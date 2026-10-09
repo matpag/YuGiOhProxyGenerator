@@ -4,7 +4,7 @@ const assert=require('node:assert/strict');
 (async()=>{
  const browser=await chromium.launch({headless:true,channel:'msedge'});
  try{
-  const page=await browser.newPage();
+  const page=await browser.newPage({locale:'it-IT'});
   await page.route('https://**/*',route=>route.abort());
   await page.goto('http://127.0.0.1:8765/html/index.html');
   await page.waitForFunction(()=>!document.getElementById('generate').disabled);
@@ -24,7 +24,7 @@ const assert=require('node:assert/strict');
   await fs.mkdir('docs/validation/fonts',{recursive:true});
   await fs.writeFile('docs/validation/fonts/font-metrics.json',JSON.stringify(fonts,null,2)+'\n');
   await page.close();
-  const missing=await browser.newPage();let blocked=false;
+  const missing=await browser.newPage({locale:'it-IT'});let blocked=false;
   await missing.route('https://**/*',route=>route.abort());
   await missing.route('**/assets/fonts/matrix-regular-small-caps.ttf',route=>{blocked=true;return route.abort();});
   await missing.goto('http://127.0.0.1:8765/html/index.html');

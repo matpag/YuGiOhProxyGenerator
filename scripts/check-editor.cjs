@@ -1,7 +1,7 @@
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const fs=require('node:fs/promises');const assert=require('node:assert/strict');
 (async()=>{
- const browser=await chromium.launch({headless:true,channel:'msedge'}),page=await browser.newPage({viewport:{width:1280,height:900}});
+ const browser=await chromium.launch({headless:true,channel:'msedge'}),page=await browser.newPage({locale:'it-IT',viewport:{width:1280,height:900}});
  await fs.mkdir('docs/validation/phase-6',{recursive:true});
  await page.goto('http://127.0.0.1:8765/html/index.html');await page.waitForFunction(()=>!document.getElementById('generate').disabled);
  await page.locator('#generate').click();await page.waitForFunction(()=>!document.getElementById('generate').disabled);
@@ -10,6 +10,9 @@ const fs=require('node:fs/promises');const assert=require('node:assert/strict');
  await page.screenshot({path:'docs/validation/phase-6/editor.png'});
  await page.locator('#apply-edit').click();await page.locator('#editor').waitFor({state:'hidden'});
  assert.equal(await page.locator('#preview img').getAttribute('alt'),'Mago di prova');
+ assert.equal(await page.locator('#project-controls').isVisible(),false);
+ // Exercise the retained, unpublished project handlers explicitly.
+ await page.evaluate(()=>document.getElementById('project-controls').hidden=false);
  let pending=page.waitForEvent('download');await page.locator('#save-project').click();await (await pending).saveAs('docs/validation/phase-6/custom-project.json');
  await page.locator('#language').selectOption('en');assert.equal(await page.locator('#download').isDisabled(),true);
  await page.locator('#project-file').setInputFiles('docs/validation/phase-6/custom-project.json');

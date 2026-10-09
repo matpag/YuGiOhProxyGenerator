@@ -1,6 +1,6 @@
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');const assert=require('node:assert/strict');
 (async()=>{
- const b=await chromium.launch({headless:true,channel:'msedge'}),p=await b.newPage();
+ const b=await chromium.launch({headless:true,channel:'msedge'}),p=await b.newPage({locale:'it-IT'});
  await p.goto('http://127.0.0.1:8765/html/index.html');await p.waitForFunction(()=>!document.getElementById('generate').disabled);
  await p.locator('#generate').click();await p.waitForFunction(()=>!document.getElementById('generate').disabled);
  await p.getByRole('button',{name:'Modifica carta',exact:true}).click();

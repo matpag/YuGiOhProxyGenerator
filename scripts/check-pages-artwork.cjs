@@ -2,11 +2,11 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const fs=require('node:fs/promises'),path=require('node:path'),assert=require('node:assert/strict');
 const origin='https://static-proxy.test',prefix='/YuGiOhProxyGenerator/';
 const deck='3 Dark Magician\n1 Arcanite Magician\n1 Dark Hole\n1 Mirror Force';
-const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.ttf':'font/ttf','.otf':'font/otf','.woff2':'font/woff2','.png':'image/png','.jpg':'image/jpeg'};
+const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.ttf':'font/ttf','.otf':'font/otf','.woff2':'font/woff2','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml'};
 (async()=>{
  const browser=await chromium.launch({headless:true,channel:'msedge'});
  try{
-  const page=await browser.newPage(),errors=[],direct=[],relays=[],proxyCalls=[];
+  const page=await browser.newPage({locale:'it-IT'}),errors=[],direct=[],relays=[],proxyCalls=[];
   const fixture=JSON.parse(await fs.readFile('tests/fixtures/remote-cards.json','utf8'));
   // A tiny substitute image keeps the replay deterministic; real pixels are checked separately.
   const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aX1sAAAAASUVORK5CYII=','base64');

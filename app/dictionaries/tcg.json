@@ -1,216 +1,369 @@
 {
-  "version": 3,
+  "version": 4,
   "languages": [
     "en",
-    "it"
+    "it",
+    "de",
+    "fr"
   ],
   "attributes": {
     "dark": {
       "en": "DARK",
-      "it": "OSCURITÀ"
+      "it": "OSCURITÀ",
+      "de": "FINSTERNIS",
+      "fr": "TÉNÈBRES",
+      "es": "OSCURIDAD"
     },
     "light": {
       "en": "LIGHT",
-      "it": "LUCE"
+      "it": "LUCE",
+      "de": "LICHT",
+      "fr": "LUMIÈRE",
+      "es": "LUZ"
     },
     "earth": {
       "en": "EARTH",
-      "it": "TERRA"
+      "it": "TERRA",
+      "de": "ERDE",
+      "fr": "TERRE",
+      "es": "TIERRA"
     },
     "fire": {
       "en": "FIRE",
-      "it": "FUOCO"
+      "it": "FUOCO",
+      "de": "FEUER",
+      "fr": "FEU",
+      "es": "FUEGO"
     },
     "water": {
       "en": "WATER",
-      "it": "ACQUA"
+      "it": "ACQUA",
+      "de": "WASSER",
+      "fr": "EAU",
+      "es": "AGUA"
     },
     "wind": {
       "en": "WIND",
-      "it": "VENTO"
+      "it": "VENTO",
+      "de": "WIND",
+      "fr": "VENT",
+      "es": "VIENTO"
     },
     "divine": {
       "en": "DIVINE",
-      "it": "DIVINO"
+      "it": "DIVINO",
+      "de": "GÖTTLICH",
+      "fr": "DIVIN",
+      "es": "DIVINA"
     },
     "spell": {
       "en": "SPELL",
-      "it": "MAGIA"
+      "it": "MAGIA",
+      "de": "ZAUBER",
+      "fr": "MAGIE",
+      "es": "MAGIA"
     },
     "trap": {
       "en": "TRAP",
-      "it": "TRAPPOLA"
+      "it": "TRAPPOLA",
+      "de": "FALLE",
+      "fr": "PIÈGE",
+      "es": "TRAMPA"
     }
   },
   "races": {
     "spellcaster": {
       "en": "Spellcaster",
-      "it": "Incantatore"
+      "it": "Incantatore",
+      "de": "Hexer",
+      "fr": "Magicien",
+      "es": "Lanzador de Conjuros"
     },
     "dragon": {
       "en": "Dragon",
-      "it": "Drago"
+      "it": "Drago",
+      "de": "Drache",
+      "fr": "Dragon",
+      "es": "Dragón"
     },
     "zombie": {
       "en": "Zombie",
-      "it": "Zombie"
+      "it": "Zombie",
+      "de": "Zombie",
+      "fr": "Zombie",
+      "es": "Zombi"
     },
     "warrior": {
       "en": "Warrior",
-      "it": "Guerriero"
+      "it": "Guerriero",
+      "de": "Krieger",
+      "fr": "Guerrier",
+      "es": "Guerrero"
     },
     "beast_warrior": {
       "en": "Beast-Warrior",
-      "it": "Guerriero-Bestia"
+      "it": "Guerriero-Bestia",
+      "de": "Ungeheuer-Krieger",
+      "fr": "Bête-Guerrier",
+      "es": "Guerrero Bestia"
     },
     "beast": {
       "en": "Beast",
-      "it": "Bestia"
+      "it": "Bestia",
+      "de": "Ungeheuer",
+      "fr": "Bête",
+      "es": "Bestia"
     },
     "winged_beast": {
       "en": "Winged Beast",
-      "it": "Bestia Alata"
+      "it": "Bestia Alata",
+      "de": "Geflügeltes Ungeheuer",
+      "fr": "Bête Ailée",
+      "es": "Bestia Alada"
     },
     "fiend": {
       "en": "Fiend",
-      "it": "Demone"
+      "it": "Demone",
+      "de": "Unterweltler",
+      "fr": "Démon",
+      "es": "Demonio"
     },
     "fairy": {
       "en": "Fairy",
-      "it": "Fata"
+      "it": "Fata",
+      "de": "Fee",
+      "fr": "Elfe",
+      "es": "Hada"
     },
     "insect": {
       "en": "Insect",
-      "it": "Insetto"
+      "it": "Insetto",
+      "de": "Insekt",
+      "fr": "Insecte",
+      "es": "Insecto"
     },
     "dinosaur": {
       "en": "Dinosaur",
-      "it": "Dinosauro"
+      "it": "Dinosauro",
+      "de": "Dinosaurier",
+      "fr": "Dinosaure",
+      "es": "Dinosaurio"
     },
     "reptile": {
       "en": "Reptile",
-      "it": "Rettile"
+      "it": "Rettile",
+      "de": "Reptil",
+      "fr": "Reptile",
+      "es": "Reptil"
     },
     "fish": {
       "en": "Fish",
-      "it": "Pesce"
+      "it": "Pesce",
+      "de": "Fisch",
+      "fr": "Poisson",
+      "es": "Pez"
     },
     "sea_serpent": {
       "en": "Sea Serpent",
-      "it": "Serpente Marino"
+      "it": "Serpente Marino",
+      "de": "Seeschlange",
+      "fr": "Serpent de Mer",
+      "es": "Serpiente Marina"
     },
     "aqua": {
       "en": "Aqua",
-      "it": "Acqua"
+      "it": "Acqua",
+      "de": "Aqua",
+      "fr": "Aqua",
+      "es": "Aqua"
     },
     "pyro": {
       "en": "Pyro",
-      "it": "Pyro"
+      "it": "Pyro",
+      "de": "Pyro",
+      "fr": "Pyro",
+      "es": "Piro"
     },
     "thunder": {
       "en": "Thunder",
-      "it": "Tuono"
+      "it": "Tuono",
+      "de": "Donner",
+      "fr": "Tonnerre",
+      "es": "Trueno"
     },
     "rock": {
       "en": "Rock",
-      "it": "Roccia"
+      "it": "Roccia",
+      "de": "Stein",
+      "fr": "Rocher",
+      "es": "Roca"
     },
     "plant": {
       "en": "Plant",
-      "it": "Pianta"
+      "it": "Pianta",
+      "de": "Pflanze",
+      "fr": "Plante",
+      "es": "Planta"
     },
     "machine": {
       "en": "Machine",
-      "it": "Macchina"
+      "it": "Macchina",
+      "de": "Maschine",
+      "fr": "Machine",
+      "es": "Máquina"
     },
     "psychic": {
       "en": "Psychic",
-      "it": "Psichico"
+      "it": "Psichico",
+      "de": "Psi",
+      "fr": "Psychique",
+      "es": "Psíquico"
     },
     "divine_beast": {
       "en": "Divine-Beast",
-      "it": "Divinità-Bestia"
+      "it": "Divinità-Bestia",
+      "de": "Göttliches-Ungeheuer",
+      "fr": "Bête-Divine",
+      "es": "Bestia Divina"
     },
     "wyrm": {
       "en": "Wyrm",
-      "it": "Wyrm"
+      "it": "Wyrm",
+      "de": "Wyrm",
+      "fr": "Wyrm",
+      "es": "Wyrm"
     },
     "cyberse": {
       "en": "Cyberse",
-      "it": "Cyberso"
+      "it": "Cyberso",
+      "de": "Cyberse",
+      "fr": "Cyberse",
+      "es": "Ciberso"
     },
     "illusion": {
       "en": "Illusion",
-      "it": "Illusione"
+      "it": "Illusione",
+      "de": "Illusion",
+      "fr": "Illusion",
+      "es": "Ilusión"
     }
   },
   "mechanics": {
     "normal": {
       "en": "Normal",
-      "it": "Normale"
+      "it": "Normale",
+      "de": "Normal",
+      "fr": "Normal",
+      "es": "Normal"
     },
     "effect": {
       "en": "Effect",
-      "it": "Effetto"
+      "it": "Effetto",
+      "de": "Effekt",
+      "fr": "Effet",
+      "es": "Efecto"
     },
     "fusion": {
       "en": "Fusion",
-      "it": "Fusione"
+      "it": "Fusione",
+      "de": "Fusion",
+      "fr": "Fusion",
+      "es": "Fusión"
     },
     "ritual": {
       "en": "Ritual",
-      "it": "Rituale"
+      "it": "Rituale",
+      "de": "Ritual",
+      "fr": "Rituel",
+      "es": "Ritual"
     },
     "synchro": {
       "en": "Synchro",
-      "it": "Synchro"
+      "it": "Synchro",
+      "de": "Synchro",
+      "fr": "Synchro",
+      "es": "Sincronía"
     },
     "xyz": {
       "en": "Xyz",
-      "it": "Xyz"
+      "it": "Xyz",
+      "de": "Xyz",
+      "fr": "Xyz",
+      "es": "Xyz"
     },
     "link": {
       "en": "Link",
-      "it": "Link"
+      "it": "Link",
+      "de": "Link",
+      "fr": "Lien",
+      "es": "Enlace"
     },
     "pendulum": {
       "en": "Pendulum",
-      "it": "Pendulum"
+      "it": "Pendulum",
+      "de": "Pendel",
+      "fr": "Pendule",
+      "es": "Péndulo"
     },
     "tuner": {
       "en": "Tuner",
-      "it": "Tuner"
+      "it": "Tuner",
+      "de": "Empfänger",
+      "fr": "Syntoniseur",
+      "es": "Cantante"
     },
     "flip": {
       "en": "Flip",
-      "it": "Scoperta"
+      "it": "Scoperta",
+      "de": "Flip",
+      "fr": "Flip",
+      "es": "Volteo"
     },
     "gemini": {
       "en": "Gemini",
-      "it": "Gemello"
+      "it": "Gemello",
+      "de": "Zwilling",
+      "fr": "Gémeau",
+      "es": "Géminis"
     },
     "spirit": {
       "en": "Spirit",
-      "it": "Spirito"
+      "it": "Spirito",
+      "de": "Spirit",
+      "fr": "Spirit",
+      "es": "Espíritu"
     },
     "union": {
       "en": "Union",
-      "it": "Unione"
+      "it": "Unione",
+      "de": "Union",
+      "fr": "Union",
+      "es": "Unión"
     },
     "toon": {
       "en": "Toon",
-      "it": "Toon"
+      "it": "Toon",
+      "de": "Toon",
+      "fr": "Toon",
+      "es": "Toon"
     }
   },
   "families": {
     "spell": {
       "en": "Spell Card",
-      "it": "Carta Magia"
+      "it": "Carta Magia",
+      "de": "Zauberkarte",
+      "fr": "Carte Magie",
+      "es": "Carta Mágica"
     },
     "trap": {
       "en": "Trap Card",
-      "it": "Carta Trappola"
+      "it": "Carta Trappola",
+      "de": "Fallenkarte",
+      "fr": "Carte Piège",
+      "es": "Carta de Trampa"
     }
   },
-  "labelSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4041&request_locale=it"
+  "labelSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4041&request_locale=it",
+  "additionalLabelSource": "https://github.com/Team13fr/IgnisMulti/tree/d4388224709539c7af20bd498cfe7054c0296cd2"
 }

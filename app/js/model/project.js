@@ -1,7 +1,8 @@
+import {CARD_LANGUAGES} from '../localization/languages.js';
 const layouts=['Normal','Effect','Spell','Trap','Fusion','Ritual','Synchro','Xyz','Link'];
 export function exportProject(items,language,decklist){return {projectVersion:1,language,decklist,items:items.map(({entry,card,render})=>({entry,card,artworkId:render.artworkId}))};}
 export function validateProject(project){
- if(project?.projectVersion!==1||!['en','it'].includes(project.language)||!Array.isArray(project.items)||!project.items.length||project.items.length>200)throw new Error('Progetto carta non valido');
+ if(project?.projectVersion!==1||!CARD_LANGUAGES.includes(project.language)||!Array.isArray(project.items)||!project.items.length||project.items.length>200)throw new Error('Progetto carta non valido');
  for(const item of project.items){
   const c=item.card,e=item.entry;
   if(!c||c.language!==project.language||!/^\d{8}$/.test(c.passcode)||!layouts.includes(c.layout)||!Array.isArray(c.artworks)||!c.artworks.length||!c.text?.name||!Number.isSafeInteger(e?.quantity)||e.quantity<1||e.quantity>999)throw new Error('Carta o quantità del progetto non valida');

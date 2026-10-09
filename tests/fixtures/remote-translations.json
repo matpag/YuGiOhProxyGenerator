@@ -1,0 +1,12 @@
+{
+  "de": {
+    "id": 31924889,
+    "name": "Arkanitmagier",
+    "desc": "1 Empfänger + 1+ Hexer-Nicht-Empfänger-Monster\nFalls diese Karte als Synchrobeschwörung beschworen wird: Lege 2 Zauberzählmarken darauf. Diese Karte erhält 1000 ATK für jede Zauberzählmarke auf dieser Karte. Du kannst 1 Zauberzählmarke von deiner Spielfeldseite entfernen und dann 1 Karte wählen, die dein Gegner kontrolliert; zerstöre das gewählte Ziel."
+  },
+  "fr": {
+    "id": 31924889,
+    "name": "Magicien des Arcanes",
+    "desc": "1 Syntoniseur + 1+ monstre non-Syntoniseur Magicien\nSi cette carte est Invoquée par Synchronisation : placez 2 Compteurs Magie sur elle. Cette carte gagne 1000 ATK pour chaque Compteur Magie sur elle. Vous pouvez retirer 1 Compteur Magie depuis votre Terrain, puis ciblez 1 carte contrôlée par votre adversaire ; détruisez la cible."
+  }
+}

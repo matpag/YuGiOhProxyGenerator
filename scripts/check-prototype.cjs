@@ -3,7 +3,7 @@ const fs=require('node:fs/promises');
 const assert=require('node:assert/strict');
 (async()=>{
  const browser=await chromium.launch({headless:true,channel:'msedge'});
- const page=await browser.newPage({viewport:{width:1280,height:1000}});
+ const page=await browser.newPage({locale:'it-IT',viewport:{width:1280,height:1000}});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await fs.mkdir('docs/validation/phase-3',{recursive:true});
  await page.goto('http://127.0.0.1:8765/html/index.html');

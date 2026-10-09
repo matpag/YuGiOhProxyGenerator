@@ -4,7 +4,7 @@ const deck='3 Dark Magician\n1 Arcanite Magician\n1 Dark Hole\n1 Mirror Force';
 (async()=>{
  const browser=await chromium.launch({headless:true,channel:'msedge'});
  try{
-  const page=await browser.newPage();const errors=[],directImages=[],relays=[];
+  const page=await browser.newPage({locale:'it-IT'});const errors=[],directImages=[],relays=[];
   page.on('pageerror',e=>errors.push(e.message));
   const fixture=JSON.parse(await fs.readFile('tests/fixtures/remote-cards.json','utf8'));
   const jpeg=await fs.readFile('app/assets/artwork/46986414.jpg');

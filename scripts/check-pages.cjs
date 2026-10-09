@@ -5,7 +5,7 @@ const path=require('node:path');
 const assert=require('node:assert/strict');
 (async()=>{
  const root=path.resolve('app');
- const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.ttf':'font/ttf','.woff2':'font/woff2','.png':'image/png','.jpg':'image/jpeg'};
+ const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.ttf':'font/ttf','.woff2':'font/woff2','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml'};
  const server=createServer(async(req,res)=>{
   try{
    const pathname=new URL(req.url,'http://localhost').pathname;
@@ -19,7 +19,7 @@ const assert=require('node:assert/strict');
  let browser;
  try{
   browser=await chromium.launch({headless:true,channel:'msedge'});
-  const page=await browser.newPage();const errors=[],failed=[];
+  const page=await browser.newPage({locale:'it-IT'});const errors=[],failed=[];
   page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400)failed.push(r.url());});
   await page.route('https://**/*',route=>route.abort());
   await page.goto(`http://127.0.0.1:${server.address().port}/YuGiOhProxyGenerator/`);

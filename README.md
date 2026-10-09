@@ -1,15 +1,15 @@
 # YuGiOh Proxy Maker
 
-Create printable Yu-Gi-Oh! proxy cards in English or Italian from a decklist. Preview cards, edit their text or artwork, and download a PDF for printing.
+Create printable Yu-Gi-Oh! proxy cards in English, Italian, German or French from a decklist. Preview cards, edit their text or artwork, and download a PDF for printing.
 
 [Open YuGiOh Proxy Maker](https://matpag.github.io/YuGiOhProxyGenerator/)
 
 ## Features
 
 - Import `.ydk` or `.txt` decklists, or enter cards manually.
-- Choose English or Italian card text.
+- Choose English, Italian, German or French card text.
+- Switch the interface between Italian, English, German, Spanish and French using the flags. The first visit uses your browser language; subsequent visits remember your choice.
 - Preview cards and customize individual copies.
-- Save and reopen projects as JSON files.
 - Export printable PDFs with adjustable paper size, margins and card scale.
 
 ## How to use
@@ -23,10 +23,10 @@ Create printable Yu-Gi-Oh! proxy cards in English or Italian from a decklist. Pr
    ```
 
 2. Choose the language for the printed cards. For example, `Dark Magician` prints as `Mago Nero` in Italian. Use English names in the decklist even when printing in Italian.
-3. Click **Genera anteprima**, then **Scarica PDF**.
+3. Generate the preview, review the cards, then download the PDF. Interface language and card language are independent.
 4. Print at **100% scale**, without fitting to the page. At card scale 1, cards measure **59 × 86 mm**.
 
-To select another illustration, append its index, such as `Dark Magician [1]`. Use **Modifica carta** to customize a copy and **Salva progetto** / **Apri progetto JSON** to save or reload your work. Generating the decklist again replaces your edits with the card data.
+To select another illustration, append its index, such as `Dark Magician [1]`. Use the edit button below a preview to customize a copy. Project save/load controls are currently hidden. Generating the decklist again replaces your edits with the card data.
 
 ## Run locally
 
@@ -40,7 +40,7 @@ Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/). Keep the terminal open wh
 
 ## Availability and limitations
 
-English and Italian TCG cards are supported. The included sample cards can be generated without external requests; other cards and artwork variants require an internet connection on first use. On GitHub Pages, additional artwork is downloaded through [wsrv.nl](https://wsrv.nl/) to avoid browser CORS restrictions, then cached for offline reuse. The first download requires both YGOProDeck and the image service to be available. The local server downloads artwork directly from YGOProDeck.
+English, Italian, German and French TCG card text is supported when the translation is available from YGOProDeck. Spanish is available for the interface only. Some localized sections, including Pendulum effects, are incomplete in the API; these are reported rather than silently printed in English. The included sample cards can be generated without external requests; other cards and artwork variants require an internet connection on first use. On GitHub Pages, additional artwork is downloaded through [wsrv.nl](https://wsrv.nl/) to avoid browser CORS restrictions, then cached for offline reuse. The first download requires both YGOProDeck and the image service to be available. The local server downloads artwork directly from YGOProDeck.
 
 This is a prototype: visual fidelity is still being refined, and not every card combination has been validated. Missing translations and unsupported combinations are reported. OCG languages are not currently supported.
 

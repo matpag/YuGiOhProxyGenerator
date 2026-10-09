@@ -1,0 +1,59 @@
+[
+  {
+    "id": 89631139,
+    "name": "Dragon Blanc aux Yeux Bleus",
+    "desc": "Ce dragon légendaire est un puissant moteur de destruction. Rares sont ceux qui ont survécu à cette terrifiante créature quasiment invincible pour en parler."
+  },
+  {
+    "id": 70095154,
+    "name": "Cyber Dragon",
+    "desc": "Si uniquement votre adversaire contrôle un monstre, vous pouvez Invoquer Spécialement cette carte (depuis votre main)."
+  },
+  {
+    "id": 46986414,
+    "name": "Magicien Sombre",
+    "desc": "Mage suprême en termes d'attaque et de défense."
+  },
+  {
+    "id": 1861629,
+    "name": "Décodeur Bavard",
+    "desc": "2+ Monstres à Effet\nGagne 500 ATK pour chaque monstre pointé par cette carte. Lorsque votre adversaire active une carte ou un effet qui cible une ou plusieurs cartes que vous contrôlez (Effet Rapide) : vous pouvez Sacrifier 1 monstre pointé par cette carte ; annulez l'activation, et si vous le faites, détruisez la carte."
+  },
+  {
+    "id": 44095762,
+    "name": "Force de Miroir",
+    "desc": "Lorsqu'un monstre de l'adversaire déclare une attaque : détruisez tous les monstres en Position d'Attaque de votre adversaire."
+  },
+  {
+    "id": 84013237,
+    "name": "Numéro 39 : Utopie",
+    "desc": "2 monstres de Niveau 4\nLorsqu'un monstre déclare une attaque : vous pouvez détacher 1 Matériel de cette carte ; annulez l'attaque. Si cette carte est ciblée par une attaque, tant qu'elle n'a pas de Matériel : détruisez cette carte."
+  },
+  {
+    "id": 16178681,
+    "name": "Dragon Pendule aux Yeux Impairs",
+    "desc": "[ Pendulum Effect ] \nYou can reduce the battle damage you take from an attack involving a Pendulum Monster you control to 0. During your End Phase: You can destroy this card, and if you do, add 1 Pendulum Monster with 1500 or less ATK from your Deck to your hand. You can only use each Pendulum Effect of \"Odd-Eyes Pendulum Dragon\" once per turn.\n\n[ Monster Effect ] \nSi cette carte combat un monstre de l'adversaire, les dommages de combat que cette carte inflige à votre adversaire sont doublés.",
+    "monster_desc": "Si cette carte combat un monstre de l'adversaire, les dommages de combat que cette carte inflige à votre adversaire sont doublés.",
+    "pend_desc": "You can reduce the battle damage you take from an attack involving a Pendulum Monster you control to 0. During your End Phase: You can destroy this card, and if you do, add 1 Pendulum Monster with 1500 or less ATK from your Deck to your hand. You can only use each Pendulum Effect of \"Odd-Eyes Pendulum Dragon\" once per turn."
+  },
+  {
+    "id": 55144522,
+    "name": "Pot de Cupidité",
+    "desc": "Piochez 2 cartes."
+  },
+  {
+    "id": 44508094,
+    "name": "Dragon Poussière d'Étoile",
+    "desc": "1 Syntoniseur + 1+ monstre non-Syntoniseur\nLorsqu'une carte ou un effet qui va détruire une ou plusieurs cartes sur le Terrain est activé (Effet Rapide) : vous pouvez Sacrifier cette carte ; annulez l'activation, et si vous le faites, détruisez-la. Durant la End Phase, si cet effet a été activé ce tour (et n'a pas été annulé) : vous pouvez Invoquer Spécialement cette carte depuis votre Cimetière."
+  },
+  {
+    "id": 23995346,
+    "name": "Dragon Ultime aux Yeux Bleus",
+    "desc": "\"Dragon Blanc aux Yeux Bleus\" + \"Dragon Blanc aux Yeux Bleus\" + \"Dragon Blanc aux Yeux Bleus\""
+  },
+  {
+    "id": 5405694,
+    "name": "Soldat du Lustre Noir",
+    "desc": "Vous pouvez Invoquer Rituellement cette carte avec \"Rituel du Lustre Noir\"."
+  }
+]

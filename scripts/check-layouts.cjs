@@ -3,7 +3,7 @@ const fs=require('node:fs/promises');const assert=require('node:assert/strict');
 const validationDirectory=process.env.PROXY_VALIDATION_DIR||'docs/validation/phase-5';
 (async()=>{
  const browser=await chromium.launch({headless:true,channel:'msedge'});
- const page=await browser.newPage({viewport:{width:1440,height:1000}});const errors=[];page.on('pageerror',e=>{errors.push(e.message);console.log('PAGE ERROR',e.message)});page.on('console',m=>{if(m.text().startsWith('SAMPLE'))console.log(m.text())});
+ const page=await browser.newPage({locale:'it-IT',viewport:{width:1440,height:1000}});const errors=[];page.on('pageerror',e=>{errors.push(e.message);console.log('PAGE ERROR',e.message)});page.on('console',m=>{if(m.text().startsWith('SAMPLE'))console.log(m.text())});
  await fs.mkdir(validationDirectory,{recursive:true});
  await page.goto('http://127.0.0.1:8765/html/index.html');await page.waitForFunction(()=>!document.getElementById('generate').disabled);
  await page.route('https://**/*',route=>route.abort());
