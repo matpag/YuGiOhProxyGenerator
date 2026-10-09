@@ -33,12 +33,17 @@ async function generate(){
     const prepared=[];
     for(const [index,entry] of parsed.entries.entries()){
       status(`Preparazione carta ${index+1} di ${parsed.entries.length}…`);
-      controller.signal.throwIfAborted();const {en,it}=await repository.find(entry,controller.signal);
-      const card=localizeCard(normalizeCard(en,it),$('language').value,dictionary,overrides);
-      const artwork=card.artworks[entry.variant];
-      if(!artwork)throw new Error(`Riga ${entry.line}: variante [${entry.variant}] non disponibile`);
-      const render=await renderCard(card,{artworkId:artwork.id});controller.signal.throwIfAborted();
-      prepared.push({entry,card,render});
+      try{
+        controller.signal.throwIfAborted();const {en,it}=await repository.find(entry,controller.signal);
+        const card=localizeCard(normalizeCard(en,it),$('language').value,dictionary,overrides);
+        const artwork=card.artworks[entry.variant];
+        if(!artwork)throw new Error(`Variante [${entry.variant}] non disponibile`);
+        const render=await renderCard(card,{artworkId:artwork.id});controller.signal.throwIfAborted();
+        prepared.push({entry,card,render});
+      }catch(error){
+        if(error.name==='AbortError')throw error;
+        throw new Error(`Riga ${entry.line} (${entry.query}): ${error.message}`);
+      }
     }
     items=prepared;
     refreshPreview();

@@ -46,7 +46,7 @@ Requirements: Python 3 and a current browser. Node.js is only needed for the aut
 python scripts/serve.py
 ```
 
-Open [the local app](http://127.0.0.1:8765/html/index.html). The server binds only to localhost. The original generator is preserved at `/baseline/html/index.html` as a historical interface snapshot. Dueling Nexus (https://duelingnexus.com/yugioh-card-maker/) is the visual source of truth for geometry, typography and spacing; YGOProDeck card/deck images calibrate frame background brightness by explicit user instruction.
+Open [the local app](http://127.0.0.1:8765/html/index.html). The server binds only to localhost and relays new card illustrations from YGOProDeck to avoid browser CORS restrictions. The original generator is preserved at `/baseline/html/index.html` as a historical interface snapshot. Dueling Nexus (https://duelingnexus.com/yugioh-card-maker/) is the visual source of truth for geometry, typography and spacing; YGOProDeck card/deck images calibrate frame background brightness by explicit user instruction.
 
 1. Enter exact English card names or passcodes; quantities and `[artwork index]` are supported. Import/drop a `.ydk` file if preferred. The selected card language controls the printed names and text, independently of the lookup name: `Dark Magician` prints as `Mago Nero` in Italian. Italian names must not be used in the decklist; the supported lookup inputs are exact English names or passcodes.
 2. Select the card language, generate previews, and download the PDF. Scale 1 uses 59 × 86 mm; print at 100% without page fitting.
@@ -58,6 +58,7 @@ The eleven sample cards, fonts, first artworks and Nexus TCG template assets are
 
 ```powershell
 node --test tests/core.test.js
+npm run test:server
 ```
 
 Browser checks use Playwright and Edge. Run `npm install` to install the pinned development dependency, or set `PLAYWRIGHT_MODULE` to an existing package. `npm run test:browser` runs the browser checks, including real font loading and missing-font handling. Run `scripts/check-prototype.cjs`, `scripts/check-layouts.cjs`, `scripts/check-editor.cjs` and `scripts/check-edge-cases.cjs` with Node while the server is running.
@@ -65,6 +66,7 @@ Browser checks use Playwright and Edge. Run `npm install` to install the pinned 
 - [First EN/IT pair and visual limitations](docs/validation/phase-3/README.md)
 - [TCG layout samples](docs/validation/phase-5/README.md)
 - [Editor and project checks](docs/validation/phase-6/README.md)
+- [Remote artwork, exact reported deck and offline cache](docs/validation/remote-artwork/README.md)
 - [Historical attribute-label research (superseded visual baseline)](docs/validation/attributes/README.md)
 - [TCG font families and visual comparison](docs/validation/fonts/README.md)
 - [Dueling Nexus title sizing and compact type-line punctuation](docs/validation/typography/README.md)

@@ -16,9 +16,19 @@ async function artworkData(image){
   const key=appUrl(`cached-artwork/${image.id}`);
   let response=await cache.match(key);
   if(!response){
-    response=await fetch(local);
-    if(!response.ok)response=await fetch(image.image_url_cropped);
-    if(!response.ok)throw new Error(`Illustrazione ${image.id} non disponibile`);
+    try{
+      response=await fetch(local);
+      // The CDN does not allow browser CORS fetches; our local server relays by ID.
+      if(!response.ok){
+        const loopback=['localhost','127.0.0.1','[::1]'].includes(window.location.hostname);
+        response=await fetch(loopback?appUrl(`api/artwork/${image.id}.jpg`):image.image_url_cropped);
+      }
+    }catch{throw new Error(`Impossibile scaricare l’illustrazione ${image.id}. Controlla la connessione e riprova.`);}
+    if(!response.ok){
+      const detail=await response.json().catch(()=>null);
+      throw new Error(detail?.error||`Illustrazione ${image.id} non disponibile`);
+    }
+    if(!response.headers.get('content-type')?.startsWith('image/'))throw new Error(`Illustrazione ${image.id}: risposta non valida`);
     await cache.put(key,response.clone());
   }
   const blob=await response.blob();
