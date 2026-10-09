@@ -11,7 +11,7 @@ const fits=async(page,selector)=>{const b=await page.locator(selector).boundingB
   await page.route('https://**/*',r=>r.abort());await page.goto('http://127.0.0.1:8765/');await ready(page);
   await fits(page,'#generate');
   await page.locator('#generate').click();await ready(page);
-  await page.locator('#language').selectOption('en');assert.equal(await page.locator('#download').isDisabled(),true);
+  await page.locator('#language').selectOption('it');assert.equal(await page.locator('#download').isDisabled(),true);
   assert.equal(await page.locator('#preview button').first().isDisabled(),true,'Stale previews must disable editing');assert.match(await page.locator('#status').innerText(),/rigenerare/);
   await page.locator('#decklist_input').fill('3 Dark Magician');
   await page.evaluate(()=>{const dt=new DataTransfer();dt.items.add(new File(['1 Dark Hole\n1 Mirror Force'],'deck.txt',{type:'text/plain'}));document.querySelector('#decklist_input').dispatchEvent(new DragEvent('drop',{bubbles:true,cancelable:true,dataTransfer:dt}));});
@@ -39,7 +39,7 @@ const fits=async(page,selector)=>{const b=await page.locator(selector).boundingB
   await generate(page,Array(16).fill('1 Dark Magician').join('\n'));await page.locator('#preview img').first().scrollIntoViewIfNeeded();await page.locator('#download-shortcut').waitFor({state:'visible'});await fits(page,'#download-shortcut');await page.locator('#download-shortcut').click();await fits(page,'#download');await page.close();
   for(const language of ['it','en','de','es','fr']){
    const page=await browser.newPage({locale:language,isMobile:true,hasTouch:true,viewport:{width:320,height:740}});page.on('pageerror',e=>errors.push(e.message));await page.route('https://**/*',r=>r.abort());await page.goto('http://127.0.0.1:8765/');await ready(page);await fits(page,'#generate');assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
-   await page.locator('[data-ui-language=en]').tap();await page.locator(`[data-ui-language=${language}]`).tap();assert.equal(await page.locator('#language').inputValue(),'it');
+   await page.locator('[data-ui-language=en]').tap();await page.locator(`[data-ui-language=${language}]`).tap();assert.equal(await page.locator('#language').inputValue(),'en');
    await generate(page,'1 Dark Magician');await page.locator('#preview button').tap();await fits(page,'#apply-edit');await fits(page,'#close-editor-top');
    await page.setViewportSize({width:740,height:320});await fits(page,'#apply-edit');await fits(page,'#close-editor-top');assert.ok(await page.evaluate(()=>document.querySelector('#editor').scrollWidth<=document.querySelector('#editor').clientWidth));await page.locator('#close-editor').click();await page.close();
   }

@@ -96,7 +96,7 @@ try{
  await initUi();
  [dictionary,overrides]=await Promise.all(['dictionaries/tcg.json','text-overrides/cards.json'].map(async url=>(await fetch(appUrl(url))).json()));
  for(const lang of dictionary.languages){const option=document.createElement('option');option.value=lang;option.textContent=t('language.'+lang);$('language').append(option);}
- $('language').value='it';await repository.init();
+ $('language').value='en';await repository.init();
  preview=setupPreview({getItems:()=>items,getSettings:settings,isStale:()=>stale,isDownloading:()=>pdfBusy,onEdit:index=>editor.open(index)});
  editor=setupEditor({getItems:()=>stale?[]:items,getLanguage:()=>$('language').value,getDictionary:()=>dictionary,getDecklist:()=>$('decklist_input').value,
   renderPreview:(card,artworkId)=>renderCard(card,{artworkId,cacheResult:false}),

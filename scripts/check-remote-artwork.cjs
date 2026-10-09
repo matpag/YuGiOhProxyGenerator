@@ -16,7 +16,7 @@ const deck='3 Dark Magician\n1 Arcanite Magician\n1 Dark Hole\n1 Mirror Force';
   });
   await page.route('https://images.ygoprodeck.com/**',route=>{directImages.push(route.request().url());return route.abort();});
   await page.route('**/api/artwork/*.jpg',route=>{relays.push(route.request().url());return route.fulfill({contentType:'image/jpeg',body:jpeg});});
-  await page.goto('http://127.0.0.1:8765/html/index.html');await page.waitForFunction(()=>!document.querySelector('#generate').disabled);
+  await page.goto('http://127.0.0.1:8765/html/index.html');await page.waitForFunction(()=>!document.querySelector('#generate').disabled);await page.locator('#language').selectOption('it');
   await page.locator('#decklist_input').fill(deck);await page.locator('#generate').click();await page.waitForFunction(()=>!document.querySelector('#generate').disabled);
   assert.match(await page.locator('#status').innerText(),/6 carte pronte in IT/,`Exact reported deck failed: ${await page.locator('#status').innerText()}`);
   assert.equal(await page.locator('#preview figure').count(),4);assert.deepEqual(directImages,[]);
@@ -26,13 +26,13 @@ const deck='3 Dark Magician\n1 Arcanite Magician\n1 Dark Hole\n1 Mirror Force';
   // A reload drops memory caches; persistent metadata and artwork must still work without network.
   await page.unroute('https://db.ygoprodeck.com/**');await page.unroute('**/api/artwork/*.jpg');
   await page.route('https://db.ygoprodeck.com/**',route=>route.abort());await page.route('**/api/artwork/*.jpg',route=>route.abort());
-  await page.reload();await page.waitForFunction(()=>!document.querySelector('#generate').disabled);
+  await page.reload();await page.waitForFunction(()=>!document.querySelector('#generate').disabled);await page.locator('#language').selectOption('it');
   await page.locator('#decklist_input').fill(deck);await page.locator('#generate').click();await page.waitForFunction(()=>!document.querySelector('#generate').disabled);
   assert.match(await page.locator('#status').innerText(),/6 carte pronte in IT/);
   // Failed relay responses identify the line/card and must never enter Cache Storage.
   await page.evaluate(async()=>{await caches.delete('proxy-artwork-v1')});
   await page.unroute('**/api/artwork/*.jpg');await page.route('**/api/artwork/*.jpg',route=>route.fulfill({status:502,json:{error:'Servizio illustrazioni non disponibile. Riprova.'}}));
-  await page.reload();await page.waitForFunction(()=>!document.querySelector('#generate').disabled);
+  await page.reload();await page.waitForFunction(()=>!document.querySelector('#generate').disabled);await page.locator('#language').selectOption('it');
   await page.locator('#decklist_input').fill('1 Arcanite Magician');await page.locator('#generate').click();await page.waitForFunction(()=>!document.querySelector('#generate').disabled);
   assert.match(await page.locator('#status').innerText(),/Riga 1 \(Arcanite Magician\): Servizio illustrazioni/);
   assert.equal(await page.locator('#download').isDisabled(),true);

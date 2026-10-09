@@ -16,12 +16,13 @@ const fs=require('node:fs/promises'),assert=require('node:assert/strict');
    assert.equal(await page.locator('html').getAttribute('lang'),expected);
    assert.equal(await page.locator(`[data-ui-language=${expected}]`).getAttribute('aria-pressed'),'true');
    assert.match(await page.locator('.title').innerText(),/\[MULTI5\]/);
-   assert.equal(await page.locator('#language').inputValue(),'it','Browser UI language must not change the print default');
+   assert.equal(await page.locator('#language').inputValue(),'en','Print must default to English regardless of browser UI language');
    assert.deepEqual(await page.locator('#language option').evaluateAll(options=>options.map(o=>o.value)),['en','it','de','fr']);
    assert.equal(await page.locator('#project-controls').isVisible(),false);
    assert.equal(await page.locator('#save-project').isVisible(),false);assert.equal(await page.locator('#project-file').isVisible(),false);
    assert.equal(await page.locator('[data-file-name=file]').innerText(),messages[expected].noFile);
    assert.equal(await page.locator('[data-file-input=file]').innerText(),messages[expected].chooseFile);
+   await page.waitForFunction(()=>[...document.querySelectorAll('.ui-languages img')].every(img=>img.complete&&img.naturalWidth>0));
    assert.equal(await page.locator('.ui-languages img').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0)),true);
    if(locale==='ja-JP'){await page.close();continue;}
    for(const printLanguage of Object.keys(names)){
@@ -63,7 +64,7 @@ const fs=require('node:fs/promises'),assert=require('node:assert/strict');
    await page.locator('#decklist_input').fill('0 Dark Magician');await page.locator('#generate').click();await ready(page);
    assert.equal(await page.locator('#status').innerText(),messages[expected]['error.row'].replace('{line}','1').replace('{message}',messages[expected]['error.invalidQuantity']));
    await page.locator('[data-ui-language=es]').click();assert.match(await page.locator('#status').innerText(),/^Línea 1:/);
-   await page.reload();await ready(page);assert.equal(await page.locator('html').getAttribute('lang'),'es');assert.equal(await page.locator('#language').inputValue(),'it');
+   await page.reload();await ready(page);assert.equal(await page.locator('html').getAttribute('lang'),'es');assert.equal(await page.locator('#language').inputValue(),'en');
    await page.close();console.log(`${locale}: browser default, independent UI/print matrix, editor, errors, PDF and mobile passed`);
   }
   // Non-sample card: request only the chosen API translation, never Spanish.

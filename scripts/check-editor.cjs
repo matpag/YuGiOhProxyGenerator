@@ -4,6 +4,7 @@ const fs=require('node:fs/promises');const assert=require('node:assert/strict');
  const browser=await chromium.launch({headless:true,channel:'msedge'}),page=await browser.newPage({locale:'it-IT',viewport:{width:1280,height:900}});
  await fs.mkdir('docs/validation/phase-6',{recursive:true});
  await page.goto('http://127.0.0.1:8765/html/index.html');await page.waitForFunction(()=>!document.getElementById('generate').disabled);
+ await page.locator('#language').selectOption('it');
  await page.locator('#generate').click();await page.waitForFunction(()=>!document.getElementById('generate').disabled);
  await page.getByRole('button',{name:'Modifica carta',exact:true}).click();
  await page.locator('#edit-name').fill('Mago di prova');await page.locator('#edit-atk').fill('2600');

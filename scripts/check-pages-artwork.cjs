@@ -35,7 +35,7 @@ const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json
   });
   const ready=()=>page.waitForFunction(()=>!document.querySelector('#generate').disabled);
   const generate=async text=>{await page.locator('#decklist_input').fill(text);await page.locator('#generate').click();await ready();return page.locator('#status').innerText();};
-  await page.goto(origin+prefix);await ready();
+  await page.goto(origin+prefix);await ready();await page.locator('#language').selectOption('it');
   assert.match(await generate('1 Dark Hole'),/1 carte pronte in IT/,'Reported Dark Hole input failed on a static origin');
   assert.match(await page.locator('#preview').innerText(),/Buco Nero/);
   assert.equal(await page.locator('#preview img').first().evaluate(img=>img.naturalWidth),697);
@@ -47,11 +47,11 @@ const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json
   }).sort(),['https://images.ygoprodeck.com/images/cards_cropped/31924889.jpg','https://images.ygoprodeck.com/images/cards_cropped/53129443.jpg']);
   const download=page.waitForEvent('download');await page.locator('#download').click();
   assert.equal((await fs.readFile(await(await download).path())).subarray(0,5).toString(),'%PDF-');
-  offline=true;const calls=proxyCalls.length;await page.reload();await ready();
+  offline=true;const calls=proxyCalls.length;await page.reload();await ready();await page.locator('#language').selectOption('it');
   assert.match(await generate(deck),/6 carte pronte in IT/);assert.equal(proxyCalls.length,calls);
   // Clear only artwork, then check failure and retry after a reload clears the render cache.
   await page.evaluate(()=>caches.delete('proxy-artwork-v1'));
-  offline=false;proxyUnavailable=true;await page.reload();await ready();
+  offline=false;proxyUnavailable=true;await page.reload();await ready();await page.locator('#language').selectOption('it');
   assert.match(await generate('1 Dark Hole'),/Riga 1 \(Dark Hole\): Illustrazione 53129443 non disponibile/);
   assert.equal(await page.locator('#download').isDisabled(),true);
   assert.equal(await page.evaluate(async()=>Boolean(await(await caches.open('proxy-artwork-v1')).match('/YuGiOhProxyGenerator/cached-artwork/53129443'))),false);

@@ -24,7 +24,7 @@ Create printable Yu-Gi-Oh! proxy cards in English, Italian, German or French fro
    46986414
    ```
 
-2. Choose the language for the printed cards. For example, `Dark Magician` prints as `Mago Nero` in Italian. Use English names in the decklist even when printing in Italian.
+2. Choose the language for the printed cards. The default is English on every page load, independently of your browser or interface language. For example, `Dark Magician` prints as `Mago Nero` in Italian. Use English names in the decklist even when printing in Italian.
 3. Generate the preview, review the cards or print sheets, then download the PDF. Interface language and card language are independent.
 4. Print at **100% scale**, without fitting to the page. At card scale 100%, cards measure **59 × 86 mm**.
 
