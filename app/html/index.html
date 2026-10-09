@@ -1,25 +1,2 @@
 <!doctype html>
-<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>YuGiOh Proxy Maker</title><link rel="stylesheet" href="../assets/fonts/fonts.css"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="maker.css"></head>
-<body><header><h1 class="title">YGOProxys <small>EN / IT</small></h1></header>
-<main class="wrapper"><div class="content">
-<section class="decklist"><h2>La tua decklist</h2><label for="decklist_input">Nomi inglesi o ID, una carta per riga</label><textarea id="decklist_input" rows="8" spellcheck="false" aria-describedby="decklist-help">3 Dark Magician</textarea><p id="decklist-help"><strong>Inserisci le carte con il nome in inglese oppure con l’ID.</strong> I nomi italiani non vanno usati nella decklist, anche se scegli la stampa in italiano.</p><label class="file-label" for="file">Importa un file .ydk o .txt</label><input id="file" type="file" accept=".ydk,.txt"></section>
-<section class="settings"><h2>Impostazioni</h2><div class="grid">
-<label for="language">Lingua delle carte</label><select id="language"></select>
-<label for="card_scale">Scala delle carte</label><input id="card_scale" type="number" min="0.1" max="3" step="0.01" value="1">
-<label for="margin_cards">Spazio tra carte (pt)</label><input id="margin_cards" type="number" min="0" value="0">
-<label for="margin_document">Margine foglio (pt)</label><input id="margin_document" type="number" min="0" value="20">
-<label for="paper_size">Formato del foglio</label><select id="paper_size"><option>A4</option><option>LETTER</option><option>A3</option></select></div></section>
-<section class="howto"><h2>Come funziona</h2><p>Inserisci quantità e nome inglese esatto oppure ID:</p><pre>3 Dark Magician
-2 Cyber Dragon
-46986414</pre><p>Le carte devono essere inserite con il nome inglese esatto oppure con l’ID, anche per stampare in italiano. La scelta «Lingua delle carte» determina i nomi e i testi sulle carte: ad esempio, <strong>Dark Magician</strong> diventa <strong>Mago Nero</strong> selezionando Italiano.</p><p>Per scegliere un’altra illustrazione aggiungi l’indice, ad esempio <strong>Dark Magician [1]</strong>.</p><p>Prima genera l’anteprima, poi scarica il PDF. Una carta a scala 1 misura 59 × 86 mm.</p><p>Layout TCG: Normale, Effetto, Magia, Trappola, Fusione, Rituale, Synchro, Xyz, Link e Pendulum. Le carte campione sono disponibili anche senza rete.</p></section>
-<div class="btn"><button id="generate" disabled>Genera anteprima</button><button id="cancel" disabled>Annulla</button><button id="download" disabled>Scarica PDF</button><button id="save-project" disabled>Salva progetto</button><label class="project-import" for="project-file">Apri progetto JSON</label><input id="project-file" type="file" accept=".json"><p id="status" role="status" aria-live="polite">Caricamento…</p></div>
-<section class="preview-section"><h2>Anteprima di stampa</h2><div id="preview"></div></section>
-</div></main><footer>Dati YGOProDeck · Rendering cardmaker · Esecuzione locale</footer>
-<dialog id="editor"><form id="editor-form"><h2>Modifica carta</h2>
-<label for="edit-name">Nome</label><input id="edit-name" required>
-<label for="edit-layout">Layout</label><select id="edit-layout"><option>Normal</option><option>Effect</option><option>Spell</option><option>Trap</option><option>Fusion</option><option>Ritual</option><option>Synchro</option><option>Xyz</option><option>Link</option></select>
-<div class="editor-grid"><label for="edit-attribute">Attributo</label><select id="edit-attribute"></select><label for="edit-race">Tipo mostro</label><select id="edit-race"></select><label for="edit-level">Livello / Rango / Link</label><input id="edit-level" type="number" min="0" max="13"><label for="edit-atk">ATK</label><input id="edit-atk"><label for="edit-def">DEF</label><input id="edit-def"></div>
-<label for="edit-description">Descrizione o effetto Mostro</label><textarea id="edit-description" rows="4" required></textarea>
-<label><input id="edit-pendulum" type="checkbox"> Pendulum</label><label for="edit-scale">Valore Pendulum</label><input id="edit-scale" type="number" min="0" max="13"><label for="edit-pendulum-text">Testo Pendulum</label><textarea id="edit-pendulum-text" rows="4"></textarea>
-<label for="edit-artwork">Sostituisci illustrazione</label><input id="edit-artwork" type="file" accept="image/png,image/jpeg,image/webp"><p id="edit-error" role="alert"></p><button id="apply-edit" type="submit">Applica</button><button id="close-editor" type="button">Chiudi</button></form></dialog>
-<script src="../js/FileSaver.js"></script><script src="../js/blob-stream.js"></script><script src="../js/pdfkit.standalone.js"></script><script src="../vendor/runtime/require.js"></script><script type="module" src="../js/main.js"></script></body></html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>YuGiOh Proxy Maker</title><meta http-equiv="refresh" content="0;url=../"></head><body><a href="../">Apri YuGiOh Proxy Maker</a></body></html>

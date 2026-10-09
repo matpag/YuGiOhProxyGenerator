@@ -24,7 +24,7 @@ const assert=require('node:assert/strict');
   await page.route('https://**/*',route=>route.abort());
   await page.goto(`http://127.0.0.1:${server.address().port}/YuGiOhProxyGenerator/`);
   await page.waitForFunction(()=>document.getElementById('generate')&&!document.getElementById('generate').disabled);
-  assert.ok(page.url().endsWith('/YuGiOhProxyGenerator/html/index.html'));
+  assert.ok(page.url().endsWith('/YuGiOhProxyGenerator/'));
   for(const lang of ['en','it']){
    await page.locator('#language').selectOption(lang);
    await page.locator('#decklist_input').fill('3 Dark Magician');await page.locator('#generate').click();

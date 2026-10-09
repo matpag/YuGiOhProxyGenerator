@@ -81,4 +81,6 @@ Published app: https://matpag.github.io/YuGiOhProxyGenerator/
 
 The Pages workflow runs the core tests and publishes only `app/` on every push to `main` or `master`. Repository Settings → Pages uses GitHub Actions. No backend or build step is required: rendering, editing and PDF generation run in the browser. Non-sample cards still require access to YGOProDeck. Asset URLs resolve relative to the application root, so both localhost and repository subpaths work.
 
-Run `node scripts/check-pages.cjs` to verify the repository subpath, entry redirect, EN/IT sample rendering and PDF downloads in Edge without external requests.
+Run `node scripts/check-pages.cjs` to verify the repository subpath, root entry point, EN/IT sample rendering and PDF downloads in Edge without external requests.
+
+The app is served directly at `/YuGiOhProxyGenerator/`; the old `/html/index.html` URL redirects to the root for existing bookmarks.
