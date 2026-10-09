@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url(/assets/fonts/matrix-regular-small-caps.ttf) format('truetype');
+  src: url(matrix-regular-small-caps.ttf) format('truetype');
 }
 
 @font-face {
@@ -11,7 +11,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url(/assets/fonts/matrix-regular-small-caps-legacy.ttf) format('truetype');
+  src: url(matrix-regular-small-caps-legacy.ttf) format('truetype');
 }
 
 @font-face {
@@ -19,7 +19,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url(/assets/fonts/matrix-book.ttf) format('truetype');
+  src: url(matrix-book.ttf) format('truetype');
 }
 
 @font-face {
@@ -27,7 +27,7 @@
   font-style: normal;
   font-weight: 700;
   font-display: block;
-  src: url(/assets/fonts/stone-serif-small-caps-bold.ttf) format('truetype');
+  src: url(stone-serif-small-caps-bold.ttf) format('truetype');
 }
 
 @font-face {
@@ -35,7 +35,7 @@
   font-style: italic;
   font-weight: 400;
   font-display: block;
-  src: url(/assets/fonts/stone-serif-lt-italic.ttf) format('truetype');
+  src: url(stone-serif-lt-italic.ttf) format('truetype');
 }
 
 @font-face {
@@ -43,7 +43,7 @@
   font-style: normal;
   font-weight: 600;
   font-display: block;
-  src: url(/assets/fonts/stone-serif-semibold.ttf) format('truetype');
+  src: url(stone-serif-semibold.ttf) format('truetype');
 }
 
 @font-face {
@@ -51,7 +51,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url(/assets/fonts/stone-serif-lt.ttf) format('truetype');
+  src: url(stone-serif-lt.ttf) format('truetype');
 }
 
 @font-face {
@@ -59,7 +59,7 @@
   font-style: normal;
   font-weight: 700;
   font-display: block;
-  src: url(/assets/fonts/matrix-bold-small-caps.ttf) format('truetype');
+  src: url(matrix-bold-small-caps.ttf) format('truetype');
 }
 
 @font-face {
@@ -67,5 +67,5 @@
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url(/assets/fonts/idroid.otf) format('opentype');
+  src: url(idroid.otf) format('opentype');
 }

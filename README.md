@@ -74,3 +74,11 @@ Browser checks use Playwright and Edge. Run `npm install` to install the pinned 
 - [Imported revisions, downloads and file hashes](docs/research/import-manifest.json)
 
 The prototype is not yet visually identical to every original printing. The card font families now follow the referenced TCG guide and load from local files. Native raster resolution, typographic positioning and printing-specific template details remain fidelity limits. Set codes are not fabricated; OCG languages remain outside scope.
+
+## GitHub Pages
+
+Published app: https://matpag.github.io/YuGiOhProxyGenerator/
+
+The Pages workflow runs the core tests and publishes only `app/` on every push to `main`. Repository Settings → Pages uses GitHub Actions. No backend or build step is required: rendering, editing and PDF generation run in the browser. Non-sample cards still require access to YGOProDeck. Asset URLs resolve relative to the application root, so both localhost and repository subpaths work.
+
+Run `node scripts/check-pages.cjs` to verify the repository subpath, entry redirect, EN/IT sample rendering and PDF downloads in Edge without external requests.

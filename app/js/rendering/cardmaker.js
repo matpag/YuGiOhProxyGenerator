@@ -1,18 +1,19 @@
+import {appUrl} from '../paths.js';
 const WIDTH=697,HEIGHT=1016;
 let modules;
 const cache=new Map();
 function loadModules(){
   if(!modules)modules=new Promise((resolve,reject)=>{
-    window.NCM_RESOURCES='/assets/templates/nexus';
-    window.require.config({baseUrl:'/vendor/cardmaker/src',paths:{react:'/vendor/runtime/react','react-dom':'/vendor/runtime/react-dom','react-class':'/vendor/runtime/create-react-class'}});
+    window.NCM_RESOURCES=appUrl('assets/templates/nexus');
+    window.require.config({baseUrl:appUrl('vendor/cardmaker/src'),paths:{react:appUrl('vendor/runtime/react'),'react-dom':appUrl('vendor/runtime/react-dom'),'react-class':appUrl('vendor/runtime/create-react-class')}});
     window.require(['react','react-dom','tcg/ygo/Card','tcg/ygo/Template'],(React,ReactDOM,Card,Template)=>resolve({React,ReactDOM,Card,Template}),reject);
   });return modules;
 }
 async function artworkData(image){
   if(/^data:image\/(png|jpeg|webp);base64,/.test(image.image_url_cropped))return image.image_url_cropped;
-  const local=`/assets/artwork/${image.id}.jpg`;
+  const local=appUrl(`assets/artwork/${image.id}.jpg`);
   const cache=await caches.open('proxy-artwork-v1');
-  const key=`/cached-artwork/${image.id}`;
+  const key=appUrl(`cached-artwork/${image.id}`);
   let response=await cache.match(key);
   if(!response){
     response=await fetch(local);

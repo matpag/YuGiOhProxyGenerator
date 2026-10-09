@@ -1,9 +1,10 @@
+import {appUrl} from '../paths.js';
 const endpoint='https://db.ygoprodeck.com/api/v7/cardinfo.php';
 export class CardRepository {
   constructor(){this.memory=new Map();this.fixtures=null;}
   async init(){
     const [en,it]=await Promise.all(['en','it'].map(async lang=>{
-      const r=await fetch(`/fixtures/cards-${lang}.json`);if(!r.ok)throw new Error('Fixture locale non disponibile');return r.json();
+      const r=await fetch(appUrl(`fixtures/cards-${lang}.json`));if(!r.ok)throw new Error('Fixture locale non disponibile');return r.json();
     }));this.fixtures={en,it};
   }
   readCache(key){try{return JSON.parse(localStorage.getItem(key));}catch{return null;}}

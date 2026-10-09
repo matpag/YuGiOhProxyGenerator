@@ -1,3 +1,4 @@
+import {appUrl} from './paths.js';
 import {setupEditor} from './editor.js';
 import {parseDecklist} from './decklist/parse.js';
 import {normalizeCard} from './model/card.js';
@@ -55,7 +56,7 @@ $('file').addEventListener('change',async e=>{const f=e.target.files[0];if(f){$(
 $('decklist_input').addEventListener('dragover',e=>e.preventDefault());
 $('decklist_input').addEventListener('drop',async e=>{e.preventDefault();if(busy)return;const f=e.dataTransfer.files[0];if(f){$('decklist_input').value+=await f.text();invalidate();}});
 try{
-  [dictionary,overrides]=await Promise.all(['/dictionaries/tcg.json','/text-overrides/cards.json'].map(async url=>(await fetch(url)).json()));
+  [dictionary,overrides]=await Promise.all(['dictionaries/tcg.json','text-overrides/cards.json'].map(async url=>(await fetch(appUrl(url))).json()));
   for(const lang of dictionary.languages){const option=document.createElement('option');option.value=lang;option.textContent=lang==='it'?'Italiano':'English';$('language').append(option);}
   $('language').value='it';await repository.init();
   editor=setupEditor({getItems:()=>items,getLanguage:()=>$('language').value,getDictionary:()=>dictionary,getDecklist:()=>$('decklist_input').value,
