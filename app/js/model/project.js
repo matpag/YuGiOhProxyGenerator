@@ -22,11 +22,12 @@ export function editCard(original,values,language,dictionary){
  if(!Number.isInteger(level)||level<0||level>13)throw new Error('Livello, rango o valore Link non valido');
  card.layout=values.layout;card.frame=values.layout.toLowerCase();card.family=['Spell','Trap'].includes(values.layout)?values.layout.toLowerCase():'monster';
  card.attribute=card.family==='monster'?values.attribute:card.family;
- card.race=card.family==='monster'?values.race:'normal';card.icon='None';
+ card.race=card.family==='monster'?values.race:original.family===card.family?original.race:'normal';
+ card.icon=card.family!=='monster'&&original.family===card.family?original.icon:'None';
  card.mechanics=card.family==='monster'?({Normal:['normal'],Effect:['effect'],Fusion:['fusion','effect'],Ritual:['ritual','effect'],Synchro:['synchro','effect'],Xyz:['xyz','effect'],Link:['link','effect']})[values.layout]:[];
  card.scale=values.pendulum?Number(values.scale):null;
  if(card.scale!==null){if(!Number.isInteger(card.scale)||card.scale<0||card.scale>13||!values.pendulumText.trim())throw new Error('Valore e testo Pendulum sono obbligatori');if(card.family!=='monster'||card.layout==='Link')throw new Error('Questo abbinamento Pendulum non è supportato');card.mechanics.splice(card.mechanics.length-1,0,'pendulum');}
- card.level=['Xyz','Link'].includes(card.layout)?null:level;card.rank=card.layout==='Xyz'?level:null;card.linkValue=card.layout==='Link'?level:null;
+ card.level=card.family!=='monster'||['Xyz','Link'].includes(card.layout)?null:level;card.rank=card.layout==='Xyz'?level:null;card.linkValue=card.layout==='Link'?level:null;
  card.atk=card.family==='monster'?stat(values.atk):null;card.def=card.family==='monster'&&card.layout!=='Link'?stat(values.def):null;
  const label=(group,key)=>{const l=dictionary[group]?.[key]?.[language];if(!l)throw new Error('Etichetta non disponibile');return l;};
  card.language=language;card.attributeLabel=label('attributes',card.attribute);

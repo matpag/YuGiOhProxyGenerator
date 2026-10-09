@@ -45,3 +45,11 @@ test('Edited Pendulum frames keep Normal/Effect last in the compact type line',(
   assert.equal(editCard(original,{...values,layout},'it',dictionary).typeLine,expected);
  }
 });
+
+test('Editing a Spell preserves its existing icon and subtype without monster statistics',()=>{
+ const original=localizeCard(pair(55144522),'it',dictionary);
+ original.icon='Continuous';original.race='continuous';
+ const edited=editCard(original,{name:original.text.name,description:original.text.description,layout:'Spell',attribute:'dark',race:'spellcaster',atk:'0',def:'0',level:'0',pendulum:false,scale:'4',pendulumText:'',artwork:null},'it',dictionary);
+ assert.equal(edited.icon,'Continuous');assert.equal(edited.race,'continuous');
+ assert.equal(edited.level,null);assert.equal(edited.atk,null);assert.equal(edited.def,null);
+});

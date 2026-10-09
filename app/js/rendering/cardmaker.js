@@ -64,7 +64,7 @@ function localizedAttribute(canvas,card,Template){
   ctx.fillStyle='white';ctx.font='700 7.5px "ITC Stone Serif Small Caps Bold"';ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillText(card.attributeLabel,Template.attribute.left+20,Template.attribute.top+9);
   ctx.restore();
 }
-export async function renderCard(card,{artworkId}={}){
+export async function renderCard(card,{artworkId,cacheResult=true}={}){
   if(!['Normal','Effect','Spell','Trap','Fusion','Ritual','Synchro','Xyz','Link'].includes(card.layout))throw new Error(`Layout ${card.layout} non ancora abilitato`);
   const image=card.artworks.find(x=>x.id===artworkId)||(!artworkId?card.artworks[0]:null);
   if(!image)throw new Error('Variante illustrazione non disponibile');
@@ -95,7 +95,7 @@ export async function renderCard(card,{artworkId}={}){
     if(canvas.proxyDiagnostics.some(x=>x.fontSize<8))throw new Error('Il testo non entra nella carta con un corpo leggibile');
     localizedAttribute(canvas,card,Template);
     const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('PNG non esportabile')),'image/png'));
-    const result={pngBytes:new Uint8Array(await blob.arrayBuffer()),width:WIDTH,height:HEIGHT,url:URL.createObjectURL(blob),diagnostics:canvas.proxyDiagnostics,artworkId:image.id};
-    cache.set(key,result);return result;
+    const result={pngBytes:new Uint8Array(await blob.arrayBuffer()),width:WIDTH,height:HEIGHT,url:URL.createObjectURL(blob),diagnostics:canvas.proxyDiagnostics,artworkId:image.id,transient:!cacheResult};
+    if(cacheResult)cache.set(key,result);return result;
   }finally{ReactDOM.unmountComponentAtNode(host);host.remove();}
 }
