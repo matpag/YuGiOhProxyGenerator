@@ -1,0 +1,216 @@
+{
+  "version": 3,
+  "languages": [
+    "en",
+    "it"
+  ],
+  "attributes": {
+    "dark": {
+      "en": "DARK",
+      "it": "OSCURITÀ"
+    },
+    "light": {
+      "en": "LIGHT",
+      "it": "LUCE"
+    },
+    "earth": {
+      "en": "EARTH",
+      "it": "TERRA"
+    },
+    "fire": {
+      "en": "FIRE",
+      "it": "FUOCO"
+    },
+    "water": {
+      "en": "WATER",
+      "it": "ACQUA"
+    },
+    "wind": {
+      "en": "WIND",
+      "it": "VENTO"
+    },
+    "divine": {
+      "en": "DIVINE",
+      "it": "DIVINO"
+    },
+    "spell": {
+      "en": "SPELL",
+      "it": "MAGIA"
+    },
+    "trap": {
+      "en": "TRAP",
+      "it": "TRAPPOLA"
+    }
+  },
+  "races": {
+    "spellcaster": {
+      "en": "Spellcaster",
+      "it": "Incantatore"
+    },
+    "dragon": {
+      "en": "Dragon",
+      "it": "Drago"
+    },
+    "zombie": {
+      "en": "Zombie",
+      "it": "Zombie"
+    },
+    "warrior": {
+      "en": "Warrior",
+      "it": "Guerriero"
+    },
+    "beast_warrior": {
+      "en": "Beast-Warrior",
+      "it": "Guerriero-Bestia"
+    },
+    "beast": {
+      "en": "Beast",
+      "it": "Bestia"
+    },
+    "winged_beast": {
+      "en": "Winged Beast",
+      "it": "Bestia Alata"
+    },
+    "fiend": {
+      "en": "Fiend",
+      "it": "Demone"
+    },
+    "fairy": {
+      "en": "Fairy",
+      "it": "Fata"
+    },
+    "insect": {
+      "en": "Insect",
+      "it": "Insetto"
+    },
+    "dinosaur": {
+      "en": "Dinosaur",
+      "it": "Dinosauro"
+    },
+    "reptile": {
+      "en": "Reptile",
+      "it": "Rettile"
+    },
+    "fish": {
+      "en": "Fish",
+      "it": "Pesce"
+    },
+    "sea_serpent": {
+      "en": "Sea Serpent",
+      "it": "Serpente Marino"
+    },
+    "aqua": {
+      "en": "Aqua",
+      "it": "Acqua"
+    },
+    "pyro": {
+      "en": "Pyro",
+      "it": "Pyro"
+    },
+    "thunder": {
+      "en": "Thunder",
+      "it": "Tuono"
+    },
+    "rock": {
+      "en": "Rock",
+      "it": "Roccia"
+    },
+    "plant": {
+      "en": "Plant",
+      "it": "Pianta"
+    },
+    "machine": {
+      "en": "Machine",
+      "it": "Macchina"
+    },
+    "psychic": {
+      "en": "Psychic",
+      "it": "Psichico"
+    },
+    "divine_beast": {
+      "en": "Divine-Beast",
+      "it": "Divinità-Bestia"
+    },
+    "wyrm": {
+      "en": "Wyrm",
+      "it": "Wyrm"
+    },
+    "cyberse": {
+      "en": "Cyberse",
+      "it": "Cyberso"
+    },
+    "illusion": {
+      "en": "Illusion",
+      "it": "Illusione"
+    }
+  },
+  "mechanics": {
+    "normal": {
+      "en": "Normal",
+      "it": "Normale"
+    },
+    "effect": {
+      "en": "Effect",
+      "it": "Effetto"
+    },
+    "fusion": {
+      "en": "Fusion",
+      "it": "Fusione"
+    },
+    "ritual": {
+      "en": "Ritual",
+      "it": "Rituale"
+    },
+    "synchro": {
+      "en": "Synchro",
+      "it": "Synchro"
+    },
+    "xyz": {
+      "en": "Xyz",
+      "it": "Xyz"
+    },
+    "link": {
+      "en": "Link",
+      "it": "Link"
+    },
+    "pendulum": {
+      "en": "Pendulum",
+      "it": "Pendulum"
+    },
+    "tuner": {
+      "en": "Tuner",
+      "it": "Tuner"
+    },
+    "flip": {
+      "en": "Flip",
+      "it": "Scoperta"
+    },
+    "gemini": {
+      "en": "Gemini",
+      "it": "Gemello"
+    },
+    "spirit": {
+      "en": "Spirit",
+      "it": "Spirito"
+    },
+    "union": {
+      "en": "Union",
+      "it": "Unione"
+    },
+    "toon": {
+      "en": "Toon",
+      "it": "Toon"
+    }
+  },
+  "families": {
+    "spell": {
+      "en": "Spell Card",
+      "it": "Carta Magia"
+    },
+    "trap": {
+      "en": "Trap Card",
+      "it": "Carta Trappola"
+    }
+  },
+  "labelSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4041&request_locale=it"
+}

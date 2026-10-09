@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "reference": "https://www.cardmaker.net/forums/topic/308603-fonts-for-yu-gi-oh-card-making-with-multilingual-support/",
+  "archive_sha256": "03906a088b097ed7ca7674534499d691aef77fda079c5732bd9d447beb5e3933",
+  "fonts": [
+    {
+      "file": "app/assets/fonts/matrix-regular-small-caps.ttf",
+      "family": "Matrix Regular Small Caps",
+      "style": "normal",
+      "css_weight": 400,
+      "source_url": "https://www.mediafire.com/file/9r6fww9rss1d2dc/TCG_fonts.rar/file",
+      "source_file": "Yu-Gi-Oh! Matrix Regular Small Caps 2.ttf",
+      "source_revision": null,
+      "sha256": "e342f533d0fdd6a52946819d1a07a0c8eb98ba3e41732ff574d7afcde95ffe7c",
+      "internal_names": {
+        "1": "Yu-Gi-Oh! Matrix Small Caps 2",
+        "2": "Normal",
+        "4": "Yu-Gi-Oh! Matrix Small Caps 2",
+        "6": "Yu-Gi-Oh! Matrix Small Caps 2"
+      },
+      "verified_characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÀÈÉÌÒÙàèéìòù’“”–—•"
+    },
+    {
+      "file": "app/assets/fonts/matrix-regular-small-caps-legacy.ttf",
+      "family": "Matrix Regular Small Caps Legacy",
+      "style": "normal",
+      "css_weight": 400,
+      "source_url": "https://www.mediafire.com/file/9r6fww9rss1d2dc/TCG_fonts.rar/file",
+      "source_file": "Yu-Gi-Oh! Matrix Regular Small Caps 1.ttf",
+      "source_revision": null,
+      "sha256": "6468a5b0b28be7129570c74f39428969a206ef0db08883557c9fca1d0b94ae62",
+      "internal_names": {
+        "1": "Yu-Gi-Oh! Matrix Small Caps 1",
+        "2": "Normal",
+        "4": "Yu-Gi-Oh! Matrix Small Caps 1",
+        "6": "Yu-Gi-Oh! Matrix Small Caps 1"
+      },
+      "verified_characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÀÈÉÌÒÙàèéìòù’“”–—•"
+    },
+    {
+      "file": "app/assets/fonts/matrix-book.ttf",
+      "family": "Matrix Book",
+      "style": "normal",
+      "css_weight": 400,
+      "source_url": "https://www.mediafire.com/file/9r6fww9rss1d2dc/TCG_fonts.rar/file",
+      "source_file": "Yu-Gi-Oh! Matrix Book.ttf",
+      "source_revision": null,
+      "sha256": "56e0b4c323c0c0d343f53bb46e9d2aaefd21410cd7d6565e635359b7e50ea0a9",
+      "internal_names": {
+        "1": "Yu-Gi-Oh! Matrix Book",
+        "2": "Normal",
+        "4": "Yu-Gi-Oh! Matrix Book",
+        "6": "Yu-Gi-Oh! Matrix Book"
+      },
+      "verified_characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÀÈÉÌÒÙàèéìòù’“”–—•"
+    },
+    {
+      "file": "app/assets/fonts/stone-serif-small-caps-bold.ttf",
+      "family": "ITC Stone Serif Small Caps Bold",
+      "style": "normal",
+      "css_weight": 700,
+      "source_url": "https://www.mediafire.com/file/9r6fww9rss1d2dc/TCG_fonts.rar/file",
+      "source_file": "Yu-Gi-Oh! ITC Stone Serif Small Caps Bold.ttf",
+      "source_revision": null,
+      "sha256": "bfeba9dacb92f6e2caf1203ddccb4e3cf7cdd3aaf2f8787c6f2e532e2dee8fd3",
+      "internal_names": {
+        "1": "",
+        "2": "Negrita",
+        "4": "Yu-Gi-Oh! ITC Stone Gracia Negrita Versalita",
+        "6": "Yu-Gi-Oh! ITC Stone Gracia Negrita Versalita"
+      },
+      "verified_characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÀÈÉÌÒÙàèéìòù’“”–—•"
+    },
+    {
+      "file": "app/assets/fonts/stone-serif-lt-italic.ttf",
+      "family": "ITC Stone Serif LT",
+      "style": "italic",
+      "css_weight": 400,
+      "source_url": "https://www.mediafire.com/file/9r6fww9rss1d2dc/TCG_fonts.rar/file",
+      "source_file": "Yu-Gi-Oh! ITC Stone Serif LT Italic.ttf",
+      "source_revision": null,
+      "sha256": "432d2e9d936f3a77ac18cff25521f1de81077a1c3510218821bafcb81802411c",
+      "internal_names": {
+        "1": "Yu-Gi-Oh! StoneSerif LT",
+        "2": "Italique",
+        "4": "Yu-Gi-Oh! ITC Stone Serif LT Italic",
+        "6": "Yu-Gi-Oh! StoneSerifLT-Italic"
+      },
+      "verified_characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÀÈÉÌÒÙàèéìòù’“”–—•"
+    },
+    {
+      "file": "app/assets/fonts/stone-serif-semibold.ttf",
+      "family": "ITC Stone Serif Semibold",
+      "style": "normal",
+      "css_weight": 600,
+      "source_url": "https://www.mediafire.com/file/9r6fww9rss1d2dc/TCG_fonts.rar/file",
+      "source_file": "Stone Serif Semibold.ttf",
+      "source_revision": null,
+      "sha256": "16d9d7b1318689c2a4a07e84190656c63cad7789f1738d9ed6bd213a6a6436f5",
+      "internal_names": {
+        "1": "StoneSerif-Semibold",
+        "2": "Gras",
+        "4": "StoneSerif-Semibold",
+        "6": "StoneSerif-Semibold"
+      },
+      "verified_characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÀÈÉÌÒÙàèéìòù’“”–—•"
+    },
+    {
+      "file": "app/assets/fonts/stone-serif-lt.ttf",
+      "family": "ITC Stone Serif LT",
+      "style": "normal",
+      "css_weight": 400,
+      "source_url": "https://raw.githubusercontent.com/amarillonmc/MSE201_w_ygos10/8161e50fb28f6b78431fe1dd9e2617982e48f205/font/Stone%20Serif%20Regular.ttf",
+      "source_file": "Stone Serif Regular.ttf",
+      "source_revision": "8161e50fb28f6b78431fe1dd9e2617982e48f205",
+      "sha256": "e809a00b5f47f5f6f9be9ceb78722ffbe10faf9366aecae07ea15b36d7c0b620",
+      "internal_names": {
+        "1": "Stone Serif",
+        "2": "Regular",
+        "4": "Stone Serif Regular",
+        "6": "StoneSerifMedium"
+      },
+      "verified_characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÀÈÉÌÒÙàèéìòù’“”–—•"
+    },
+    {
+      "file": "app/assets/fonts/matrix-bold-small-caps.ttf",
+      "family": "Matrix Bold Small Caps",
+      "style": "normal",
+      "css_weight": 700,
+      "source_url": "https://raw.githubusercontent.com/amarillonmc/MSE201_w_ygos10/8161e50fb28f6b78431fe1dd9e2617982e48f205/font/MatrixBoldSmallCaps.ttf",
+      "source_file": "MatrixBoldSmallCaps.ttf",
+      "source_revision": "8161e50fb28f6b78431fe1dd9e2617982e48f205",
+      "sha256": "930cfda339d21b4d6652422f3e63f610a4ff144af550729558da11b2879442d2",
+      "internal_names": {
+        "1": "MatrixBoldSmallCaps",
+        "2": "Regular",
+        "4": "MatrixBoldSmallCaps",
+        "6": "MatrixBoldSmallCaps"
+      },
+      "verified_characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÀÈÉÌÒÙàèéìòù’“”–—•"
+    },
+    {
+      "file": "app/assets/fonts/idroid.otf",
+      "family": "IDroid",
+      "style": "normal",
+      "css_weight": 400,
+      "source_url": "https://raw.githubusercontent.com/amarillonmc/MSE201_w_ygos10/8161e50fb28f6b78431fe1dd9e2617982e48f205/font/IDroid.otf",
+      "source_file": "IDroid.otf",
+      "source_revision": "8161e50fb28f6b78431fe1dd9e2617982e48f205",
+      "sha256": "fd44157401dd612be6bdf8288d7476e8b7f8967a61059dac2bc8a8e883ae8d55",
+      "internal_names": {
+        "1": "IDroid",
+        "2": "Regular",
+        "4": "IDroid",
+        "6": "IDroid"
+      },
+      "verified_characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÀÈÉÌÒÙàèéìòù’“”–—•"
+    }
+  ]
+}

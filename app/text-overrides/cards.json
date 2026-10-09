@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "cards": {
+    "16178681": {
+      "it": {
+        "pendulumEffect": {
+          "value": "Puoi ridurre a 0 il danno da combattimento che subisci da un attacco che coinvolge un Mostro Pendulum che controlli. Durante la tua End Phase: puoi distruggere questa carta e, se lo fai, aggiungi 1 Mostro Pendulum con ATK 1500 o inferiore dal tuo Deck alla tua mano. Puoi utilizzare ogni Effetto Pendulum di \"Drago Pendulum Occhi Diversi\" una sola volta per turno.",
+          "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11213&request_locale=it",
+          "reviewedAt": "2026-10-09"
+        }
+      }
+    }
+  }
+}

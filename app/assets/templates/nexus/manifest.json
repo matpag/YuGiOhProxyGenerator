@@ -1,0 +1,391 @@
+{
+  "source": "https://duelingnexus.com/yugioh-card-maker/",
+  "implementation_url": "https://duelingnexus.com/yugioh-card-maker/build/cardmaker.js",
+  "implementation_sha256": "31343b63244d6113b6848c28d978e8e06b2e37bb06d4c33f6348a26b5c2c39f0",
+  "acquired_at": "2026-10-09",
+  "variant": "Normal TCG",
+  "pendulum_box_size": "Normal",
+  "geometry": {
+    "width": 421,
+    "height": 614,
+    "artwork": {
+      "regular": {
+        "left": 47,
+        "top": 109,
+        "width": 326,
+        "height": 326
+      },
+      "pendulum": {
+        "left": 25,
+        "top": 107,
+        "width": 371,
+        "height": 371
+      }
+    },
+    "attribute": {
+      "left": 356,
+      "top": 27,
+      "width": 40,
+      "height": 40
+    },
+    "monsterType": {
+      "left": 30,
+      "top": 461,
+      "width": 360,
+      "height": 30
+    },
+    "effect": {
+      "monster": {
+        "left": 30,
+        "top": 478,
+        "width": 360,
+        "height": 75
+      },
+      "backrow": {
+        "left": 30,
+        "top": 461,
+        "width": 360,
+        "height": 110
+      }
+    },
+    "pendulum": {
+      "effect": {
+        "left": 65,
+        "top": 389,
+        "width": 290,
+        "height": 65
+      },
+      "blue": {
+        "left": 29,
+        "top": 416,
+        "width": 23,
+        "height": 30
+      },
+      "red": {
+        "left": 368,
+        "top": 416,
+        "width": 23,
+        "height": 30
+      }
+    },
+    "stats": {
+      "atk": {
+        "left": 263,
+        "top": 560,
+        "width": 35
+      },
+      "def": {
+        "left": 350,
+        "top": 560,
+        "width": 35
+      },
+      "link": {
+        "left": 365,
+        "top": 560,
+        "width": 20
+      }
+    },
+    "footer": {
+      "serial": {
+        "left": 18,
+        "top": 587,
+        "width": 150
+      },
+      "copyright": {
+        "left": 230,
+        "top": 587,
+        "width": 150
+      }
+    },
+    "id": {
+      "regular": {
+        "left": 290,
+        "top": 441,
+        "width": 80
+      },
+      "pendulum": {
+        "left": 32,
+        "top": 562,
+        "width": 80
+      },
+      "link": {
+        "left": 265,
+        "top": 441,
+        "width": 80
+      }
+    },
+    "markers": {
+      "topLeft": {
+        "left": 30,
+        "top": 95,
+        "width": 43,
+        "height": 43
+      },
+      "topCenter": {
+        "left": 161.5,
+        "top": 88,
+        "width": 97,
+        "height": 24
+      },
+      "topRight": {
+        "left": 347,
+        "top": 95,
+        "width": 43,
+        "height": 43
+      },
+      "middleLeft": {
+        "left": 24,
+        "top": 223,
+        "width": 24,
+        "height": 97
+      },
+      "middleRight": {
+        "left": 372,
+        "top": 223,
+        "width": 24,
+        "height": 97
+      },
+      "bottomLeft": {
+        "left": 30,
+        "top": 407,
+        "width": 43,
+        "height": 43
+      },
+      "bottomCenter": {
+        "left": 161.5,
+        "top": 433,
+        "width": 97,
+        "height": 24
+      },
+      "bottomRight": {
+        "left": 347,
+        "top": 407,
+        "width": 43,
+        "height": 43
+      }
+    },
+    "title": {
+      "left": 28,
+      "top": 12,
+      "width": 323,
+      "height": 48
+    }
+  },
+  "assets": [
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/border/Normal.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/border/Normal.png",
+      "sha256": "7c99b73ec07c75577f6792e1ac8edbc43915382b9948c4f967d29110c921c390"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/star/Normal.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/star/Normal.png",
+      "sha256": "cd218cc0ac7ef8c583ef0d77bfb4b95d4456ee29c6f1e169b654314932b2a72f"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/text/leftbracket.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/text/leftbracket.png",
+      "sha256": "da8ebcb23df84e59379c7b574d5fb4806971febe81fdea455839e023cb7f7eac"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/text/rightbracket.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/text/rightbracket.png",
+      "sha256": "37ac98545ee8334dfacafb120db85b579527228d2faaddd55516610341685081"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/border/Normal.pendulum.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/border/Normal.pendulum.png",
+      "sha256": "4d00f8354548d16e3ce0255d27b8a49803b2baf04a3de707ede731b47c436f73"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/border/Effect.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/border/Effect.png",
+      "sha256": "dd372f984bb25755fea143edd9c2c88c684cabb4cfa59422f799a0735e8fbce5"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/border/Effect.pendulum.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/border/Effect.pendulum.png",
+      "sha256": "f33d8a24ae8ec83c4bd5cdf67418d0a4c3f3c2bae5e16ea00a4c71ffc3541707"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/border/Fusion.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/border/Fusion.png",
+      "sha256": "a7509ba493903fd6fba594e4a09c6a1d78d7ce0c92de12b36e48c71372e5724c"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/border/Fusion.pendulum.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/border/Fusion.pendulum.png",
+      "sha256": "fb6bab41c41e0fe5d18d3c59c0f20432c766a6eca51b572eb1353e7d3c75c2a4"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/border/Ritual.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/border/Ritual.png",
+      "sha256": "69fa23629fe1456690eb8cab76029510a4bd2494c497571f96e844f6357ee741"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/border/Ritual.pendulum.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/border/Ritual.pendulum.png",
+      "sha256": "ad6d3474ebc74887afd78dbf7d262db61deb28b27bb46324bbc2dd4c1932cf2a"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/border/Synchro.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/border/Synchro.png",
+      "sha256": "56255e01a9f8c1289a2458a1e7e35d1c15fe8cb7d34dc427db985d7db05cc98f"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/border/Synchro.pendulum.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/border/Synchro.pendulum.png",
+      "sha256": "883ffa34a4308d5fd48e4ea6c3d6cf3774ea4074d3fca9665553a68a91de7f17"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/border/Xyz.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/border/Xyz.png",
+      "sha256": "f103846736076efbe69136d5fa83f2fe95011108de2fdd91560b3ad82996e3fc"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/star/Xyz.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/star/Xyz.png",
+      "sha256": "2324aabdd6d8e81c6963a1d29e552063e9ba6aff19e91bc38d3333d94e3fc5fe"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/border/Xyz.pendulum.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/border/Xyz.pendulum.png",
+      "sha256": "a77a817b94f552f0b64057336d96e732cee0402f7bde4ced9b18a89ea89d25f0"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/border/Link.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/border/Link.png",
+      "sha256": "7e5af891951898a050d59863f0864109d5a32e84a896d555d36fa66e9505ea22"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/border/Spell.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/border/Spell.png",
+      "sha256": "c49ac87cd8d522115fbb46af1efeac77fff84236653a40152500ca2d65a78e63"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/border/Trap.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/border/Trap.png",
+      "sha256": "c2c2884bcba9b7773715dd47ba91531ce874fa6ea6ff90c580f37a6042852ddd"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/attribute/Dark.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/attribute/Dark.png",
+      "sha256": "c3656c75969a829e335b7b478ad97034191b89531674abcfffa83beeca08965b"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/attribute/Light.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/attribute/Light.png",
+      "sha256": "7577b76df559f8710e17c305f4e7e010e5fb3e47424a1798eac4ed02eac51994"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/attribute/Earth.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/attribute/Earth.png",
+      "sha256": "01b545775f4c1678592ec679124c79ab09035ff326f9718b1724f973657f9384"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/attribute/Fire.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/attribute/Fire.png",
+      "sha256": "2fef9938bd1c0e2545bc9484f92f35ff7671a9c12f44e40de74775d60baf24fe"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/attribute/Water.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/attribute/Water.png",
+      "sha256": "3adba5998f1befaef4b363f3da6a00585df1ab6530c4ea18f534793b4c727637"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/attribute/Wind.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/attribute/Wind.png",
+      "sha256": "c6490ae262e228d091ad7b56c7c5a45e58d38ed8e4c33e649043f75b554a5f19"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/attribute/Divine.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/attribute/Divine.png",
+      "sha256": "eafcfa707103ba7cac9eda2cf9c956fd7133301c82828bd8d2744ed07da5d670"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/attribute/Spell.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/attribute/Spell.png",
+      "sha256": "60f3db6152dd441c643884c6a0e477b4f81a7fd2d9241b12528f00d16ecbe09d"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/attribute/Trap.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/attribute/Trap.png",
+      "sha256": "90f1d2d5e12f5a2bf0ae41010e8cd825ed258d8c4765791873364cfabd601e3a"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/marker/topLeft.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/marker/topLeft.png",
+      "sha256": "93494dbfc7af3471972bde800910663a2286b53d35389a47086a694434816568"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/marker/topCenter.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/marker/topCenter.png",
+      "sha256": "ceed7f05c0eae6263c24382c4f7022dddcc99b8bc0d3d9d6e2641c728fdc1ec0"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/marker/topRight.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/marker/topRight.png",
+      "sha256": "1b6caef69e4c142dd9673f907670793b0a8477ea0b78787aef907a4c206f7f4d"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/marker/middleLeft.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/marker/middleLeft.png",
+      "sha256": "f848d5a5ba13e2b295448740d1a9640a68f53c698eb6889bc5729951392bc3f5"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/marker/middleRight.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/marker/middleRight.png",
+      "sha256": "17137efa7f6aa63d9fb8d87de948429d37c17d6fe5ae7ff5d2149e628fc6a469"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/marker/bottomLeft.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/marker/bottomLeft.png",
+      "sha256": "bdc8455833125cb802088a295996ae75e33b10e1968e157c7520177fc4c5f619"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/marker/bottomCenter.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/marker/bottomCenter.png",
+      "sha256": "7be74f44995b8c2a95a99ffed8143b56d440e506457d12dd2425aebb4d6ae7f5"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/marker/bottomRight.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/marker/bottomRight.png",
+      "sha256": "b74796a56cc4255e61175ba10c2d5f55159cf897b6e67e99acd9e3e85aa1f40e"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/icon/Continuous.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/icon/Continuous.png",
+      "sha256": "3b44a19e2e68d19040e2bda999f9437cf1ad2879e622907d22002334e008ea78"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/icon/Counter.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/icon/Counter.png",
+      "sha256": "f8806d4568e52278f6806385b64467de8bd62b5a64ae7f60e667bbe3a4869492"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/icon/Equip.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/icon/Equip.png",
+      "sha256": "a2745b9557d847b2b3cb041cc25e5c5444142ea3ced5a18202cdbb5e281cc5bb"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/icon/Field.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/icon/Field.png",
+      "sha256": "88e254d54829cd3a2c8f7bc51a2d11d597ef9922e89cd2f288371dbb06e01955"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/icon/Quick-play.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/icon/Quick-play.png",
+      "sha256": "d1409e8d30154d84c2744e3d67bfdd67fe3d0e388f5ebcc743da97ee1f05370b"
+    },
+    {
+      "file": "app/assets/templates/nexus/tcg/ygo/icon/Ritual.png",
+      "url": "https://duelingnexus.com/yugioh-card-maker/res/tcg/ygo/icon/Ritual.png",
+      "sha256": "959fea4c9bc89e619181dfb9e19106071fbfc795ccb35aa83c23d1d6c44d9916"
+    }
+  ],
+  "adaptations": [
+    "Existing local TCG font faces retained; frame/text regions follow Nexus coordinates.",
+    "Type punctuation stays compact text, rather than raster brackets.",
+    "Proxy footer and blank set ID remain app-controlled."
+  ]
+}

@@ -1,0 +1,71 @@
+@font-face {
+  font-family: 'Matrix Regular Small Caps';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(/assets/fonts/matrix-regular-small-caps.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Matrix Regular Small Caps Legacy';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(/assets/fonts/matrix-regular-small-caps-legacy.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Matrix Book';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(/assets/fonts/matrix-book.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'ITC Stone Serif Small Caps Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url(/assets/fonts/stone-serif-small-caps-bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'ITC Stone Serif LT';
+  font-style: italic;
+  font-weight: 400;
+  font-display: block;
+  src: url(/assets/fonts/stone-serif-lt-italic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'ITC Stone Serif Semibold';
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url(/assets/fonts/stone-serif-semibold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'ITC Stone Serif LT';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(/assets/fonts/stone-serif-lt.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Matrix Bold Small Caps';
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url(/assets/fonts/matrix-bold-small-caps.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'IDroid';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(/assets/fonts/idroid.otf) format('opentype');
+}

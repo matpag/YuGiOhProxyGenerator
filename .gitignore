@@ -1,0 +1,4 @@
+_upstream/
+node_modules/
+__pycache__/
+*.log
