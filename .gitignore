@@ -5,3 +5,6 @@ __pycache__/
 
 # Local research and validation documents
 /docs/
+
+# Local agent instructions (all directory levels)
+[Aa][Gg][Ee][Nn][Tt][Ss].[Mm][Dd]
