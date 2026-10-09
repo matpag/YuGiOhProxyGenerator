@@ -40,7 +40,7 @@ Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/). Keep the terminal open wh
 
 ## Availability and limitations
 
-English and Italian TCG cards are supported. The included sample cards can be generated without external requests; other cards and artwork variants require an internet connection on first use. The local server supports downloading additional artwork when browser restrictions prevent it on the hosted site.
+English and Italian TCG cards are supported. The included sample cards can be generated without external requests; other cards and artwork variants require an internet connection on first use. On GitHub Pages, additional artwork is downloaded through [wsrv.nl](https://wsrv.nl/) to avoid browser CORS restrictions, then cached for offline reuse. The first download requires both YGOProDeck and the image service to be available. The local server downloads artwork directly from YGOProDeck.
 
 This is a prototype: visual fidelity is still being refined, and not every card combination has been validated. Missing translations and unsupported combinations are reported. OCG languages are not currently supported.
 

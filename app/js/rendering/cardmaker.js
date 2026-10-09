@@ -18,10 +18,19 @@ async function artworkData(image){
   if(!response){
     try{
       response=await fetch(local);
-      // The CDN does not allow browser CORS fetches; our local server relays by ID.
+      // The CDN omits CORS headers. Local hosts relay by ID; static hosts use wsrv.
       if(!response.ok){
         const loopback=['localhost','127.0.0.1','[::1]'].includes(window.location.hostname);
-        response=await fetch(loopback?appUrl(`api/artwork/${image.id}.jpg`):image.image_url_cropped);
+        let source=appUrl(`api/artwork/${image.id}.jpg`);
+        if(!loopback){
+          if(!/^\d{1,12}$/.test(String(image.id)))throw new Error('Invalid artwork ID');
+          const proxy=new URL('https://wsrv.nl/');
+          proxy.searchParams.set('url',`https://images.ygoprodeck.com/images/cards_cropped/${image.id}.jpg`);
+          // PNG preserves decoded pixels without resizing or JPEG recompression.
+          proxy.searchParams.set('output','png');
+          source=proxy.href;
+        }
+        response=await fetch(source,{signal:AbortSignal.timeout(15000)});
       }
     }catch{throw new Error(`Impossibile scaricare l’illustrazione ${image.id}. Controlla la connessione e riprova.`);}
     if(!response.ok){
