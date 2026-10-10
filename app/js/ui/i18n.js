@@ -18,6 +18,11 @@ export function applyUiLanguage(value,{persist=true}={}){
   if(!UI_LANGUAGES.includes(value))return;
   language=value;document.documentElement.lang=language;
   document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));
+  document.querySelectorAll('[data-i18n-linked]').forEach(el=>{
+    const link=el.querySelector('a');if(!link)return;
+    const label=link.textContent,message=t(el.dataset.i18nLinked),index=message.indexOf(label);
+    if(index>=0)el.replaceChildren(message.slice(0,index),link,message.slice(index+label.length));
+  });
   document.querySelectorAll('[data-i18n-aria]').forEach(el=>el.setAttribute('aria-label',t(el.dataset.i18nAria)));
   document.querySelectorAll('[data-ui-language]').forEach(button=>{
     button.setAttribute('aria-pressed',String(button.dataset.uiLanguage===language));
