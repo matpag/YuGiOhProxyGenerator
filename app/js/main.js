@@ -24,6 +24,15 @@ function refreshUi(){
  preview?.refreshLabels();editor?.refreshLabels();paintStatus();
  if(pdfBusy){$('download').textContent=t('pdfPreparing');$('download').disabled=true;}
 }
+// Move the same help section so visual, reading and keyboard order agree on mobile.
+const mobileLayout=matchMedia('(max-width:760px)'),howto=document.querySelector('.howto'),mobileHelp=$('mobile-howto');
+function positionHelp(){
+ const focus=document.activeElement,restoreFocus=howto.contains(focus);
+ (mobileLayout.matches?mobileHelp:document.querySelector('.settings')).append(howto);
+ mobileHelp.hidden=!mobileLayout.matches;
+ if(restoreFocus)focus.focus({preventScroll:true});
+}
+mobileLayout.addEventListener('change',positionHelp);positionHelp();
 window.addEventListener('ui-language-change',refreshUi);
 function invalidate(){
  stale=items.length>0;$('download').disabled=true;$('save-project').disabled=true;

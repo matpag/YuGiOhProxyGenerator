@@ -2,6 +2,13 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs/promises');
 const ready=page=>page.waitForFunction(()=>!document.querySelector('#generate').disabled);
 async function generate(page,deck){await page.locator('#decklist_input').fill(deck);await page.locator('#generate').click();await ready(page);assert.ok(await page.locator('#preview figure').count()>0,await page.locator('#status').innerText());}
+async function initialMobileFlow(page){
+ assert.equal(await page.locator('.howto').count(),1);
+ const help=await page.locator('.howto').boundingBox(),deck=await page.locator('.decklist').boundingBox();
+ assert.ok(help.y+help.height<=deck.y,'Mobile help must precede the decklist');
+ assert.ok(await page.locator('.howto').evaluate(e=>Boolean(e.compareDocumentPosition(document.querySelector('.decklist'))&Node.DOCUMENT_POSITION_FOLLOWING)),'Reading order must match visual order');
+ await page.locator('#generate').scrollIntoViewIfNeeded();await fits(page,'#generate');
+}
 const fits=async(page,selector)=>{const b=await page.locator(selector).boundingBox();const v=page.viewportSize();assert.ok(b&&b.x>=0&&b.x+b.width<=v.width&&b.y>=0&&b.y+b.height<=v.height,`${selector} is unreachable in ${v.width}x${v.height}`);};
 (async()=>{
  const browser=await chromium.launch({headless:true,channel:'msedge'}),errors=[];
@@ -9,7 +16,7 @@ const fits=async(page,selector)=>{const b=await page.locator(selector).boundingB
   const page=await browser.newPage({locale:'it-IT',viewport:{width:390,height:844}});page.on('pageerror',e=>errors.push(e.message));
   await page.addInitScript(()=>{window.releasedPreviewUrls=[];const revoke=URL.revokeObjectURL;URL.revokeObjectURL=url=>{window.releasedPreviewUrls.push(url);revoke.call(URL,url);};});
   await page.route('https://**/*',r=>r.abort());await page.goto('http://127.0.0.1:8765/');await ready(page);
-  await fits(page,'#generate');
+  await initialMobileFlow(page);
   await page.locator('#generate').click();await ready(page);
   await page.locator('#language').selectOption('it');assert.equal(await page.locator('#download').isDisabled(),true);
   assert.equal(await page.locator('#preview button').first().isDisabled(),true,'Stale previews must disable editing');assert.match(await page.locator('#status').innerText(),/rigenerare/);
@@ -38,7 +45,7 @@ const fits=async(page,selector)=>{const b=await page.locator(selector).boundingB
   // Many entries must retain a reachable route to download on a small screen.
   await generate(page,Array(16).fill('1 Dark Magician').join('\n'));await page.locator('#preview img').first().scrollIntoViewIfNeeded();await page.locator('#download-shortcut').waitFor({state:'visible'});await fits(page,'#download-shortcut');await page.locator('#download-shortcut').click();await fits(page,'#download');await page.close();
   for(const language of ['it','en','de','es','fr']){
-   const page=await browser.newPage({locale:language,isMobile:true,hasTouch:true,viewport:{width:320,height:740}});page.on('pageerror',e=>errors.push(e.message));await page.route('https://**/*',r=>r.abort());await page.goto('http://127.0.0.1:8765/');await ready(page);await fits(page,'#generate');assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+   const page=await browser.newPage({locale:language,isMobile:true,hasTouch:true,viewport:{width:320,height:740}});page.on('pageerror',e=>errors.push(e.message));await page.route('https://**/*',r=>r.abort());await page.goto('http://127.0.0.1:8765/');await ready(page);await initialMobileFlow(page);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
    await page.locator('[data-ui-language=en]').tap();await page.locator(`[data-ui-language=${language}]`).tap();assert.equal(await page.locator('#language').inputValue(),'en');
    await generate(page,'1 Dark Magician');await page.locator('#preview button').tap();await fits(page,'#apply-edit');await fits(page,'#close-editor-top');
    await page.setViewportSize({width:740,height:320});await fits(page,'#apply-edit');await fits(page,'#close-editor-top');assert.ok(await page.evaluate(()=>document.querySelector('#editor').scrollWidth<=document.querySelector('#editor').clientWidth));await page.locator('#close-editor').click();await page.close();
