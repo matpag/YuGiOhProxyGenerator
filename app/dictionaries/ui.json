@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "languages": [
     "en",
     "it",
@@ -113,7 +113,17 @@
       "pdfPreparing": "Creazione PDF…",
       "error.fileRead": "Impossibile leggere il file. Riprova.",
       "engineCredit": "Motore carte:",
-      "inspiredBy": "Ispirato da"
+      "inspiredBy": "Ispirato da",
+      "error.project": "Progetto carta non valido",
+      "error.projectCard": "Carta o quantità del progetto non valida",
+      "error.projectArtwork": "Riferimento artwork non valido",
+      "error.projectSize": "Progetto troppo grande",
+      "error.canonical": "Dati canonici mancanti",
+      "error.cardMismatch": "La coppia EN/{language} contiene ID diversi",
+      "error.qualifier": "Qualificatore carta non supportato",
+      "error.race": "Razza non supportata: {race}",
+      "error.artworkId": "ID illustrazione non valido",
+      "error.uiTranslations": "Traduzioni dell’interfaccia non disponibili"
     },
     "en": {
       "decklist": "Your decklist",
@@ -220,7 +230,17 @@
       "pdfPreparing": "Creating PDF…",
       "error.fileRead": "Unable to read the file. Please try again.",
       "engineCredit": "Card engine:",
-      "inspiredBy": "Inspired by"
+      "inspiredBy": "Inspired by",
+      "error.project": "Invalid card project",
+      "error.projectCard": "Invalid project card or quantity",
+      "error.projectArtwork": "Invalid artwork reference",
+      "error.projectSize": "Project is too large",
+      "error.canonical": "Canonical card data is missing",
+      "error.cardMismatch": "The EN/{language} pair contains different IDs",
+      "error.qualifier": "Unsupported card qualifier",
+      "error.race": "Unsupported monster type: {race}",
+      "error.artworkId": "Invalid artwork ID",
+      "error.uiTranslations": "Interface translations are unavailable"
     },
     "de": {
       "decklist": "Deine Deckliste",
@@ -327,7 +347,17 @@
       "pdfPreparing": "PDF wird erstellt…",
       "error.fileRead": "Datei konnte nicht gelesen werden. Bitte erneut versuchen.",
       "engineCredit": "Karten-Engine:",
-      "inspiredBy": "Inspiriert von"
+      "inspiredBy": "Inspiriert von",
+      "error.project": "Ungültiges Kartenprojekt",
+      "error.projectCard": "Ungültige Projektkarte oder Anzahl",
+      "error.projectArtwork": "Ungültiger Bildverweis",
+      "error.projectSize": "Das Projekt ist zu groß",
+      "error.canonical": "Kanonische Kartendaten fehlen",
+      "error.cardMismatch": "Das Paar EN/{language} enthält unterschiedliche IDs",
+      "error.qualifier": "Nicht unterstützter Kartenzusatz",
+      "error.race": "Nicht unterstützter Monstertyp: {race}",
+      "error.artworkId": "Ungültige Bild-ID",
+      "error.uiTranslations": "Übersetzungen der Oberfläche sind nicht verfügbar"
     },
     "es": {
       "decklist": "Tu lista de cartas",
@@ -434,7 +464,17 @@
       "pdfPreparing": "Creando PDF…",
       "error.fileRead": "No se puede leer el archivo. Inténtalo de nuevo.",
       "engineCredit": "Motor de cartas:",
-      "inspiredBy": "Inspirado en"
+      "inspiredBy": "Inspirado en",
+      "error.project": "Proyecto de cartas no válido",
+      "error.projectCard": "Carta o cantidad del proyecto no válida",
+      "error.projectArtwork": "Referencia de ilustración no válida",
+      "error.projectSize": "El proyecto es demasiado grande",
+      "error.canonical": "Faltan los datos canónicos de la carta",
+      "error.cardMismatch": "El par EN/{language} contiene identificadores diferentes",
+      "error.qualifier": "Calificador de carta no compatible",
+      "error.race": "Tipo de monstruo no compatible: {race}",
+      "error.artworkId": "Identificador de ilustración no válido",
+      "error.uiTranslations": "Las traducciones de la interfaz no están disponibles"
     },
     "fr": {
       "decklist": "Votre liste de cartes",
@@ -541,7 +581,17 @@
       "pdfPreparing": "Création du PDF…",
       "error.fileRead": "Impossible de lire le fichier. Réessayez.",
       "engineCredit": "Moteur de cartes:",
-      "inspiredBy": "Inspiré de"
+      "inspiredBy": "Inspiré de",
+      "error.project": "Projet de cartes invalide",
+      "error.projectCard": "Carte ou quantité du projet invalide",
+      "error.projectArtwork": "Référence d’illustration invalide",
+      "error.projectSize": "Le projet est trop volumineux",
+      "error.canonical": "Les données canoniques de la carte sont manquantes",
+      "error.cardMismatch": "La paire EN/{language} contient des identifiants différents",
+      "error.qualifier": "Qualificatif de carte non pris en charge",
+      "error.race": "Type de monstre non pris en charge : {race}",
+      "error.artworkId": "Identifiant d’illustration invalide",
+      "error.uiTranslations": "Les traductions de l’interface sont indisponibles"
     }
   }
 }

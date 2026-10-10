@@ -1,12 +1,13 @@
+import {appError} from '../errors.js';
 export const PRINT_PROFILE={widthMm:59,heightMm:86,dpi:300};
 const sizes={A4:[595.28,841.89],LETTER:[612,792],A3:[841.89,1190.55]};
 export function pageLayout(settings) {
   const size=sizes[String(settings.paper||'A4').toUpperCase()];
   const scale=Number(settings.scale),margin=Number(settings.margin),gap=Number(settings.gap);
-  if(!size||![scale,margin,gap].every(Number.isFinite)||scale<=0||margin<0||gap<0)throw new Error('Formato o misure di stampa non validi');
+  if(!size||![scale,margin,gap].every(Number.isFinite)||scale<=0||margin<0||gap<0)throw appError('error.printSettings','Formato o misure di stampa non validi');
   const width=PRINT_PROFILE.widthMm*72/25.4*scale,height=PRINT_PROFILE.heightMm*72/25.4*scale;
   const columns=Math.floor((size[0]-2*margin+gap)/(width+gap)),rows=Math.floor((size[1]-2*margin+gap)/(height+gap));
-  if(columns<1||rows<1)throw new Error('Una carta non entra nel foglio con queste impostazioni');
+  if(columns<1||rows<1)throw appError('error.printFit','Una carta non entra nel foglio con queste impostazioni');
   return {size,width,height,columns,rows,capacity:columns*rows,margin,gap};
 }
 export async function createPdf(items,settings){

@@ -50,6 +50,18 @@ This is a prototype: visual fidelity is still being refined, and not every card 
 
 Card data is provided by [YGOProDeck](https://ygoprodeck.com/).
 
+## Architecture
+
+The front end uses native HTML/CSS and JavaScript ES modules. Shared application state and derived command rules live in app/js/state/app.js; app/js/application.js owns generation, editing, import and PDF effects. main.js only bootstraps dependencies and updates the UI modules. Editor drafts and preview navigation stay local to their modules. No additional framework or runtime dependency is required.
+
+Each asynchronous operation captures its inputs and checks its operation ID before committing. UI translations read their language from shared state; changing UI language preserves cards, focus, editor drafts and the selected print sheet. Application errors use stable codes and parameters, with a fallback for browser/vendor errors.
+
 ## Development checks
 
-Run `node --test tests/*.test.js` for the model, localization and PDF layout checks. Browser checks use Playwright and Microsoft Edge: run `node scripts/check-ui-usability.cjs` and `node scripts/check-ui-languages.cjs` against the local server. Set `PLAYWRIGHT_MODULE` to the installed Playwright module path if necessary. These cover stale previews, file import, print geometry, zoom, editing, PDFs and all five UI languages on narrow mobile screens and in landscape.
+Run node --test tests/*.test.js for model, localization, print geometry, state transitions and asynchronous-operation regressions. Run python -m unittest discover -s tests -p "test_*.py" for the local artwork relay.
+
+Browser checks use Playwright and Microsoft Edge against the local server. Run node scripts/check-ui-usability.cjs, node scripts/check-ui-languages.cjs and node scripts/check-app-state.cjs. Set PLAYWRIGHT_MODULE to the installed Playwright module path if necessary. These cover stale previews, file import, print geometry, zoom, editing, PDFs, all five UI languages on narrow/landscape screens, delayed/cancelled operations, editor upload races and slow/failed startup.
+
+For visual refactoring checks, run node scripts/check-ui-visuals.cjs before on the unchanged app, then node scripts/check-ui-visuals.cjs after on the updated app. The script saves 60 desktop/mobile screenshots and compares geometry, control state, messages and card PNG hashes. With Pillow installed, python scripts/compare-ui-visuals.py also compares screenshot pixels. Validation artifacts are local under docs/validation/state-refactor/. Save historical baselines separately before another run. VISUAL_DISABLE_GPU=1 selects software rasterization to reduce screenshot sampling noise.
+
+The full local rendering/research suite is available through node scripts/run-browser-checks.cjs; its historical frame checks also require the local research files under docs/research/.

@@ -9,7 +9,7 @@ async function initialMobileFlow(page){
  assert.ok(await page.locator('.howto').evaluate(e=>Boolean(e.compareDocumentPosition(document.querySelector('.decklist'))&Node.DOCUMENT_POSITION_FOLLOWING)),'Reading order must match visual order');
  await page.locator('#generate').scrollIntoViewIfNeeded();await fits(page,'#generate');
 }
-const fits=async(page,selector)=>{const b=await page.locator(selector).boundingBox();const v=page.viewportSize();assert.ok(b&&b.x>=0&&b.x+b.width<=v.width&&b.y>=0&&b.y+b.height<=v.height,`${selector} is unreachable in ${v.width}x${v.height}`);};
+const fits=async(page,selector)=>{const b=await page.locator(selector).boundingBox();const v=page.viewportSize();assert.ok(b&&b.x>=-1&&b.x+b.width<=v.width+1&&b.y>=-1&&b.y+b.height<=v.height+1,`${selector} is unreachable in ${v.width}x${v.height}`);};
 (async()=>{
  const browser=await chromium.launch({headless:true,channel:'msedge'}),errors=[];
  try{

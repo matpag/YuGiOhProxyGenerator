@@ -1,3 +1,4 @@
+import {appError} from '../errors.js';
 import {appUrl} from '../paths.js';
 const WIDTH=697,HEIGHT=1016;
 let modules;
@@ -23,7 +24,7 @@ async function artworkData(image){
         const loopback=['localhost','127.0.0.1','[::1]'].includes(window.location.hostname);
         let source=appUrl(`api/artwork/${image.id}.jpg`);
         if(!loopback){
-          if(!/^\d{1,12}$/.test(String(image.id)))throw new Error('Invalid artwork ID');
+          if(!/^\d{1,12}$/.test(String(image.id)))throw appError('error.artworkId','Invalid artwork ID');
           const proxy=new URL('https://wsrv.nl/');
           proxy.searchParams.set('url',`https://images.ygoprodeck.com/images/cards_cropped/${image.id}.jpg`);
           // PNG preserves decoded pixels without resizing or JPEG recompression.
@@ -32,12 +33,12 @@ async function artworkData(image){
         }
         response=await fetch(source,{signal:AbortSignal.timeout(15000)});
       }
-    }catch{throw new Error(`Impossibile scaricare l’illustrazione ${image.id}. Controlla la connessione e riprova.`);}
+    }catch{throw appError('error.artworkDownload',`Impossibile scaricare l’illustrazione ${image.id}. Controlla la connessione e riprova.`,{id:image.id});}
     if(!response.ok){
       const detail=await response.json().catch(()=>null);
-      throw new Error(detail?.error||`Illustrazione ${image.id} non disponibile`);
+      throw appError(response.status===404||!detail?.error?'error.artworkUnavailable':'error.artworkService',detail?.error||`Illustrazione ${image.id} non disponibile`,{id:image.id});
     }
-    if(!response.headers.get('content-type')?.startsWith('image/'))throw new Error(`Illustrazione ${image.id}: risposta non valida`);
+    if(!response.headers.get('content-type')?.startsWith('image/'))throw appError('error.invalidImage',`Illustrazione ${image.id}: risposta non valida`,{id:image.id});
     await cache.put(key,response.clone());
   }
   const blob=await response.blob();
@@ -45,9 +46,9 @@ async function artworkData(image){
 }
 function waitForImages(host){
   return Promise.all([...host.querySelectorAll('img[src]')].filter(img=>img.getAttribute('src')).map(img=>new Promise((resolve,reject)=>{
-    if(img.complete){img.naturalWidth?resolve():reject(new Error(`Immagine non caricata: ${img.src}`));return;}
-    const timer=setTimeout(()=>reject(new Error(`Timeout caricamento: ${img.src}`)),15000);
-    const done=()=>{clearTimeout(timer);resolve();},fail=()=>{clearTimeout(timer);reject(new Error(`Immagine non caricata: ${img.src}`));};
+    if(img.complete){img.naturalWidth?resolve():reject(appError('error.image',`Immagine non caricata: ${img.src}`,{url:img.src}));return;}
+    const timer=setTimeout(()=>reject(appError('error.imageTimeout',`Timeout caricamento: ${img.src}`,{url:img.src})),15000);
+    const done=()=>{clearTimeout(timer);resolve();},fail=()=>{clearTimeout(timer);reject(appError('error.image',`Immagine non caricata: ${img.src}`,{url:img.src}));};
     img.addEventListener('load',done,{once:true});img.addEventListener('error',fail,{once:true});
   })));
 }
@@ -65,9 +66,9 @@ function localizedAttribute(canvas,card,Template){
   ctx.restore();
 }
 export async function renderCard(card,{artworkId,cacheResult=true}={}){
-  if(!['Normal','Effect','Spell','Trap','Fusion','Ritual','Synchro','Xyz','Link'].includes(card.layout))throw new Error(`Layout ${card.layout} non ancora abilitato`);
+  if(!['Normal','Effect','Spell','Trap','Fusion','Ritual','Synchro','Xyz','Link'].includes(card.layout))throw appError('error.layout',`Layout ${card.layout} non ancora abilitato`);
   const image=card.artworks.find(x=>x.id===artworkId)||(!artworkId?card.artworks[0]:null);
-  if(!image)throw new Error('Variante illustrazione non disponibile');
+  if(!image)throw appError('error.artworkVariant','Variante illustrazione non disponibile');
   const key=JSON.stringify({renderer:7,card,image:image.id});
   if(cache.has(key))return cache.get(key);
   const {React,ReactDOM,Card,Template}=await loadModules();
@@ -81,8 +82,8 @@ export async function renderCard(card,{artworkId,cacheResult=true}={}){
     '400 16px "IDroid"'
   ];
   await Promise.all(fontSpecs.map(async spec=>{
-    const faces=await document.fonts.load(spec,'ÀÈÉÌÒÙ àèéìòù 0123456789');
-    if(!faces.length)throw new Error(`Font della carta non disponibile: ${spec}`);
+    let faces;try{faces=await document.fonts.load(spec,'ÀÈÉÌÒÙ àèéìòù 0123456789');}catch(error){throw appError('error.font','Font della carta non disponibile: '+spec,{font:spec},error);}
+    if(!faces.length)throw appError('error.font',`Font della carta non disponibile: ${spec}`,{font:spec});
   }));
   await document.fonts.ready;
   const artwork=await artworkData(image);
@@ -92,9 +93,9 @@ export async function renderCard(card,{artworkId,cacheResult=true}={}){
     await waitForImages(host);
     const canvas=host.querySelector('canvas');canvas.proxyDiagnostics=[];
     await new Promise(resolve=>instance.forceUpdate(resolve));
-    if(canvas.proxyDiagnostics.some(x=>x.fontSize<8))throw new Error('Il testo non entra nella carta con un corpo leggibile');
+    if(canvas.proxyDiagnostics.some(x=>x.fontSize<8))throw appError('error.textFit','Il testo non entra nella carta con un corpo leggibile');
     localizedAttribute(canvas,card,Template);
-    const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('PNG non esportabile')),'image/png'));
+    const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(appError('error.png','PNG non esportabile')),'image/png'));
     const result={pngBytes:new Uint8Array(await blob.arrayBuffer()),width:WIDTH,height:HEIGHT,url:URL.createObjectURL(blob),diagnostics:canvas.proxyDiagnostics,artworkId:image.id,transient:!cacheResult};
     if(cacheResult)cache.set(key,result);return result;
   }finally{ReactDOM.unmountComponentAtNode(host);host.remove();}

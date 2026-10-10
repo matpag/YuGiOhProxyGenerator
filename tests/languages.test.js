@@ -1,3 +1,4 @@
+import {appError} from '../app/js/errors.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -43,6 +44,6 @@ test('Missing or English-only localized sections fail explicitly; Spanish print 
 import {CardRepository} from '../app/js/data/api.js';
 test('Missing selected translation identifies the language while preserving a valid English lookup',async()=>{
  const repository=new CardRepository();
- repository.request=async (_query,language)=>{if(language==='en')return {id:46986414};throw new Error('Carta non trovata');};
+ repository.request=async (_query,language)=>{if(language==='en')return {id:46986414};throw appError('error.cardNotFound','Carta non trovata');};
  await assert.rejects(repository.find({kind:'name',query:'Dark Magician'},undefined,'de'),/Traduzione non disponibile per 46986414 in de/);
 });
