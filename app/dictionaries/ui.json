@@ -112,7 +112,8 @@
       "previewInvalid": "Completa i campi per aggiornare l’anteprima.",
       "pdfPreparing": "Creazione PDF…",
       "error.fileRead": "Impossibile leggere il file. Riprova.",
-      "engineCredit": "Motore carte:"
+      "engineCredit": "Motore carte:",
+      "inspiredBy": "Ispirato da"
     },
     "en": {
       "decklist": "Your decklist",
@@ -218,7 +219,8 @@
       "previewInvalid": "Complete the fields to update the preview.",
       "pdfPreparing": "Creating PDF…",
       "error.fileRead": "Unable to read the file. Please try again.",
-      "engineCredit": "Card engine:"
+      "engineCredit": "Card engine:",
+      "inspiredBy": "Inspired by"
     },
     "de": {
       "decklist": "Deine Deckliste",
@@ -324,7 +326,8 @@
       "previewInvalid": "Felder ausfüllen, um die Vorschau zu aktualisieren.",
       "pdfPreparing": "PDF wird erstellt…",
       "error.fileRead": "Datei konnte nicht gelesen werden. Bitte erneut versuchen.",
-      "engineCredit": "Karten-Engine:"
+      "engineCredit": "Karten-Engine:",
+      "inspiredBy": "Inspiriert von"
     },
     "es": {
       "decklist": "Tu lista de cartas",
@@ -430,7 +433,8 @@
       "previewInvalid": "Completa los campos para actualizar la vista previa.",
       "pdfPreparing": "Creando PDF…",
       "error.fileRead": "No se puede leer el archivo. Inténtalo de nuevo.",
-      "engineCredit": "Motor de cartas:"
+      "engineCredit": "Motor de cartas:",
+      "inspiredBy": "Inspirado en"
     },
     "fr": {
       "decklist": "Votre liste de cartes",
@@ -536,7 +540,8 @@
       "previewInvalid": "Complétez les champs pour actualiser l’aperçu.",
       "pdfPreparing": "Création du PDF…",
       "error.fileRead": "Impossible de lire le fichier. Réessayez.",
-      "engineCredit": "Moteur de cartes:"
+      "engineCredit": "Moteur de cartes:",
+      "inspiredBy": "Inspiré de"
     }
   }
 }
