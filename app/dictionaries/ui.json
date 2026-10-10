@@ -31,7 +31,7 @@
       "download": "Scarica PDF",
       "preview": "Anteprima di stampa",
       "editCard": "Modifica carta",
-      "footer": "Dati YGOProDeck · Creazione delle carte nel browser",
+      "footer": "Dati YGOProDeck",
       "uiLanguage": "Lingua dell’interfaccia",
       "name": "Nome",
       "layout": "Layout",
@@ -111,7 +111,8 @@
       "previewUpdating": "Aggiornamento anteprima…",
       "previewInvalid": "Completa i campi per aggiornare l’anteprima.",
       "pdfPreparing": "Creazione PDF…",
-      "error.fileRead": "Impossibile leggere il file. Riprova."
+      "error.fileRead": "Impossibile leggere il file. Riprova.",
+      "engineCredit": "Motore carte:"
     },
     "en": {
       "decklist": "Your decklist",
@@ -136,7 +137,7 @@
       "download": "Download PDF",
       "preview": "Print preview",
       "editCard": "Edit card",
-      "footer": "YGOProDeck data · Cards created in your browser",
+      "footer": "YGOProDeck data",
       "uiLanguage": "Interface language",
       "name": "Name",
       "layout": "Layout",
@@ -216,7 +217,8 @@
       "previewUpdating": "Updating preview…",
       "previewInvalid": "Complete the fields to update the preview.",
       "pdfPreparing": "Creating PDF…",
-      "error.fileRead": "Unable to read the file. Please try again."
+      "error.fileRead": "Unable to read the file. Please try again.",
+      "engineCredit": "Card engine:"
     },
     "de": {
       "decklist": "Deine Deckliste",
@@ -241,7 +243,7 @@
       "download": "PDF herunterladen",
       "preview": "Druckvorschau",
       "editCard": "Karte bearbeiten",
-      "footer": "YGOProDeck-Daten · Kartenerstellung im Browser",
+      "footer": "YGOProDeck-Daten",
       "uiLanguage": "Sprache der Oberfläche",
       "name": "Name",
       "layout": "Layout",
@@ -321,7 +323,8 @@
       "previewUpdating": "Vorschau wird aktualisiert…",
       "previewInvalid": "Felder ausfüllen, um die Vorschau zu aktualisieren.",
       "pdfPreparing": "PDF wird erstellt…",
-      "error.fileRead": "Datei konnte nicht gelesen werden. Bitte erneut versuchen."
+      "error.fileRead": "Datei konnte nicht gelesen werden. Bitte erneut versuchen.",
+      "engineCredit": "Karten-Engine:"
     },
     "es": {
       "decklist": "Tu lista de cartas",
@@ -346,7 +349,7 @@
       "download": "Descargar PDF",
       "preview": "Vista previa de impresión",
       "editCard": "Editar carta",
-      "footer": "Datos de YGOProDeck · Cartas creadas en el navegador",
+      "footer": "Datos de YGOProDeck",
       "uiLanguage": "Idioma de la interfaz",
       "name": "Nombre",
       "layout": "Diseño",
@@ -426,7 +429,8 @@
       "previewUpdating": "Actualizando vista previa…",
       "previewInvalid": "Completa los campos para actualizar la vista previa.",
       "pdfPreparing": "Creando PDF…",
-      "error.fileRead": "No se puede leer el archivo. Inténtalo de nuevo."
+      "error.fileRead": "No se puede leer el archivo. Inténtalo de nuevo.",
+      "engineCredit": "Motor de cartas:"
     },
     "fr": {
       "decklist": "Votre liste de cartes",
@@ -451,7 +455,7 @@
       "download": "Télécharger le PDF",
       "preview": "Aperçu avant impression",
       "editCard": "Modifier la carte",
-      "footer": "Données YGOProDeck · Création des cartes dans le navigateur",
+      "footer": "Données YGOProDeck",
       "uiLanguage": "Langue de l’interface",
       "name": "Nom",
       "layout": "Modèle",
@@ -531,7 +535,8 @@
       "previewUpdating": "Mise à jour de l’aperçu…",
       "previewInvalid": "Complétez les champs pour actualiser l’aperçu.",
       "pdfPreparing": "Création du PDF…",
-      "error.fileRead": "Impossible de lire le fichier. Réessayez."
+      "error.fileRead": "Impossible de lire le fichier. Réessayez.",
+      "engineCredit": "Moteur de cartes:"
     }
   }
 }
