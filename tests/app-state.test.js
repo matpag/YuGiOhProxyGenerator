@@ -146,4 +146,3 @@ test('Native DOMException numeric codes remain external errors and cannot break 
  await application.generate();assert.equal(store.getState().operation,null);assert.equal(selectApp(store.getState()).canGenerate,true);
  assert.equal(store.getState().notice.error.params.error.code,'external');
 });
-
