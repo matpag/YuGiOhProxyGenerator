@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "geometry": {
     "width": 421,
     "height": 614
@@ -30,7 +30,7 @@
       }
     }
   },
-  "method": "sRGB affine luminance-to-RGB transfer, fitted to trimmed color measurements of two original GBI photographs/scans per card; geometry and alpha use the unmodified Nexus Normal template.",
+  "method": "sRGB affine luminance-to-RGB transfer, fitted to trimmed color measurements of two original GBI photographs/scans per card; geometry and alpha use the unmodified Nexus Normal template. The outer gold hairline is replaced with neighboring body texture without changing alpha or the dark outer border.",
   "measurement_regions": {
     "body": [
       [
@@ -485,5 +485,106 @@
         }
       ]
     }
+  },
+  "outer_edge": {
+    "method": "Replace the inherited gold hairline with adjacent opaque body texture, retaining the original SourceAlpha coverage. Patch rectangles are x/y/width/height; offsets move the source texture in native pixels.",
+    "patches": [
+      {
+        "rect": [
+          14,
+          12,
+          393,
+          2
+        ],
+        "offset": [
+          0,
+          -2
+        ]
+      },
+      {
+        "rect": [
+          10,
+          14,
+          4,
+          586
+        ],
+        "offset": [
+          -4,
+          0
+        ]
+      },
+      {
+        "rect": [
+          407,
+          14,
+          4,
+          586
+        ],
+        "offset": [
+          4,
+          0
+        ]
+      },
+      {
+        "rect": [
+          14,
+          600,
+          393,
+          3
+        ],
+        "offset": [
+          0,
+          3
+        ]
+      },
+      {
+        "rect": [
+          10,
+          12,
+          4,
+          2
+        ],
+        "offset": [
+          -4,
+          -2
+        ]
+      },
+      {
+        "rect": [
+          407,
+          12,
+          4,
+          2
+        ],
+        "offset": [
+          4,
+          -2
+        ]
+      },
+      {
+        "rect": [
+          10,
+          600,
+          4,
+          3
+        ],
+        "offset": [
+          -4,
+          3
+        ]
+      },
+      {
+        "rect": [
+          407,
+          600,
+          4,
+          3
+        ],
+        "offset": [
+          4,
+          3
+        ]
+      }
+    ]
   }
 }

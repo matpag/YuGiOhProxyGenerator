@@ -21,14 +21,17 @@ const directory='docs/validation/egyptian-gods';
    const [{normalizeCard},{localizeCard},{editCard},{renderCard},en,it,dictionary]=await Promise.all([module('js/model/card.js'),module('js/localization/resolve.js'),module('js/model/project.js'),module('js/rendering/cardmaker.js'),json('fixtures/cards-en.json'),json('fixtures/cards-it.json'),json('dictionaries/tcg.json')]);
    const decoded=async source=>{const image=new Image();image.src=source;await image.decode();const canvas=document.createElement('canvas');canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;const context=canvas.getContext('2d');context.drawImage(image,0,0);return {canvas,pixels:context.getImageData(0,0,canvas.width,canvas.height).data};};
    const base=await decoded(relative('assets/templates/nexus/tcg/ygo/border/Normal.png')),assets=[];
-   const masks=Object.values(palette.masks).flat();
+   const masks=[...Object.values(palette.masks).flat(),...palette.outer_edge.patches.map(patch=>patch.rect)];
    const colored=(x,y)=>masks.some(([rx,ry,w,h])=>x>=rx&&x<rx+w&&y>=ry&&y<ry+h);
    const mean=(pixels,regions)=>{const rgb=[];for(const [x1,y1,x2,y2] of regions)for(let y=y1;y<y2;y++)for(let x=x1;x<x2;x++){const k=(y*421+x)*4;rgb.push(Array.from(pixels.slice(k,k+3)));}const light=rgb.map(v=>v[0]*.2126+v[1]*.7152+v[2]*.0722).sort((a,b)=>a-b);const low=light[Math.floor(light.length*.15)],high=light[Math.floor(light.length*.9)],valid=rgb.filter(v=>{const y=v[0]*.2126+v[1]*.7152+v[2]*.0722;return y>=low&&y<=high;});return [0,1,2].map(n=>valid.reduce((sum,v)=>sum+v[n],0)/valid.length);};
    for(const code of Object.keys(palette.frames)){
     const frame=await decoded(relative('assets/templates/egyptian-gods/'+code+'.png'));let alphaDifference=0,neutralDifference=0;
     for(let y=0;y<614;y++)for(let x=0;x<421;x++){const k=(y*421+x)*4;alphaDifference=Math.max(alphaDifference,Math.abs(frame.pixels[k+3]-base.pixels[k+3]));if(!colored(x,y))for(let n=0;n<4;n++)neutralDifference=Math.max(neutralDifference,Math.abs(frame.pixels[k+n]-base.pixels[k+n]));}
     const measurement={};for(const name of ['body','panel'])measurement[name]=mean(frame.pixels,palette.measurement_regions[name]);
-    assets.push({code,width:frame.canvas.width,height:frame.canvas.height,alphaDifference,neutralDifference,measurement});
+    // The body must meet the dark outer border without the Normal frame's gold hairline.
+    const probes=[...[20,100,200,350].map(x=>[x,13,x,16]),...[75,150,300,550].map(y=>[11,y,15,y]),...[75,150,300,550].map(y=>[408,y,405,y]),...[20,100,200,350].map(x=>[x,600,x,598]),[11,13,15,15],[408,13,405,15],[11,601,15,598],[408,601,405,598]];
+    const outerEdgeDifference=Math.max(...probes.flatMap(([x,y,bx,by])=>[0,1,2].map(n=>Math.abs(frame.pixels[(y*421+x)*4+n]-frame.pixels[(by*421+bx)*4+n]))));
+    assets.push({code,width:frame.canvas.width,height:frame.canvas.height,alphaDifference,neutralDifference,outerEdgeDifference,measurement});
    }
    const image=document.createElement('canvas');image.width=image.height=4;const ctx=image.getContext('2d');ctx.fillStyle='#28598b';ctx.fillRect(0,0,4,4);const artwork=image.toDataURL();
    const raw=en.find(card=>card.id===46986414),localized=it.find(card=>card.id===46986414),renders=[];
@@ -69,7 +72,7 @@ const directory='docs/validation/egyptian-gods';
    }finally{CanvasRenderingContext2D.prototype.drawImage=drawImage;if(Border)Border.prototype.render=originalBorderRender;}
    return {assets,renders};
   },palette);
-  for(const asset of results.assets){assert.equal(asset.width,421);assert.equal(asset.height,614);assert.equal(asset.alphaDifference,0);assert.equal(asset.neutralDifference,0);for(const name of ['body','panel'])for(let n=0;n<3;n++)assert.ok(Math.abs(asset.measurement[name][n]-palette.frames[asset.code].target[name].rgb[n])<1.5,'Frame color departed from the measured palette');}
+  for(const asset of results.assets){assert.equal(asset.width,421);assert.equal(asset.height,614);assert.equal(asset.alphaDifference,0);assert.equal(asset.neutralDifference,0);assert.ok(asset.outerEdgeDifference<12,asset.code+': a separate outer hairline remains ('+asset.outerEdgeDifference+')');for(const name of ['body','panel'])for(let n=0;n<3;n++)assert.ok(Math.abs(asset.measurement[name][n]-palette.frames[asset.code].target[name].rgb[n])<1.5,'Frame color departed from the measured palette');}
   for(const render of results.renders){assert.equal(render.outsidePixels,0,JSON.stringify({...render,png:undefined,draws:render.draws.slice(0,1)}));assert.equal(render.repeatPixels,0,"Repaints must yield the same pixels, including the first column");assert.deepEqual(render.diagnostics,[]);assert.deepEqual(render.draws[0].args,[0,0,421,614]);await fs.writeFile(`${directory}/cards/${render.code}-${render.layout}-${render.language}.png`,Buffer.from(render.png,'base64'));delete render.png;}
   await fs.writeFile(directory+'/render-checks.json',JSON.stringify(results,null,2)+'\n');await page.close();
   for(const lang of ['it','en','de','es','fr']){
@@ -89,6 +92,6 @@ const directory='docs/validation/egyptian-gods';
    await page.locator('#view-cards').tap();await page.locator('#preview button').first().tap();await page.locator('#edit-layout').selectOption('Fusion');assert.equal(await page.locator('#edit-frame').isVisible(),false);await page.locator('#edit-layout').selectOption('Normal');assert.equal(await page.locator('#edit-frame').inputValue(),'');await page.locator('#edit-pendulum').check();assert.equal(await page.locator('#edit-frame').isVisible(),false);await page.locator('#edit-pendulum').uncheck();assert.equal(await page.locator('#edit-frame').isVisible(),true);
    await page.locator('#edit-frame').selectOption('slifer');await page.setViewportSize({width:740,height:320});const button=await page.locator('#apply-edit').boundingBox();assert.ok(button.y>=-1&&button.y+button.height<=321);assert.ok(await page.evaluate(()=>document.querySelector('#editor').scrollWidth<=document.querySelector('#editor').clientWidth));await page.screenshot({path:`${directory}/editor-${lang}-landscape.png`});await page.locator('#close-editor').tap();await page.close();
   }
-  assert.deepEqual(errors,[]);console.log('Three frames: measured colors, exact alpha/neutral pixels, 12 EN/IT renders, five-language mobile editing and PDFs passed.');
+  assert.deepEqual(errors,[]);console.log('Three frames: no outer gold hairline, measured colors, exact alpha/neutral pixels, 12 EN/IT renders, five-language mobile editing and PDFs passed.');
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

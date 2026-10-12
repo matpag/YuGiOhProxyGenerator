@@ -4,7 +4,7 @@ define(["react", "react-class", "draw/Image", "../../Resources", "../../Template
 		render: function render()
 		{
 			var special = { Slifer: "slifer", Obelisk: "obelisk", Ra: "ra" }[this.props.value];
-			var border = special ? resources + "/../egyptian-gods/" + special + ".png" : resources + "/tcg/ygo/border/" + this.props.value + ".png";
+			var border = special ? resources + "/../egyptian-gods/" + special + ".png?v=2" : resources + "/tcg/ygo/border/" + this.props.value + ".png";
 			if (this.props.pendulum && !special)
 			{
 				border = border.replace(".png", ".pendulum.png");
