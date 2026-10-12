@@ -1,4 +1,5 @@
 import {appError} from '../errors.js';
+import {imageRegistry,preparePdfImage} from './lossless.js';
 export const PRINT_PROFILE={widthMm:59,heightMm:86,dpi:300};
 const sizes={A4:[595.28,841.89],LETTER:[612,792],A3:[841.89,1190.55]};
 export function pageLayout(settings) {
@@ -16,8 +17,14 @@ export async function createPdf(items,settings){
   const stream=doc.pipe(window.blobStream());
   const result=new Promise((resolve,reject)=>{stream.on('finish',()=>resolve(stream.toBlob('application/pdf')));stream.on('error',reject);doc.on('error',reject);});
   let index=0;
+  const images=imageRegistry();
   for(const item of items){
-    const image=doc.openImage(item.render.pngBytes.buffer.slice(item.render.pngBytes.byteOffset, item.render.pngBytes.byteOffset + item.render.pngBytes.byteLength));
+    const bytes=item.render.pngBytes;
+    let image=images.find(bytes);
+    if(!image){
+      image=await preparePdfImage(doc.openImage(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)));
+      images.add(bytes,image);
+    }
     for(let copy=0;copy<item.entry.quantity;copy++){
       if(index>0&&index%layout.capacity===0)doc.addPage();
       const pos=index%layout.capacity;
