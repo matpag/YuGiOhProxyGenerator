@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "geometry": {
     "width": 421,
     "height": 614
@@ -9,31 +9,31 @@
     "sha256": "7c99b73ec07c75577f6792e1ac8edbc43915382b9948c4f967d29110c921c390"
   },
   "palette": "app/assets/templates/frames/egyptian-gods-palette.json",
-  "method": "sRGB affine luminance-to-RGB transfer, fitted to trimmed color measurements of two original GBI photographs/scans per card; geometry and alpha use the unmodified Nexus Normal template. The outer gold hairline is replaced with neighboring body texture without changing alpha or the dark outer border. Slifer and Obelisk apply the recorded chroma gains around sRGB weighted luma, preserving the measured reference RGB values and mean luma.",
+  "method": "sRGB affine luminance-to-RGB transfer, fitted to trimmed color measurements of two original GBI photographs/scans per card; geometry and alpha use the unmodified Nexus Normal template. The outer gold hairline is replaced with neighboring body texture without changing alpha or the dark outer border. Slifer and Obelisk apply the recorded chroma gains around sRGB weighted luma, preserving the measured reference RGB values and mean luma. The panel tint includes its bottom inner bevel through native row 580, removing the untinted cream strip below ATK/DEF while preserving the ornamental edge.",
   "assets": [
     {
       "code": "slifer",
       "name": "Slifer",
       "file": "app/assets/templates/frames/slifer.png",
-      "sha256": "4340d792d002cdae1c1ad3b594c2d277389cd817e87e971b8e106a14e5e8e6a5",
+      "sha256": "762e26562b5c082023fb6b4ef1eb4fd3996ffdee12056784e3d3fa6d938689dd",
       "sourceFile": "app/assets/templates/frames/slifer.svg",
-      "sourceSha256": "fcf063107ace5060f6b26345ed7327c3e27f574ce61febbc65cd6ca91e29abb4"
+      "sourceSha256": "8c38512e021c8f34b741d303dcdc5a644e4f67f66317079e69227c9fd637ae9b"
     },
     {
       "code": "obelisk",
       "name": "Obelisk",
       "file": "app/assets/templates/frames/obelisk.png",
-      "sha256": "3b46c2df8d0679e789e99d1ad6fd96d9dfc091243edeb86099cb8e7eecb9a83f",
+      "sha256": "b84fbd608700dc3e5ddb729dc9be58b311707d8e1c1d925f916eddb1ac65980a",
       "sourceFile": "app/assets/templates/frames/obelisk.svg",
-      "sourceSha256": "3a95e2b3b8d136e7d23e14a4daaac5405a06fc9709f904ac61143525bdf2f486"
+      "sourceSha256": "214be94cbcf9378fb47498fe5e23afd61b85cec4ec17a6f20dcf6632e774123d"
     },
     {
       "code": "ra",
       "name": "Ra",
       "file": "app/assets/templates/frames/ra.png",
-      "sha256": "d8422e91ca0877e3d7540def44a924cddf850860d7942d9728df4f9c6a6fc647",
+      "sha256": "78f5285f216288806a4a94313812e540e0c8ac97cdc5e2d8c3d25804f01e2967",
       "sourceFile": "app/assets/templates/frames/ra.svg",
-      "sourceSha256": "501007f7795ea144e485f6b11f2c4fb0a2261513243985a55ed4980af6917f10"
+      "sourceSha256": "814e3a91ffbd2ea31a8ee17dbe1ea45c1cfd1239b17c5f8b3fc1f2b915a3b671"
     }
   ]
 }

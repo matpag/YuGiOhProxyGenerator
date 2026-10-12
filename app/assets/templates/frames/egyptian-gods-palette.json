@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "geometry": {
     "width": 421,
     "height": 614
@@ -30,7 +30,7 @@
       }
     }
   },
-  "method": "sRGB affine luminance-to-RGB transfer, fitted to trimmed color measurements of two original GBI photographs/scans per card; geometry and alpha use the unmodified Nexus Normal template. The outer gold hairline is replaced with neighboring body texture without changing alpha or the dark outer border. Slifer and Obelisk apply the recorded chroma gains around sRGB weighted luma, preserving the measured reference RGB values and mean luma.",
+  "method": "sRGB affine luminance-to-RGB transfer, fitted to trimmed color measurements of two original GBI photographs/scans per card; geometry and alpha use the unmodified Nexus Normal template. The outer gold hairline is replaced with neighboring body texture without changing alpha or the dark outer border. Slifer and Obelisk apply the recorded chroma gains around sRGB weighted luma, preserving the measured reference RGB values and mean luma. The panel tint includes its bottom inner bevel through native row 580, removing the untinted cream strip below ATK/DEF while preserving the ornamental edge.",
   "measurement_regions": {
     "body": [
       [
@@ -123,7 +123,7 @@
         25,
         459,
         371,
-        118
+        122
       ]
     ]
   },

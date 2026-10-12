@@ -32,7 +32,8 @@ const directory='docs/validation/egyptian-gods';
     // The body must meet the dark outer border without the Normal frame's gold hairline.
     const probes=[...[20,100,200,350].map(x=>[x,13,x,16]),...[75,150,300,550].map(y=>[11,y,15,y]),...[75,150,300,550].map(y=>[408,y,405,y]),...[20,100,200,350].map(x=>[x,600,x,598]),[11,13,15,15],[408,13,405,15],[11,601,15,598],[408,601,405,598]];
     const outerEdgeDifference=Math.max(...probes.flatMap(([x,y,bx,by])=>[0,1,2].map(n=>Math.abs(frame.pixels[(y*421+x)*4+n]-frame.pixels[(by*421+bx)*4+n]))));
-    assets.push({code,width:frame.canvas.width,height:frame.canvas.height,alphaDifference,neutralDifference,outerEdgeDifference,measurement});
+    const bottomPanelDifference=Math.max(...[40,100,160,200,310,365].flatMap(x=>[0,1,2].map(n=>Math.abs(frame.pixels[(577*421+x)*4+n]-frame.pixels[(576*421+x)*4+n]))));
+    assets.push({code,width:frame.canvas.width,height:frame.canvas.height,alphaDifference,neutralDifference,outerEdgeDifference,bottomPanelDifference,measurement});
    }
    const image=document.createElement('canvas');image.width=image.height=4;const ctx=image.getContext('2d');ctx.fillStyle='#28598b';ctx.fillRect(0,0,4,4);const artwork=image.toDataURL();
    const raw=en.find(card=>card.id===46986414),localized=it.find(card=>card.id===46986414),renders=[];
@@ -73,7 +74,7 @@ const directory='docs/validation/egyptian-gods';
    }finally{CanvasRenderingContext2D.prototype.drawImage=drawImage;if(Border)Border.prototype.render=originalBorderRender;}
    return {assets,renders};
   },palette);
-  for(const asset of results.assets){assert.equal(asset.width,421);assert.equal(asset.height,614);assert.equal(asset.alphaDifference,0);assert.equal(asset.neutralDifference,0);assert.ok(asset.outerEdgeDifference<12,asset.code+': a separate outer hairline remains ('+asset.outerEdgeDifference+')');for(const name of ['body','panel'])for(let n=0;n<3;n++)assert.ok(Math.abs(asset.measurement[name][n]-expectedRgb(palette.frames[asset.code].target[name])[n])<1.5,'Frame color departed from the calibrated palette');}
+  for(const asset of results.assets){assert.equal(asset.width,421);assert.equal(asset.height,614);assert.equal(asset.alphaDifference,0);assert.equal(asset.neutralDifference,0);assert.ok(asset.bottomPanelDifference<20,asset.code+': an untinted strip remains below ATK/DEF ('+asset.bottomPanelDifference+')');assert.ok(asset.outerEdgeDifference<12,asset.code+': a separate outer hairline remains ('+asset.outerEdgeDifference+')');for(const name of ['body','panel'])for(let n=0;n<3;n++)assert.ok(Math.abs(asset.measurement[name][n]-expectedRgb(palette.frames[asset.code].target[name])[n])<1.5,'Frame color departed from the calibrated palette');}
   for(const render of results.renders){assert.equal(render.outsidePixels,0,JSON.stringify({...render,png:undefined,draws:render.draws.slice(0,1)}));assert.equal(render.repeatPixels,0,"Repaints must yield the same pixels, including the first column");assert.deepEqual(render.diagnostics,[]);assert.deepEqual(render.draws[0].args,[0,0,421,614]);await fs.writeFile(`${directory}/cards/${render.code}-${render.layout}-${render.language}.png`,Buffer.from(render.png,'base64'));delete render.png;}
   await fs.writeFile(directory+'/render-checks.json',JSON.stringify(results,null,2)+'\n');await page.close();
   for(const lang of ['it','en','de','es','fr']){
@@ -93,6 +94,6 @@ const directory='docs/validation/egyptian-gods';
    await page.locator('#view-cards').tap();await page.locator('#preview button').first().tap();await page.locator('#edit-layout').selectOption('Fusion');assert.equal(await page.locator('#edit-frame').isVisible(),false);await page.locator('#edit-layout').selectOption('Normal');assert.equal(await page.locator('#edit-frame').inputValue(),'');await page.locator('#edit-pendulum').check();assert.equal(await page.locator('#edit-frame').isVisible(),false);await page.locator('#edit-pendulum').uncheck();assert.equal(await page.locator('#edit-frame').isVisible(),true);
    await page.locator('#edit-frame').selectOption('slifer');await page.setViewportSize({width:740,height:320});const button=await page.locator('#apply-edit').boundingBox();assert.ok(button.y>=-1&&button.y+button.height<=321);assert.ok(await page.evaluate(()=>document.querySelector('#editor').scrollWidth<=document.querySelector('#editor').clientWidth));await page.screenshot({path:`${directory}/editor-${lang}-landscape.png`});await page.locator('#close-editor').tap();await page.close();
   }
-  assert.deepEqual(errors,[]);console.log('Three frames: no outer gold hairline, measured colors, exact alpha/neutral pixels, 12 EN/IT renders, five-language mobile editing and PDFs passed.');
+  assert.deepEqual(errors,[]);console.log('Three frames: no outer gold hairline or untinted bottom panel strip, measured colors, exact alpha/neutral pixels, 12 EN/IT renders, five-language mobile editing and PDFs passed.');
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});
