@@ -14,7 +14,7 @@ const fs=require('node:fs/promises'),assert=require('node:assert/strict');
    const frameColor=await new Promise((resolve,reject)=>window.require(['tcg/ygo/FrameColor'],resolve,reject));
    const calibratedFilter=frameColor.filter;
    const drawImage=CanvasRenderingContext2D.prototype.drawImage,fillText=CanvasRenderingContext2D.prototype.fillText;
-   const leaked=[];CanvasRenderingContext2D.prototype.drawImage=function(img,...args){if(this.filter!=='none'&&!img.src?.includes('/border/'))leaked.push({type:'image',filter:this.filter});return drawImage.call(this,img,...args);};
+   const leaked=[];CanvasRenderingContext2D.prototype.drawImage=function(img,...args){if(this.filter!=='none'&&!img.src?.includes('/assets/templates/frames/'))leaked.push({type:'image',filter:this.filter});return drawImage.call(this,img,...args);};
    CanvasRenderingContext2D.prototype.fillText=function(...args){if(this.filter!=='none')leaked.push({type:'text',filter:this.filter});return fillText.call(this,...args);};
    const pixels=async src=>{const img=new Image();img.src=src;await img.decode();const c=document.createElement('canvas');c.width=697;c.height=1016;c.getContext('2d').drawImage(img,0,0,c.width,c.height);return c.getContext('2d').getImageData(0,0,c.width,c.height).data;};
    const encoded=render=>new Promise(resolve=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result.split(',')[1]);reader.readAsDataURL(new Blob([render.pngBytes],{type:'image/png'}));});

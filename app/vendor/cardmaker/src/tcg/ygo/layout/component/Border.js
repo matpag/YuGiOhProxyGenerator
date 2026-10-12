@@ -4,11 +4,12 @@ define(["react", "react-class", "draw/Image", "../../Resources", "../../Template
 		render: function render()
 		{
 			var special = { Slifer: "slifer", Obelisk: "obelisk", Ra: "ra" }[this.props.value];
-			var border = special ? resources + "/../egyptian-gods/" + special + ".png?v=2" : resources + "/tcg/ygo/border/" + this.props.value + ".png";
+			var frame = special || this.props.value;
 			if (this.props.pendulum && !special)
 			{
-				border = border.replace(".png", ".pendulum.png");
+				frame += ".pendulum";
 			}
+			var border = resources + "/../frames/" + frame + ".png" + (special ? "?v=2" : "");
 			return React.createElement(Image, { 
 				src: border,
                 canvasFilter: FrameColor.filter(this.props.value, this.props.pendulum),

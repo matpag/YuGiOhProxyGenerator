@@ -38,7 +38,7 @@ test('Unsupported special frame combinations and untrusted frame IDs fail before
  assert.throws(()=>validateProject(project),error=>error.code==='error.specialFrame');
 });
 test('Native frame assets and editable SVG sources match their recorded hashes',()=>{
- const manifest=read('app/assets/templates/egyptian-gods/manifest.json');
+ const manifest=read('app/assets/templates/frames/egyptian-gods-manifest.json');
  assert.deepEqual(manifest.geometry,{width:421,height:614});
  const hash=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
  assert.equal(hash(manifest.source.file),manifest.source.sha256);

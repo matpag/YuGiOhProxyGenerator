@@ -2,8 +2,8 @@
 // No resampling, remote requests or modifications to the imported PNG are needed.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..');
-const directory=path.join(root,'app/assets/templates/egyptian-gods');
-const palette=JSON.parse(fs.readFileSync(path.join(directory,'palette.json'),'utf8'));
+const directory=path.join(root,'app/assets/templates/frames');
+const palette=JSON.parse(fs.readFileSync(path.join(directory,'egyptian-gods-palette.json'),'utf8'));
 const bytes=fs.readFileSync(path.join(root,palette.base.file));
 const sha=value=>crypto.createHash('sha256').update(value).digest('hex');
 if(sha(bytes)!==palette.base.sha256)throw new Error('The Nexus source changed; recalibrate before rebuilding.');
@@ -23,7 +23,7 @@ const transfer=(name,frame,patch,index)=>{
  return `<filter id="${id}-color" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">${shift}${matrix}${coverage}</filter>`;
 };
 const {width,height}=palette.geometry;
-const manifest={version:palette.version,geometry:palette.geometry,source:{file:palette.base.file,sha256:palette.base.sha256},palette:'app/assets/templates/egyptian-gods/palette.json',method:palette.method,assets:[]};
+const manifest={version:palette.version,geometry:palette.geometry,source:{file:palette.base.file,sha256:palette.base.sha256},palette:'app/assets/templates/frames/egyptian-gods-palette.json',method:palette.method,assets:[]};
 for(const [code,frame] of Object.entries(palette.frames)){
  const masks=palette.masks,patches=palette.outer_edge.patches;
  const excluded=[...Object.values(masks).flat(),...patches.map(patch=>patch.rect)].map(hole).join('');
@@ -38,7 +38,7 @@ ${patches.map((patch,index)=>`<clipPath id="edge-${index}">${rectangle(patch.rec
 ${Object.keys(masks).map(name=>`<g clip-path="url(#${name})"><use href="#texture" filter="url(#${name}-color)"/></g>`).join('\n')}
 ${patches.map((patch,index)=>`<g clip-path="url(#edge-${index})"><use href="#texture" filter="url(#edge-${index}-color)"/></g>`).join('\n')}
 </svg>\n`;
- const file=`app/assets/templates/egyptian-gods/${code}.svg`;
+ const file=`app/assets/templates/frames/${code}.svg`;
  fs.writeFileSync(path.join(root,file),svg);
  manifest.assets.push({code,name:frame.name,file,sha256:sha(svg)});
  console.log(`${frame.name}: ${width} x ${height}, original alpha and Nexus geometry, ${Buffer.byteLength(svg)} bytes`);
@@ -61,6 +61,6 @@ ${patches.map((patch,index)=>`<g clip-path="url(#edge-${index})"><use href="#tex
    fs.writeFileSync(path.join(root,asset.file),bytes);asset.sha256=sha(bytes);
    console.log(asset.name+': native PNG baked, '+bytes.length+' bytes');
   }
-  fs.writeFileSync(path.join(directory,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');
+  fs.writeFileSync(path.join(directory,'egyptian-gods-manifest.json'),JSON.stringify(manifest,null,2)+'\n');
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

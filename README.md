@@ -59,6 +59,8 @@ The front end uses native HTML/CSS and JavaScript ES modules. Shared application
 
 Each asynchronous operation captures its inputs and checks its operation ID before committing. UI translations read their language from shared state; changing UI language preserves cards, focus, editor drafts and the selected print sheet. Application errors use stable codes and parameters, with a fallback for browser/vendor errors.
 
+All active card frames live together in `app/assets/templates/frames/`: standard PNGs, Pendulum variants and Egyptian God PNG/SVG sources. Their palette and generation manifest are `egyptian-gods-palette.json` and `egyptian-gods-manifest.json`. Nexus decorations stay under `app/assets/templates/nexus/`; its manifest records the imported assets and their original URLs.
+
 ## Development checks
 
 Run node --test tests/*.test.js for model, localization, print geometry, state transitions and asynchronous-operation regressions. Run python -m unittest discover -s tests -p "test_*.py" for the local artwork relay.
@@ -69,4 +71,4 @@ For visual refactoring checks, run node scripts/check-ui-visuals.cjs before on t
 
 The full local rendering/research suite is available through node scripts/run-browser-checks.cjs; its historical frame checks also require the local research files under docs/research/.
 
-The Egyptian God frames have native SVG sources and baked PNG assets under app/assets/templates/egyptian-gods/. palette.json records photo URLs, hashes, sampled card corners, measured colors and masks. With Playwright available, node scripts/build-egyptian-frames.cjs rebuilds the assets from the unchanged Nexus Normal texture. The inherited gold outer hairline is replaced with adjacent body texture so each palette meets the dark border directly. Run node scripts/check-egyptian-frames.cjs for exact alpha/neutral-pixel checks, outer-edge continuity, measured color checks, deterministic repaint, EN/IT rendering, mobile editing in five UI languages and PDF export.
+The Egyptian God frames have native SVG sources and baked PNG assets under app/assets/templates/frames/. egyptian-gods-palette.json records photo URLs, hashes, sampled card corners, measured colors and masks. With Playwright available, node scripts/build-egyptian-frames.cjs rebuilds the assets from the unchanged Nexus Normal texture. The inherited gold outer hairline is replaced with adjacent body texture so each palette meets the dark border directly. Run node scripts/check-egyptian-frames.cjs for exact alpha/neutral-pixel checks, outer-edge continuity, measured color checks, deterministic repaint, EN/IT rendering, mobile editing in five UI languages and PDF export.

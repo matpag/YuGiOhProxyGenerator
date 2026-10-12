@@ -5,7 +5,7 @@
     "height": 614
   },
   "base": {
-    "file": "app/assets/templates/nexus/tcg/ygo/border/Normal.png",
+    "file": "app/assets/templates/frames/Normal.png",
     "sha256": "7c99b73ec07c75577f6792e1ac8edbc43915382b9948c4f967d29110c921c390",
     "measurements": {
       "body": {

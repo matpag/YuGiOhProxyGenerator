@@ -4,8 +4,8 @@ const url=process.env.APP_URL||'http://127.0.0.1:8765/';
 const ready=page=>page.waitForFunction(()=>!document.querySelector('#generate').disabled);
 const directory='docs/validation/egyptian-gods';
 (async()=>{
- const manifest=JSON.parse(await fs.readFile('app/assets/templates/egyptian-gods/manifest.json','utf8'));
- const palette=JSON.parse(await fs.readFile('app/assets/templates/egyptian-gods/palette.json','utf8'));
+ const manifest=JSON.parse(await fs.readFile('app/assets/templates/frames/egyptian-gods-manifest.json','utf8'));
+ const palette=JSON.parse(await fs.readFile('app/assets/templates/frames/egyptian-gods-palette.json','utf8'));
  const messages=JSON.parse(await fs.readFile('app/dictionaries/ui.json','utf8')).messages;
  for(const asset of manifest.assets){for(const [file,hash] of [[asset.file,asset.sha256],[asset.sourceFile,asset.sourceSha256]])assert.equal(crypto.createHash('sha256').update(await fs.readFile(file)).digest('hex'),hash);}
  const browser=await chromium.launch({headless:true,channel:'msedge'}),errors=[];
@@ -20,12 +20,12 @@ const directory='docs/validation/egyptian-gods';
    const module=async file=>import(relative(file));
    const [{normalizeCard},{localizeCard},{editCard},{renderCard},en,it,dictionary]=await Promise.all([module('js/model/card.js'),module('js/localization/resolve.js'),module('js/model/project.js'),module('js/rendering/cardmaker.js'),json('fixtures/cards-en.json'),json('fixtures/cards-it.json'),json('dictionaries/tcg.json')]);
    const decoded=async source=>{const image=new Image();image.src=source;await image.decode();const canvas=document.createElement('canvas');canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;const context=canvas.getContext('2d');context.drawImage(image,0,0);return {canvas,pixels:context.getImageData(0,0,canvas.width,canvas.height).data};};
-   const base=await decoded(relative('assets/templates/nexus/tcg/ygo/border/Normal.png')),assets=[];
+   const base=await decoded(relative('assets/templates/frames/Normal.png')),assets=[];
    const masks=[...Object.values(palette.masks).flat(),...palette.outer_edge.patches.map(patch=>patch.rect)];
    const colored=(x,y)=>masks.some(([rx,ry,w,h])=>x>=rx&&x<rx+w&&y>=ry&&y<ry+h);
    const mean=(pixels,regions)=>{const rgb=[];for(const [x1,y1,x2,y2] of regions)for(let y=y1;y<y2;y++)for(let x=x1;x<x2;x++){const k=(y*421+x)*4;rgb.push(Array.from(pixels.slice(k,k+3)));}const light=rgb.map(v=>v[0]*.2126+v[1]*.7152+v[2]*.0722).sort((a,b)=>a-b);const low=light[Math.floor(light.length*.15)],high=light[Math.floor(light.length*.9)],valid=rgb.filter(v=>{const y=v[0]*.2126+v[1]*.7152+v[2]*.0722;return y>=low&&y<=high;});return [0,1,2].map(n=>valid.reduce((sum,v)=>sum+v[n],0)/valid.length);};
    for(const code of Object.keys(palette.frames)){
-    const frame=await decoded(relative('assets/templates/egyptian-gods/'+code+'.png'));let alphaDifference=0,neutralDifference=0;
+    const frame=await decoded(relative('assets/templates/frames/'+code+'.png'));let alphaDifference=0,neutralDifference=0;
     for(let y=0;y<614;y++)for(let x=0;x<421;x++){const k=(y*421+x)*4;alphaDifference=Math.max(alphaDifference,Math.abs(frame.pixels[k+3]-base.pixels[k+3]));if(!colored(x,y))for(let n=0;n<4;n++)neutralDifference=Math.max(neutralDifference,Math.abs(frame.pixels[k+n]-base.pixels[k+n]));}
     const measurement={};for(const name of ['body','panel'])measurement[name]=mean(frame.pixels,palette.measurement_regions[name]);
     // The body must meet the dark outer border without the Normal frame's gold hairline.
@@ -66,7 +66,7 @@ const directory='docs/validation/egyptian-gods';
       }
       const repeated=await decoded((await renderCard({...card,specialFrame:code,frameValidationRepeat:true})).url);
       let repeatPixels=0;for(let k=0;k<rendering.pixels.length;k+=4)if([0,1,2,3].some(n=>rendering.pixels[k+n]!==repeated.pixels[k+n]))repeatPixels++;
-      renders.push({code,layout,language,outsidePixels,maxOutside,examples,bounds,repeatPixels,diagnostics:special.diagnostics,draws:draws.filter(draw=>draw.src.includes('/egyptian-gods/')),png:rendering.canvas.toDataURL().split(',')[1]});
+      renders.push({code,layout,language,outsidePixels,maxOutside,examples,bounds,repeatPixels,diagnostics:special.diagnostics,draws:draws.filter(draw=>draw.src.includes('/assets/templates/frames/')),png:rendering.canvas.toDataURL().split(',')[1]});
      }
     }
    }finally{CanvasRenderingContext2D.prototype.drawImage=drawImage;if(Border)Border.prototype.render=originalBorderRender;}

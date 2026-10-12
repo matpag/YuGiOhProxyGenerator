@@ -22,7 +22,7 @@ const fs=require('node:fs/promises'),assert=require('node:assert/strict'),crypto
       const card=editCard(original,{name:`Frame ${layout}`,description:'A modern card designer.',layout,attribute:'dark',race:'cyberse',atk:'0',def:'0',level:'4',pendulum,scale:'5',pendulumText:'Pendulum validation text.',artwork},'en',dictionary);
       draws=[];const render=await renderCard(card);const renderedDraws=draws.slice();
       const img=new Image();img.src=render.url;await img.decode();const c=document.createElement('canvas');c.width=render.width;c.height=render.height;c.getContext('2d').drawImage(img,0,0);
-      const source=new Image();const suffix=pendulum?'.pendulum':'';source.src=`/assets/templates/nexus/tcg/ygo/border/${layout}${suffix}.png`;await source.decode();
+      const source=new Image();const suffix=pendulum?'.pendulum':'';source.src=`/assets/templates/frames/${layout}${suffix}.png`;await source.decode();
       const ref=document.createElement('canvas');ref.width=c.width;ref.height=c.height;const ctx=ref.getContext('2d');const g=manifest.geometry,s=Math.min(c.width/g.width,c.height/g.height),ox=(c.width-g.width*s)/2,oy=(c.height-g.height*s)/2;ctx.setTransform(s,0,0,s,ox,oy);ctx.drawImage(source,0,0,g.width,g.height);
       const actual=c.getContext('2d').getImageData(0,0,c.width,c.height).data,expected=ctx.getImageData(0,0,c.width,c.height).data;
       let maxDifference=0,compared=0;
@@ -39,7 +39,7 @@ const fs=require('node:fs/promises'),assert=require('node:assert/strict'),crypto
   for(const r of results){
    assert.ok(r.compared>100);assert.ok(r.maxDifference<=1,`Wrong frame pixels: ${r.layout} ${r.pendulum}`);
    assert.deepEqual(r.diagnostics,[]);
-   const frame=r.draws.find(d=>d.src.includes('/border/'));assert.ok(frame.src.includes('/assets/templates/nexus/'));assert.deepEqual(frame.args,[0,0,421,614]);
+   const frame=r.draws.find(d=>d.src.includes('/assets/templates/frames/'));assert.ok(frame.src.includes('/assets/templates/frames/'));assert.deepEqual(frame.args,[0,0,421,614]);
    const art=r.draws.find(d=>d.src.startsWith('data:image'));const area=manifest.geometry.artwork[r.pendulum?'pendulum':'regular'];assert.deepEqual(art.args,[area.left,area.top,area.width,area.height]);
    assert.ok(r.draws.every(d=>!d.src.includes('/vendor/cardmaker/res/')),'A legacy template is still being loaded');
    await fs.writeFile(`docs/validation/nexus-frames/variants/${r.layout}${r.pendulum?'.pendulum':''}.png`,Buffer.from(r.png,'base64'));delete r.png;
