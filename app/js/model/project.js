@@ -1,5 +1,6 @@
 import {appError} from '../errors.js';
 import {CARD_LANGUAGES} from '../localization/languages.js';
+import {validateSpecialFrame} from './frames.js';
 const layouts=['Normal','Effect','Spell','Trap','Fusion','Ritual','Synchro','Xyz','Link'];
 export function exportProject(items,language,decklist){return {projectVersion:1,language,decklist,items:items.map(({entry,card,render})=>({entry,card,artworkId:render.artworkId}))};}
 export function validateProject(project){
@@ -7,6 +8,7 @@ export function validateProject(project){
  for(const item of project.items){
   const c=item.card,e=item.entry;
   if(!c||c.language!==project.language||!/^\d{8}$/.test(c.passcode)||!layouts.includes(c.layout)||!Array.isArray(c.artworks)||!c.artworks.length||!c.text?.name||!Number.isSafeInteger(e?.quantity)||e.quantity<1||e.quantity>999)throw appError('error.projectCard','Carta o quantità del progetto non valida');
+  validateSpecialFrame(c.specialFrame,c.layout,c.scale!==null);
   for(const art of c.artworks){
    const url=art.image_url_cropped;
    if(typeof url!=='string'||(!url.startsWith('https://images.ygoprodeck.com/images/cards_cropped/')&&!/^data:image\/(png|jpeg|webp);base64,/.test(url)))throw appError('error.projectArtwork','Riferimento artwork non valido');
@@ -28,6 +30,7 @@ export function editCard(original,values,language,dictionary){
  card.mechanics=card.family==='monster'?({Normal:['normal'],Effect:['effect'],Fusion:['fusion','effect'],Ritual:['ritual','effect'],Synchro:['synchro','effect'],Xyz:['xyz','effect'],Link:['link','effect']})[values.layout]:[];
  card.scale=values.pendulum?Number(values.scale):null;
  if(card.scale!==null){if(!Number.isInteger(card.scale)||card.scale<0||card.scale>13||!values.pendulumText.trim())throw appError('error.pendulumRequired','Valore e testo Pendulum sono obbligatori');if(card.family!=='monster'||card.layout==='Link')throw appError('error.pendulumUnsupported','Questo abbinamento Pendulum non è supportato');card.mechanics.splice(card.mechanics.length-1,0,'pendulum');}
+ card.specialFrame=validateSpecialFrame(values.specialFrame??original.specialFrame,card.layout,card.scale!==null);
  card.level=card.family!=='monster'||['Xyz','Link'].includes(card.layout)?null:level;card.rank=card.layout==='Xyz'?level:null;card.linkValue=card.layout==='Link'?level:null;
  card.atk=card.family==='monster'?stat(values.atk):null;card.def=card.family==='monster'&&card.layout!=='Link'?stat(values.def):null;
  const label=(group,key)=>{const l=dictionary[group]?.[key]?.[language];if(!l)throw appError('error.label','Etichetta non disponibile');return l;};

@@ -7,7 +7,7 @@ define(["react", "react-class", "draw/Group", "./component/All"], function Effec
 				Group,
 				this.props,
 				React.createElement(C.Image, { value: this.props.image, pendulum: this.props.pendulum.enabled, rarity: this.props.rarity }),
-				React.createElement(C.Border, { value: "Effect", pendulum: this.props.pendulum.enabled }),
+				React.createElement(C.Border, { value: this.props.visualFrame || "Effect", pendulum: this.props.pendulum.enabled }),
 				React.createElement(C.CardName, { value: this.props.name, rarity: this.props.rarity }),
 				React.createElement(C.Attribute, { value: this.props.attribute }),
 				React.createElement(C.Level, { value: this.props.level, star: "Normal" }),

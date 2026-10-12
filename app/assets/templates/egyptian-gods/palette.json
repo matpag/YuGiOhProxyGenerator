@@ -1,0 +1,489 @@
+{
+  "version": 1,
+  "geometry": {
+    "width": 421,
+    "height": 614
+  },
+  "base": {
+    "file": "app/assets/templates/nexus/tcg/ygo/border/Normal.png",
+    "sha256": "7c99b73ec07c75577f6792e1ac8edbc43915382b9948c4f967d29110c921c390",
+    "measurements": {
+      "body": {
+        "rgb": [
+          195.4617,
+          161.8553,
+          81.6
+        ],
+        "luma": 163.2056,
+        "luma_std": 5.4501,
+        "pixels": 1265
+      },
+      "panel": {
+        "rgb": [
+          236.5043,
+          225.4709,
+          199.6577
+        ],
+        "luma": 225.9529,
+        "luma_std": 1.5792,
+        "pixels": 3468
+      }
+    }
+  },
+  "method": "sRGB affine luminance-to-RGB transfer, fitted to trimmed color measurements of two original GBI photographs/scans per card; geometry and alpha use the unmodified Nexus Normal template.",
+  "measurement_regions": {
+    "body": [
+      [
+        40,
+        28,
+        330,
+        31
+      ],
+      [
+        18,
+        150,
+        22,
+        205
+      ],
+      [
+        399,
+        150,
+        403,
+        205
+      ],
+      [
+        18,
+        338,
+        22,
+        385
+      ],
+      [
+        399,
+        338,
+        403,
+        385
+      ]
+    ],
+    "panel": [
+      [
+        45,
+        536,
+        375,
+        550
+      ]
+    ]
+  },
+  "masks": {
+    "body": [
+      [
+        14,
+        14,
+        393,
+        91
+      ],
+      [
+        14,
+        105,
+        28,
+        349
+      ],
+      [
+        380,
+        105,
+        27,
+        349
+      ],
+      [
+        42,
+        440,
+        338,
+        14
+      ],
+      [
+        14,
+        454,
+        8,
+        131
+      ],
+      [
+        399,
+        454,
+        8,
+        131
+      ],
+      [
+        14,
+        585,
+        393,
+        15
+      ]
+    ],
+    "panel": [
+      [
+        25,
+        459,
+        371,
+        118
+      ]
+    ]
+  },
+  "frames": {
+    "slifer": {
+      "name": "Slifer",
+      "target": {
+        "body": {
+          "rgb": [
+            176.3073,
+            103.9197,
+            95.1187
+          ],
+          "contrast": 1.5,
+          "reference_luma_std": 10.0212
+        },
+        "panel": {
+          "rgb": [
+            194.0894,
+            129.3812,
+            116.3421
+          ],
+          "contrast": 1.5,
+          "reference_luma_std": 5.9635
+        }
+      },
+      "references": [
+        {
+          "name": "Slifer",
+          "page": "https://totalcards.net/products/yu-gi-oh-gameboy-worldwide-edition-promos-slifer-the-sky-dragon-ultra-rare-gbi-001",
+          "path": "_upstream/research/egyptian-gods/references/Slifer.jpg",
+          "url": "https://totalcards.net/cdn/shop/files/6baa47652ed6b9a1bf4507e2c98c174c.jpg?v=1774361944",
+          "sha256": "846655020ad2c926485c0c7f4a4af39411cf5a9ac5724865b8737449c89a9093",
+          "quad": [
+            [
+              142,
+              20
+            ],
+            [
+              658,
+              20
+            ],
+            [
+              658,
+              780
+            ],
+            [
+              142,
+              780
+            ]
+          ],
+          "measurements": {
+            "body": {
+              "rgb": [
+                155.6535,
+                84.1297,
+                70.4422
+              ],
+              "luma": 98.3475,
+              "luma_std": 7.3531,
+              "pixels": 1264
+            },
+            "panel": {
+              "rgb": [
+                182.2289,
+                128.6609,
+                114.463
+              ],
+              "luma": 139.0244,
+              "luma_std": 6.2599,
+              "pixels": 3477
+            }
+          }
+        },
+        {
+          "name": "Slifer-photo",
+          "page": "https://www.ebay.com/itm/165892380733",
+          "path": "_upstream/research/egyptian-gods/references/Slifer-photo.jpg",
+          "url": "https://i.ebayimg.com/images/g/6KgAAOSwdH1jx4L5/s-l1200.jpg",
+          "sha256": "047b2c868e96da63e88ddccfbfed882b68ac19849a7d9ae06705027917cf9cd5",
+          "quad": [
+            [
+              255,
+              109
+            ],
+            [
+              923,
+              111
+            ],
+            [
+              924,
+              1081
+            ],
+            [
+              258,
+              1083
+            ]
+          ],
+          "measurements": {
+            "body": {
+              "rgb": [
+                196.9612,
+                123.7097,
+                119.7951
+              ],
+              "luma": 139.0003,
+              "luma_std": 12.6892,
+              "pixels": 1264
+            },
+            "panel": {
+              "rgb": [
+                205.9498,
+                130.1015,
+                118.2212
+              ],
+              "luma": 145.3691,
+              "luma_std": 5.6672,
+              "pixels": 3467
+            }
+          }
+        }
+      ]
+    },
+    "obelisk": {
+      "name": "Obelisk",
+      "target": {
+        "body": {
+          "rgb": [
+            110.4178,
+            124.5734,
+            157.5194
+          ],
+          "contrast": 1.5,
+          "reference_luma_std": 9.2618
+        },
+        "panel": {
+          "rgb": [
+            129.2862,
+            146.7681,
+            176.6422
+          ],
+          "contrast": 1.5,
+          "reference_luma_std": 9.2558
+        }
+      },
+      "references": [
+        {
+          "name": "Obelisk",
+          "page": "https://www.ebay.co.uk/itm/388502550791",
+          "path": "_upstream/research/egyptian-gods/references/Obelisk.jpg",
+          "url": "https://i.ebayimg.com/images/g/qPYAAeSwoApoPLFr/s-l1200.jpg",
+          "sha256": "3f9f3a5bfd8a1220d3f241c3dde6a63031b1d63fddbbd03d81a3e9d5109334f3",
+          "quad": [
+            [
+              181,
+              46
+            ],
+            [
+              937,
+              37
+            ],
+            [
+              966,
+              1173
+            ],
+            [
+              167,
+              1175
+            ]
+          ],
+          "measurements": {
+            "body": {
+              "rgb": [
+                107.0134,
+                114.6938,
+                144.068
+              ],
+              "luma": 115.1818,
+              "luma_std": 9.6874,
+              "pixels": 1264
+            },
+            "panel": {
+              "rgb": [
+                125.5143,
+                141.8835,
+                175.4174
+              ],
+              "luma": 140.8246,
+              "luma_std": 11.2312,
+              "pixels": 3469
+            }
+          }
+        },
+        {
+          "name": "Obelisk-photo",
+          "page": "https://www.ebay.com/itm/167746315488",
+          "path": "_upstream/research/egyptian-gods/references/Obelisk-photo.jpg",
+          "url": "https://i.ebayimg.com/images/g/4agAAeSwFodorngd/s-l1200.jpg",
+          "sha256": "c8c2b67c4210e30efd69fa0e55c213e5e5cf6923c78901e57f73b9ab0457abd8",
+          "quad": [
+            [
+              248,
+              37
+            ],
+            [
+              1009,
+              37
+            ],
+            [
+              1004,
+              1146
+            ],
+            [
+              246,
+              1146
+            ]
+          ],
+          "measurements": {
+            "body": {
+              "rgb": [
+                113.8221,
+                134.453,
+                170.9708
+              ],
+              "luma": 132.7034,
+              "luma_std": 8.8362,
+              "pixels": 1265
+            },
+            "panel": {
+              "rgb": [
+                133.0582,
+                151.6528,
+                177.8671
+              ],
+              "luma": 149.5923,
+              "luma_std": 7.2805,
+              "pixels": 3485
+            }
+          }
+        }
+      ]
+    },
+    "ra": {
+      "name": "Ra",
+      "target": {
+        "body": {
+          "rgb": [
+            201.1167,
+            181.6954,
+            106.6076
+          ],
+          "contrast": 1.5,
+          "reference_luma_std": 15.5245
+        },
+        "panel": {
+          "rgb": [
+            199.9892,
+            183.7139,
+            141.6669
+          ],
+          "contrast": 1.5,
+          "reference_luma_std": 10.0991
+        }
+      },
+      "references": [
+        {
+          "name": "Ra",
+          "page": "https://www.fanaticscollect.com/buy-now/b49952b7-1264-41e8-9728-2dfb3c172e08/2003-yu-gi-oh-game-boy-advance-gold-winged-dragon-of-ra-gbi-003-psa-10-gem",
+          "path": "_upstream/research/egyptian-gods/references/Ra.jpg",
+          "url": "https://cdn-vault.fanaticscollect.com/2025/1/22/rm3/large/v1166618_2025012210024561M_1.jpg",
+          "sha256": "b05cd4a3472a29bbcea4037e57ed129eee4c1513575227b2f7923e715a85a22d",
+          "quad": [
+            [
+              423,
+              1566
+            ],
+            [
+              2854,
+              1566
+            ],
+            [
+              2852,
+              5118
+            ],
+            [
+              422,
+              5118
+            ]
+          ],
+          "measurements": {
+            "body": {
+              "rgb": [
+                175.3758,
+                169.0079,
+                76.4486
+              ],
+              "luma": 163.6789,
+              "luma_std": 25.7731,
+              "pixels": 1264
+            },
+            "panel": {
+              "rgb": [
+                193.9051,
+                188.4051,
+                142.0415
+              ],
+              "luma": 186.2269,
+              "luma_std": 16.518,
+              "pixels": 3466
+            }
+          }
+        },
+        {
+          "url": "https://i.ebayimg.com/images/g/zCcAAOSwkxdnhN5T/s-l1600.jpg",
+          "name": "Ra-photo",
+          "page": "https://www.ebay.com/p/8043786533",
+          "path": "_upstream/research/egyptian-gods/references/Ra-photo.jpg",
+          "sha256": "4a9e45a3992d9eceaf4061c47d202f9373699e5cc58b39c5c2c935d95e4a6fad",
+          "quad": [
+            [
+              69,
+              77
+            ],
+            [
+              692,
+              81
+            ],
+            [
+              657,
+              957
+            ],
+            [
+              70,
+              945
+            ]
+          ],
+          "measurements": {
+            "body": {
+              "rgb": [
+                226.8576,
+                194.3829,
+                136.7666
+              ],
+              "luma": 197.1271,
+              "luma_std": 5.276,
+              "pixels": 1264
+            },
+            "panel": {
+              "rgb": [
+                206.0734,
+                179.0227,
+                141.2924
+              ],
+              "luma": 182.0496,
+              "luma_std": 3.6801,
+              "pixels": 3475
+            }
+          }
+        }
+      ]
+    }
+  }
+}

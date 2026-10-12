@@ -1,5 +1,6 @@
 import {appError} from '../errors.js';
 import {appUrl} from '../paths.js';
+import {validateSpecialFrame} from '../model/frames.js';
 const WIDTH=697,HEIGHT=1016;
 let modules;
 const cache=new Map();
@@ -67,9 +68,10 @@ function localizedAttribute(canvas,card,Template){
 }
 export async function renderCard(card,{artworkId,cacheResult=true}={}){
   if(!['Normal','Effect','Spell','Trap','Fusion','Ritual','Synchro','Xyz','Link'].includes(card.layout))throw appError('error.layout',`Layout ${card.layout} non ancora abilitato`);
+  const specialFrame=validateSpecialFrame(card.specialFrame,card.layout,card.scale!==null);
   const image=card.artworks.find(x=>x.id===artworkId)||(!artworkId?card.artworks[0]:null);
   if(!image)throw appError('error.artworkVariant','Variante illustrazione non disponibile');
-  const key=JSON.stringify({renderer:7,card,image:image.id});
+  const key=JSON.stringify({renderer:8,card,image:image.id});
   if(cache.has(key))return cache.get(key);
   const {React,ReactDOM,Card,Template}=await loadModules();
   const fontSpecs=[
@@ -89,7 +91,7 @@ export async function renderCard(card,{artworkId,cacheResult=true}={}){
   const artwork=await artworkData(image);
   const host=document.createElement('div');host.className='render-host';document.body.append(host);
   try{
-    const instance=ReactDOM.render(React.createElement(Card,{layout:card.layout,pixelWidth:WIDTH,pixelHeight:HEIGHT,name:card.text.name,image:artwork,rarity:'Common',attribute:card.attribute[0].toUpperCase()+card.attribute.slice(1),level:card.rank??card.level,type:card.typeLine,effect:card.scale===null?card.text.description:card.text.monsterEffect,atk:String(card.atk??''),def:String(card.layout==='Link'?card.linkValue:(card.def??'')),serial:card.passcode,id:'',copyright:'PROXY',icon:card.icon||'None',pendulum:{enabled:card.scale!==null,effect:card.text.pendulumEffect||'',blue:String(card.scale??0),red:String(card.scale??0)},link:Object.fromEntries(card.linkMarkers.map(x=>[({'Top':'topCenter','Bottom':'bottomCenter','Left':'middleLeft','Right':'middleRight','Top-Left':'topLeft','Top-Right':'topRight','Bottom-Left':'bottomLeft','Bottom-Right':'bottomRight'})[x],true]))}),host);
+    const instance=ReactDOM.render(React.createElement(Card,{layout:card.layout,visualFrame:({slifer:'Slifer',obelisk:'Obelisk',ra:'Ra'})[specialFrame],pixelWidth:WIDTH,pixelHeight:HEIGHT,name:card.text.name,image:artwork,rarity:'Common',attribute:card.attribute[0].toUpperCase()+card.attribute.slice(1),level:card.rank??card.level,type:card.typeLine,effect:card.scale===null?card.text.description:card.text.monsterEffect,atk:String(card.atk??''),def:String(card.layout==='Link'?card.linkValue:(card.def??'')),serial:card.passcode,id:'',copyright:'PROXY',icon:card.icon||'None',pendulum:{enabled:card.scale!==null,effect:card.text.pendulumEffect||'',blue:String(card.scale??0),red:String(card.scale??0)},link:Object.fromEntries(card.linkMarkers.map(x=>[({'Top':'topCenter','Bottom':'bottomCenter','Left':'middleLeft','Right':'middleRight','Top-Left':'topLeft','Top-Right':'topRight','Bottom-Left':'bottomLeft','Bottom-Right':'bottomRight'})[x],true]))}),host);
     await waitForImages(host);
     const canvas=host.querySelector('canvas');canvas.proxyDiagnostics=[];
     await new Promise(resolve=>instance.forceUpdate(resolve));

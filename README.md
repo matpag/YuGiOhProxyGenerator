@@ -11,6 +11,7 @@ Create printable Yu-Gi-Oh! proxy cards in English, Italian, German or French fro
 - Switch the interface between Italian, English, German, Spanish and French using the flags. The first visit uses your browser language; subsequent visits remember your choice.
 - Review a compact card grid or a paginated print-sheet preview, with card zoom.
 - Edit card text and artwork with a live preview and fields tailored to the card type.
+- Choose Slifer, Obelisk or Ra frame colors for regular Normal and Effect monsters in the editor.
 - Use the responsive interface on mobile, including portrait and landscape editors.
 - Export printable PDFs with adjustable paper size, margins and card scale.
 
@@ -29,6 +30,8 @@ Create printable Yu-Gi-Oh! proxy cards in English, Italian, German or French fro
 4. Print at **100% scale**, without fitting to the page. At card scale 100%, cards measure **59 × 86 mm**.
 
 Advanced print settings use percentages for card scale and millimeters for margins and spacing. Changing the list or printed language marks the preview as outdated until you regenerate it. Importing a file replaces the current list.
+
+For Normal and Effect monsters without Pendulum, **Edit card → Frame** offers Standard, Slifer, Obelisk and Ra. The three special palettes use measured original GBI photo references. Use the text and statistic fields to customize the card content; the frame selection is independent of YGOProDeck card data.
 
 To select another illustration, append its index, such as `Dark Magician [1]`. Use the edit button below a preview to customize a copy. Project save/load controls are currently hidden. Generating the decklist again replaces your edits with the card data.
 
@@ -65,3 +68,5 @@ Browser checks use Playwright and Microsoft Edge against the local server. Run n
 For visual refactoring checks, run node scripts/check-ui-visuals.cjs before on the unchanged app, then node scripts/check-ui-visuals.cjs after on the updated app. The script saves 60 desktop/mobile screenshots and compares geometry, control state, messages and card PNG hashes. With Pillow installed, python scripts/compare-ui-visuals.py also compares screenshot pixels. Validation artifacts are local under docs/validation/state-refactor/. Save historical baselines separately before another run. VISUAL_DISABLE_GPU=1 selects software rasterization to reduce screenshot sampling noise.
 
 The full local rendering/research suite is available through node scripts/run-browser-checks.cjs; its historical frame checks also require the local research files under docs/research/.
+
+The Egyptian God frames have native SVG sources and baked PNG assets under app/assets/templates/egyptian-gods/. palette.json records photo URLs, hashes, sampled card corners, measured colors and masks. With Playwright available, node scripts/build-egyptian-frames.cjs rebuilds the assets from the unchanged Nexus Normal texture. Run node scripts/check-egyptian-frames.cjs for exact alpha/neutral-pixel checks, measured color checks, deterministic repaint, EN/IT rendering, mobile editing in five UI languages and PDF export.

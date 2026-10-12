@@ -35,7 +35,12 @@ define(["react", "react-class"], function Group(React, ReactClass)
 				{
 					var ctx = canvas.getContext("2d");
 					ctx.fillStyle = "#fff";
-					ctx.fillRect(0,0,canvas.width, canvas.height);
+                    // Clear physical pixels before restoring the logical card transform.
+                    // A fractional offset otherwise leaves the first column accumulating.
+                    ctx.save();
+                    ctx.setTransform(1, 0, 0, 1, 0, 0);
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.restore();
 					//ctx.clearRect(0,0,canvas.width, canvas.height);
 				}
 			}

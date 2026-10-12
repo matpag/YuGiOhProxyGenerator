@@ -1,8 +1,9 @@
 import {editCard} from './model/project.js';
 import {appError} from './errors.js';
+import {supportsSpecialFrame} from './model/frames.js';
 import {errorText,t,getUiLanguage,refreshFileLabels} from './ui/i18n.js';
 const $=id=>document.getElementById(id);
-const fields={name:'edit-name',description:'edit-description',layout:'edit-layout',attribute:'edit-attribute',race:'edit-race',
+const fields={name:'edit-name',description:'edit-description',layout:'edit-layout',specialFrame:'edit-frame',attribute:'edit-attribute',race:'edit-race',
  atk:'edit-atk',def:'edit-def',level:'edit-level',pendulum:'edit-pendulum',scale:'edit-scale',pendulumText:'edit-pendulum-text'};
 export function setupEditor({getItems,getLanguage,getDictionary,onApply,renderPreview}){
  let session=null,model,timer,transientUrl=null;
@@ -16,6 +17,9 @@ export function setupEditor({getItems,getLanguage,getDictionary,onApply,renderPr
   $('pendulum-toggle').hidden=!monster||link;$('edit-pendulum').disabled=!monster||link;
   if(!monster||link){if(session)session.draft.pendulum=false;$('edit-pendulum').checked=false;}
   const pendulum=monster&&!link&&Boolean(session?.draft.pendulum);
+  const frameSupported=supportsSpecialFrame(layout,pendulum);
+  $('frame-label').hidden=!frameSupported;$('edit-frame').hidden=!frameSupported;$('edit-frame').disabled=!frameSupported;
+  if(!frameSupported){if(session)session.draft.specialFrame='';$('edit-frame').value='';}
   $('pendulum-fields').hidden=!pendulum;$('pendulum-fields').querySelectorAll('input,textarea').forEach(input=>input.disabled=!pendulum);
   $('level-label').dataset.i18n=layout==='Xyz'?'monsterRank':link?'monsterLink':'monsterLevel';
   $('level-label').textContent=t($('level-label').dataset.i18n);
@@ -44,7 +48,7 @@ export function setupEditor({getItems,getLanguage,getDictionary,onApply,renderPr
   const item=getItems()[index];if(!item||!model?.canEdit)return;
   clearTimeout(timer);releasePreview();const card=item.card;
   session={index,original:item,language:getLanguage(),revision:0,artworkRevision:0,readingArtwork:false,saving:false,error:null,previewStatus:null,
-   draft:{name:card.text.name,description:card.text.monsterEffect||card.text.description||'',layout:card.layout,
+   draft:{name:card.text.name,description:card.text.monsterEffect||card.text.description||'',layout:card.layout,specialFrame:card.specialFrame||'',
     attribute:card.family==='monster'?card.attribute:'dark',race:card.family==='monster'?card.race:'spellcaster',
     atk:String(card.atk??'0'),def:String(card.def??'0'),level:String(card.linkValue??card.rank??card.level??0),
     pendulum:card.scale!==null,scale:String(card.scale??4),pendulumText:card.text.pendulumEffect||'',artwork:null}};
