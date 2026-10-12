@@ -7,6 +7,7 @@ const directory='docs/validation/egyptian-gods';
  const manifest=JSON.parse(await fs.readFile('app/assets/templates/frames/egyptian-gods-manifest.json','utf8'));
  const palette=JSON.parse(await fs.readFile('app/assets/templates/frames/egyptian-gods-palette.json','utf8'));
  const messages=JSON.parse(await fs.readFile('app/dictionaries/ui.json','utf8')).messages;
+ const expectedRgb=target=>{const luma=target.rgb.reduce((sum,value,index)=>sum+value*[.2126,.7152,.0722][index],0);return target.rgb.map(value=>luma+(value-luma)*(target.saturation??1));};
  for(const asset of manifest.assets){for(const [file,hash] of [[asset.file,asset.sha256],[asset.sourceFile,asset.sourceSha256]])assert.equal(crypto.createHash('sha256').update(await fs.readFile(file)).digest('hex'),hash);}
  const browser=await chromium.launch({headless:true,channel:'msedge'}),errors=[];
  try{
@@ -72,7 +73,7 @@ const directory='docs/validation/egyptian-gods';
    }finally{CanvasRenderingContext2D.prototype.drawImage=drawImage;if(Border)Border.prototype.render=originalBorderRender;}
    return {assets,renders};
   },palette);
-  for(const asset of results.assets){assert.equal(asset.width,421);assert.equal(asset.height,614);assert.equal(asset.alphaDifference,0);assert.equal(asset.neutralDifference,0);assert.ok(asset.outerEdgeDifference<12,asset.code+': a separate outer hairline remains ('+asset.outerEdgeDifference+')');for(const name of ['body','panel'])for(let n=0;n<3;n++)assert.ok(Math.abs(asset.measurement[name][n]-palette.frames[asset.code].target[name].rgb[n])<1.5,'Frame color departed from the measured palette');}
+  for(const asset of results.assets){assert.equal(asset.width,421);assert.equal(asset.height,614);assert.equal(asset.alphaDifference,0);assert.equal(asset.neutralDifference,0);assert.ok(asset.outerEdgeDifference<12,asset.code+': a separate outer hairline remains ('+asset.outerEdgeDifference+')');for(const name of ['body','panel'])for(let n=0;n<3;n++)assert.ok(Math.abs(asset.measurement[name][n]-expectedRgb(palette.frames[asset.code].target[name])[n])<1.5,'Frame color departed from the calibrated palette');}
   for(const render of results.renders){assert.equal(render.outsidePixels,0,JSON.stringify({...render,png:undefined,draws:render.draws.slice(0,1)}));assert.equal(render.repeatPixels,0,"Repaints must yield the same pixels, including the first column");assert.deepEqual(render.diagnostics,[]);assert.deepEqual(render.draws[0].args,[0,0,421,614]);await fs.writeFile(`${directory}/cards/${render.code}-${render.layout}-${render.language}.png`,Buffer.from(render.png,'base64'));delete render.png;}
   await fs.writeFile(directory+'/render-checks.json',JSON.stringify(results,null,2)+'\n');await page.close();
   for(const lang of ['it','en','de','es','fr']){

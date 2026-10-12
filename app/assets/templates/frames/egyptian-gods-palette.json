@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "geometry": {
     "width": 421,
     "height": 614
@@ -30,7 +30,7 @@
       }
     }
   },
-  "method": "sRGB affine luminance-to-RGB transfer, fitted to trimmed color measurements of two original GBI photographs/scans per card; geometry and alpha use the unmodified Nexus Normal template. The outer gold hairline is replaced with neighboring body texture without changing alpha or the dark outer border.",
+  "method": "sRGB affine luminance-to-RGB transfer, fitted to trimmed color measurements of two original GBI photographs/scans per card; geometry and alpha use the unmodified Nexus Normal template. The outer gold hairline is replaced with neighboring body texture without changing alpha or the dark outer border. Slifer and Obelisk apply the recorded chroma gains around sRGB weighted luma, preserving the measured reference RGB values and mean luma.",
   "measurement_regions": {
     "body": [
       [
@@ -138,7 +138,8 @@
             95.1187
           ],
           "contrast": 1.5,
-          "reference_luma_std": 10.0212
+          "reference_luma_std": 10.0212,
+          "saturation": 1.55
         },
         "panel": {
           "rgb": [
@@ -147,7 +148,8 @@
             116.3421
           ],
           "contrast": 1.5,
-          "reference_luma_std": 5.9635
+          "reference_luma_std": 5.9635,
+          "saturation": 1.25
         }
       },
       "references": [
@@ -257,7 +259,8 @@
             157.5194
           ],
           "contrast": 1.5,
-          "reference_luma_std": 9.2618
+          "reference_luma_std": 9.2618,
+          "saturation": 1.85
         },
         "panel": {
           "rgb": [
@@ -266,7 +269,8 @@
             176.6422
           ],
           "contrast": 1.5,
-          "reference_luma_std": 9.2558
+          "reference_luma_std": 9.2558,
+          "saturation": 1.5
         }
       },
       "references": [

@@ -13,7 +13,10 @@ const hole=([x,y,width,height])=>`M${x} ${y}h${width}v${height}h-${width}Z`;
 const transfer=(name,frame,patch,index)=>{
  const target=frame.target[name],source=palette.base.measurements[name];
  const k=target.contrast,coefficients=[.2126,.7152,.0722].map(value=>value*k);
- const values=target.rgb.flatMap(value=>[...coefficients,0,(value-k*source.luma)/255]).concat([0,0,0,1,0]);
+ const saturation=target.saturation??1;
+ const luma=target.rgb.reduce((sum,value,index)=>sum+value*[.2126,.7152,.0722][index],0);
+ const rgb=saturation===1?target.rgb:target.rgb.map(value=>luma+(value-luma)*saturation);
+ const values=rgb.flatMap(value=>[...coefficients,0,(value-k*source.luma)/255]).concat([0,0,0,1,0]);
  // Extend neighboring opaque body pixels over the gold hairline. SourceAlpha
  // keeps the original outer edge coverage, including partially transparent pixels.
  const id=patch?`edge-${index}`:name;

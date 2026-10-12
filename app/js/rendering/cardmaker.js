@@ -71,7 +71,7 @@ export async function renderCard(card,{artworkId,cacheResult=true}={}){
   const specialFrame=validateSpecialFrame(card.specialFrame,card.layout,card.scale!==null);
   const image=card.artworks.find(x=>x.id===artworkId)||(!artworkId?card.artworks[0]:null);
   if(!image)throw appError('error.artworkVariant','Variante illustrazione non disponibile');
-  const key=JSON.stringify({renderer:9,card,image:image.id});
+  const key=JSON.stringify({renderer:10,card,image:image.id});
   if(cache.has(key))return cache.get(key);
   const {React,ReactDOM,Card,Template}=await loadModules();
   const fontSpecs=[
