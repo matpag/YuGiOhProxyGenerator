@@ -2,11 +2,27 @@ import {appError} from '../errors.js';
 import {appUrl} from '../paths.js';
 import {CARD_LANGUAGES} from '../localization/languages.js';
 const endpoint='https://db.ygoprodeck.com/api/v7/cardinfo.php';
+const networkMessage='Servizio dati non disponibile. Controlla la connessione e riprova.';
+async function readJson(url,{signal,allowNotFound=false}={}){
+  try{
+    const response=await fetch(url,{signal});
+    // Card lookups use HTTP 400 for a missing card. Other HTTP failures must
+    // not be parsed as API data (CDNs can return HTML maintenance/error pages).
+    if(!response.ok&&!(allowNotFound&&response.status===400))throw new Error(`HTTP ${response.status}`);
+    const data=await response.json();signal?.throwIfAborted();return {response,data};
+  }catch(error){
+    signal?.throwIfAborted();
+    if(error?.name==='AbortError')throw error;
+    throw appError('error.network',networkMessage,{},error);
+  }
+}
 export class CardRepository {
   constructor(){this.memory=new Map();this.fixtures=null;}
   async init(){
     const values=await Promise.all(['en','it','de','fr'].map(async lang=>{
-      const r=await fetch(appUrl(`fixtures/cards-${lang}.json`));if(!r.ok)throw appError('error.network','Servizio dati non disponibile. Controlla la connessione e riprova.');return [lang,await r.json()];
+      const {data}=await readJson(appUrl(`fixtures/cards-${lang}.json`));
+      if(!Array.isArray(data))throw appError('error.network',networkMessage);
+      return [lang,data];
     }));this.fixtures=Object.fromEntries(values);
   }
   readCache(key){try{return JSON.parse(localStorage.getItem(key));}catch{return null;}}
@@ -19,8 +35,9 @@ export class CardRepository {
     if(!card){
       const url=new URL(endpoint);url.searchParams.set(query.kind==='id'?'id':'name',query.query);
       if(language!=='en')url.searchParams.set('language',language);
-      const response=await fetch(url,{signal});const data=await response.json();
-      if(!response.ok||!data.data?.length)throw appError(response.status===400?'error.cardNotFound':'error.network',response.status===400?'Carta non trovata':'Servizio dati non disponibile. Controlla la connessione e riprova.');
+      const {response,data}=await readJson(url,{signal,allowNotFound:true});
+      if(response.status===400&&typeof data?.error==='string')throw appError('error.cardNotFound','Carta non trovata');
+      if(!response.ok||!Array.isArray(data?.data)||!data.data.length||!data.data[0]||typeof data.data[0]!=='object')throw appError('error.network',networkMessage);
       card=data.data[0];
       try{localStorage.setItem(key,JSON.stringify(card));}catch{}
     }
