@@ -9,7 +9,7 @@ define(["react", "react-class", "draw/Image", "../../Resources", "../../Template
 			{
 				frame += ".pendulum";
 			}
-			var border = resources + "/../frames/" + frame + ".png" + (special ? "?v=4" : "");
+			var border = resources + "/../frames/" + frame + ".png" + (special ? "?v=5" : "");
 			return React.createElement(Image, { 
 				src: border,
                 canvasFilter: FrameColor.filter(this.props.value, this.props.pendulum),

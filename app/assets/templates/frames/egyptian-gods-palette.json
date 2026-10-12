@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "geometry": {
     "width": 421,
     "height": 614
@@ -30,7 +30,7 @@
       }
     }
   },
-  "method": "sRGB affine luminance-to-RGB transfer, fitted to trimmed color measurements of two original GBI photographs/scans per card; geometry and alpha use the unmodified Nexus Normal template. The outer gold hairline is replaced with neighboring body texture without changing alpha or the dark outer border. Slifer and Obelisk apply the recorded chroma gains around sRGB weighted luma, preserving the measured reference RGB values and mean luma. The panel tint includes its bottom inner bevel through native row 580, removing the untinted cream strip below ATK/DEF while preserving the ornamental edge.",
+  "method": "sRGB luminance-to-RGB transfer, fitted to trimmed color measurements of two original GBI photographs/scans per card; geometry and alpha use the unmodified Nexus Normal template. The outer gold hairline is replaced with neighboring body texture without changing alpha or the dark outer border. Slifer and Obelisk apply the recorded chroma gains around sRGB weighted luma, preserving the measured reference RGB values and mean luma. The panel tint includes its bottom inner bevel through native row 580, removing the untinted cream strip below ATK/DEF while preserving the ornamental edge. The panel mask excludes the Nexus corner ornaments and upper metal edge. A proportional shadow branch below sRGB luma 200 prevents black clipping in its inner bevel, while the original affine transfer preserves the main panel texture and palette.",
   "measurement_regions": {
     "body": [
       [
@@ -120,10 +120,22 @@
     ],
     "panel": [
       [
+        30,
+        461,
+        361,
+        4
+      ],
+      [
         25,
-        459,
+        465,
         371,
-        122
+        111
+      ],
+      [
+        30,
+        576,
+        361,
+        5
       ]
     ]
   },
@@ -590,5 +602,9 @@
         ]
       }
     ]
+  },
+  "panel_shadow": {
+    "knee": 200,
+    "method": "Below the knee, scale each channel proportionally from black to its affine value at the knee; join continuously to the original affine transfer above it. Preserve black ink and avoid clipping the neutral inner bevel to black."
   }
 }

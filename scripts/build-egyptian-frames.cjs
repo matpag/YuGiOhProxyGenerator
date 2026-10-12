@@ -23,7 +23,20 @@ const transfer=(name,frame,patch,index)=>{
  const shift=patch?`<feOffset in="SourceGraphic" dx="${patch.offset[0]}" dy="${patch.offset[1]}" result="neighbor"/>`:'';
  const matrix=`<feColorMatrix${patch?' in="neighbor" result="body"':''} type="matrix" values="${values.map(number).join(' ')}"/>`;
  const coverage=patch?'<feComposite in="body" in2="SourceAlpha" operator="in"/>':'';
- return `<filter id="${id}-color" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">${shift}${matrix}${coverage}</filter>`;
+ let color=matrix;
+ if(name==='panel'){
+  // The affine transfer fits the light panel texture, but its negative offsets
+  // crush the neutral bevels. Join a proportional shadow branch at the knee:
+  // zero remains black ink, and brighter shades retain the calibrated transfer.
+  const knee=palette.panel_shadow.knee;
+  const curve=value=>Array.from({length:256},(_,light)=>{
+   const channel=light<knee?(value+k*(knee-source.luma))*light/knee:value+k*(light-source.luma);
+   return number(Math.max(0,Math.min(1,channel/255)));
+  }).join(' ');
+  const gray=[0,1,2].flatMap(()=>[.2126,.7152,.0722,0,0]).concat([0,0,0,1,0]);
+  color=`<feColorMatrix type="matrix" values="${gray.map(number).join(' ')}"/><feComponentTransfer>${['R','G','B'].map((channel,index)=>`<feFunc${channel} type="table" tableValues="${curve(rgb[index])}"/>`).join('')}</feComponentTransfer>`;
+ }
+ return `<filter id="${id}-color" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">${shift}${color}${coverage}</filter>`;
 };
 const {width,height}=palette.geometry;
 const manifest={version:palette.version,geometry:palette.geometry,source:{file:palette.base.file,sha256:palette.base.sha256},palette:'app/assets/templates/frames/egyptian-gods-palette.json',method:palette.method,assets:[]};
