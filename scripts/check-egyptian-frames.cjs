@@ -1,3 +1,4 @@
+const {launchTestBrowser}=require('./helpers/test-data.cjs');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const fs=require('node:fs/promises'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const url=process.env.APP_URL||'http://127.0.0.1:8765/';
@@ -9,7 +10,7 @@ const directory='docs/validation/egyptian-gods';
  const messages=JSON.parse(await fs.readFile('app/dictionaries/ui.json','utf8')).messages;
  const expectedRgb=target=>{const luma=target.rgb.reduce((sum,value,index)=>sum+value*[.2126,.7152,.0722][index],0);return target.rgb.map(value=>luma+(value-luma)*(target.saturation??1));};
  for(const asset of manifest.assets){for(const [file,hash] of [[asset.file,asset.sha256],[asset.sourceFile,asset.sourceSha256]])assert.equal(crypto.createHash('sha256').update(await fs.readFile(file)).digest('hex'),hash);}
- const browser=await chromium.launch({headless:true,channel:'msedge'}),errors=[];
+ const browser=await launchTestBrowser(chromium,{headless:true,channel:'msedge'}),errors=[];
  try{
   await fs.mkdir(directory+'/cards',{recursive:true});
   const page=await browser.newPage();page.on('pageerror',error=>errors.push(error.message));
@@ -19,7 +20,7 @@ const directory='docs/validation/egyptian-gods';
    const relative=file=>new URL(file,location.href).href;
    const json=async file=>(await fetch(relative(file))).json();
    const module=async file=>import(relative(file));
-   const [{normalizeCard},{localizeCard},{editCard},{renderCard},en,it,dictionary]=await Promise.all([module('js/model/card.js'),module('js/localization/resolve.js'),module('js/model/project.js'),module('js/rendering/cardmaker.js'),json('fixtures/cards-en.json'),json('fixtures/cards-it.json'),json('dictionaries/tcg.json')]);
+   const [{normalizeCard},{localizeCard},{editCard},{renderCard},en,it,dictionary]=await Promise.all([module('js/model/card.js'),module('js/localization/resolve.js'),module('js/model/project.js'),module('js/rendering/cardmaker.js'),json('__test__/fixtures/cards-en.json'),json('__test__/fixtures/cards-it.json'),json('dictionaries/tcg.json')]);
    const decoded=async source=>{const image=new Image();image.src=source;await image.decode();const canvas=document.createElement('canvas');canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;const context=canvas.getContext('2d');context.drawImage(image,0,0);return {canvas,pixels:context.getImageData(0,0,canvas.width,canvas.height).data};};
    const base=await decoded(relative('assets/templates/frames/Normal.png')),assets=[];
    const masks=[...Object.values(palette.masks).flat(),...palette.outer_edge.patches.map(patch=>patch.rect)];

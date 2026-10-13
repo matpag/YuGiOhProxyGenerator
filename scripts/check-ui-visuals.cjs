@@ -1,3 +1,4 @@
+const {launchTestBrowser}=require('./helpers/test-data.cjs');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const assert=require('node:assert/strict');
 const fs=require('node:fs/promises');
@@ -38,7 +39,7 @@ async function capture(page,name){
 }
 (async()=>{
  await fs.mkdir(directory,{recursive:true});
- const browser=await chromium.launch({headless:true,channel:'msedge',args:process.env.VISUAL_DISABLE_GPU?['--disable-gpu']:[]}),errors=[];
+ const browser=await launchTestBrowser(chromium,{headless:true,channel:'msedge',args:process.env.VISUAL_DISABLE_GPU?['--disable-gpu']:[]}),errors=[];
  try{
   for(const [width,height] of [[1440,1000],[390,844],[320,740],[740,320]]){
    const page=await browser.newPage({locale:'it-IT',viewport:{width,height},isMobile:width<761,hasTouch:width<761});

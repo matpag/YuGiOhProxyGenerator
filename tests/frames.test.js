@@ -7,7 +7,7 @@ import {localizeCard} from '../app/js/localization/resolve.js';
 import {editCard,exportProject,validateProject} from '../app/js/model/project.js';
 import {SPECIAL_FRAMES,supportsSpecialFrame,validateSpecialFrame} from '../app/js/model/frames.js';
 const read=file=>JSON.parse(fs.readFileSync(file,'utf8'));
-const dictionary=read('app/dictionaries/tcg.json'),en=read('app/fixtures/cards-en.json');
+const dictionary=read('app/dictionaries/tcg.json'),en=read('tests/fixtures/cards-en.json');
 const original=localizeCard(normalizeCard(en.find(card=>card.id===46986414),null,'en'),'en',dictionary);
 const values={name:original.text.name,description:original.text.description,layout:'Normal',attribute:'dark',race:'spellcaster',atk:'2500',def:'2100',level:'7',pendulum:false,scale:'4',pendulumText:'',artwork:null};
 test('Special frame editing preserves card data and survives project serialization',()=>{

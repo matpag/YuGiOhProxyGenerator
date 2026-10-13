@@ -6,7 +6,7 @@ import {rowError} from '../app/js/errors.js';
 import {formatError} from '../app/js/ui/i18n.js';
 
 const query={kind:'name',query:'Unknown Card'};
-const repository=()=>{const value=new CardRepository();value.fixtures={en:[],it:[],de:[],fr:[]};return value;};
+const repository=()=>new CardRepository();
 const messages=JSON.parse(fs.readFileSync('app/dictionaries/ui.json','utf8')).messages;
 
 test('HTML error pages, malformed JSON and invalid payloads become translated data-service errors',async t=>{
@@ -37,7 +37,7 @@ test('network errors are normalized independently of browser wording; retry is n
 test('a valid API not-found response retains the card/row context and translation distinction',async t=>{
   t.mock.method(globalThis,'fetch',async()=>Response.json({error:'No card matching your query was found in the database.'},{status:400}));
   await assert.rejects(repository().find(query,undefined,'en'),{code:'error.cardNotFound'});
-  const repo=repository();repo.fixtures.en=[{id:46986414,name:'Dark Magician'}];
+  const repo=repository();repo.memory.set('ygoprodeck:v7:en:name:Dark Magician',{id:46986414,name:'Dark Magician'});
   await assert.rejects(repo.find({kind:'name',query:'Dark Magician'},undefined,'de'),error=>{
     assert.equal(error.code,'error.translationMissing');assert.deepEqual(error.params,{id:'46986414',language:'de'});return true;
   });
@@ -53,7 +53,20 @@ test('aborts during fetch or JSON body reading remain cancellations',async t=>{
     fetch.mock.restore();
   }
 });
-test('an invalid local dictionary response at startup also produces a localized service error',async t=>{
-  t.mock.method(globalThis,'fetch',async()=>new Response('<html>Not JSON</html>',{status:200}));
-  await assert.rejects(new CardRepository().init(),{code:'error.network'});
+test('Previously bundled example cards request canonical and selected localized data from YGOProDeck',async t=>{
+  const calls=[];
+  t.mock.method(globalThis,'fetch',async source=>{
+    const url=new URL(source);calls.push(url);
+    return Response.json({data:[{id:46986414,name:url.searchParams.has('language')?'Mago Nero':'Dark Magician'}]});
+  });
+  const repo=repository();
+  const result=await repo.find({kind:'name',query:'Dark Magician'},undefined,'it');
+  assert.equal(result.localized.name,'Mago Nero');
+  assert.equal(calls.length,2);
+  assert.ok(calls.every(url=>url.origin==='https://db.ygoprodeck.com'));
+  assert.equal(calls[0].searchParams.get('name'),'Dark Magician');
+  assert.equal(calls[1].searchParams.get('id'),'46986414');
+  assert.equal(calls[1].searchParams.get('language'),'it');
+  await repo.find({kind:'name',query:'Dark Magician'},undefined,'it');
+  assert.equal(calls.length,2);
 });

@@ -1,3 +1,4 @@
+const {launchTestBrowser}=require('./helpers/test-data.cjs');
 // Offline regression: compare old and optimized exports from the exact same PNGs.
 // Optional real-deck fixture: run verify-pdf-lossless.py --prepare first.
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
@@ -27,7 +28,7 @@ const mime={'.html':'text/html','.css':'text/css','.js':'text/javascript','.json
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  let browser;
  try{
-  browser=await chromium.launch({headless:true,channel:'msedge'});
+  browser=await launchTestBrowser(chromium,{headless:true,channel:'msedge'});
   const page=await browser.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   page.on('console',message=>console.log(message.text()));
   await page.goto(`http://127.0.0.1:${server.address().port}/`);

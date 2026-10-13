@@ -1,3 +1,4 @@
+const {launchTestBrowser}=require('./helpers/test-data.cjs');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const {createServer}=require('node:http'),path=require('node:path'),fs=require('node:fs/promises'),assert=require('node:assert/strict');
 (async()=>{
@@ -6,7 +7,7 @@ const {createServer}=require('node:http'),path=require('node:path'),fs=require('
  const server=createServer(async(req,res)=>{try{const name=new URL(req.url,'http://localhost').pathname;const file=path.resolve(root,'.'+(name==='/'?'/index.html':name));if(!file.startsWith(root+path.sep))throw Error();res.setHeader('Content-Type',mime[path.extname(file)]||'application/octet-stream');res.end(await fs.readFile(file));}catch{res.writeHead(404);res.end();}});
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));let browser;
  try{
-  browser=await chromium.launch({headless:true,channel:'msedge'});
+  browser=await launchTestBrowser(chromium,{headless:true,channel:'msedge'});
   const page=await browser.newPage({locale:'it-IT',viewport:{width:390,height:844},isMobile:true,hasTouch:true}),errors=[],results=[];page.on('pageerror',e=>errors.push(e.message));
   const query='DefinitelyUnknownCardCodex20261012';
   // Replay the real API's not-found JSON, captured during the initial review.

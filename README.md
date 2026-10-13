@@ -47,7 +47,7 @@ Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/). Keep the terminal open wh
 
 ## Availability and limitations
 
-English, Italian, German and French TCG card text is supported when the translation is available from YGOProDeck. Spanish is available for the interface only. Some localized sections, including Pendulum effects, are incomplete in the API; these are reported rather than silently printed in English. The included sample cards can be generated without external requests; other cards and artwork variants require an internet connection on first use. On GitHub Pages, additional artwork is downloaded through [wsrv.nl](https://wsrv.nl/) to avoid browser CORS restrictions, then cached for offline reuse. The first download requires both YGOProDeck and the image service to be available. The local server downloads artwork directly from YGOProDeck.
+English, Italian, German and French TCG card text is supported when the translation is available from YGOProDeck. Spanish is available for the interface only. Some localized sections, including Pendulum effects, are incomplete in the API; these are reported rather than silently printed in English. Card data and artwork require an internet connection on first use. On GitHub Pages, artwork is downloaded through [wsrv.nl](https://wsrv.nl/) to avoid browser CORS restrictions, then cached for offline reuse. The first download requires both YGOProDeck and the image service to be available. The local server downloads artwork directly from YGOProDeck.
 
 This is a prototype: visual fidelity is still being refined, and not every card combination has been validated. Missing translations and unsupported combinations are reported. OCG languages are not currently supported.
 
@@ -72,3 +72,5 @@ For visual refactoring checks, run node scripts/check-ui-visuals.cjs before on t
 The full local rendering/research suite is available through node scripts/run-browser-checks.cjs; its historical frame checks also require the local research files under docs/research/.
 
 The Egyptian God frames have native SVG sources and baked PNG assets under app/assets/templates/frames/. egyptian-gods-palette.json records photo URLs, hashes, sampled card corners, measured colors, masks and saturation adjustments. With Playwright available, node scripts/build-egyptian-frames.cjs rebuilds the assets from the unchanged Nexus Normal texture. The inherited gold outer hairline is replaced with adjacent body texture so each palette meets the dark border directly. Run node scripts/check-egyptian-frames.cjs for exact alpha/neutral-pixel checks, outer-edge continuity, measured color checks, deterministic repaint, EN/IT rendering, mobile editing in five UI languages and PDF export.
+
+Recorded card responses, artwork and rendering references for automated checks live under tests/fixtures/ and are not included in the published app.

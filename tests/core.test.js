@@ -6,7 +6,7 @@ import {normalizeCard} from '../app/js/model/card.js';
 import {localizeCard} from '../app/js/localization/resolve.js';
 import {pageLayout} from '../app/js/printing/pdf.js';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
-const en=read('app/fixtures/cards-en.json'),it=read('app/fixtures/cards-it.json'),dictionary=read('app/dictionaries/tcg.json');
+const en=read('tests/fixtures/cards-en.json'),it=read('tests/fixtures/cards-it.json'),dictionary=read('app/dictionaries/tcg.json');
 const pair=id=>normalizeCard(en.find(c=>c.id===id),it.find(c=>c.id===id));
 test('YDK comments, quantities, names, variants and padded ID survive parsing',()=>{
  const p=parseDecklist('#main\n3 Mago Nero [1]\n1861629\n!side\n// note\n0 Dark Magician');

@@ -13,27 +13,23 @@ function loadModules(){
 }
 async function artworkData(image){
   if(/^data:image\/(png|jpeg|webp);base64,/.test(image.image_url_cropped))return image.image_url_cropped;
-  const local=appUrl(`assets/artwork/${image.id}.jpg`);
   const cache=await caches.open('proxy-artwork-v1');
   const key=appUrl(`cached-artwork/${image.id}`);
   let response=await cache.match(key);
   if(!response){
     try{
-      response=await fetch(local);
       // The CDN omits CORS headers. Local hosts relay by ID; static hosts use wsrv.
-      if(!response.ok){
-        const loopback=['localhost','127.0.0.1','[::1]'].includes(window.location.hostname);
-        let source=appUrl(`api/artwork/${image.id}.jpg`);
-        if(!loopback){
-          if(!/^\d{1,12}$/.test(String(image.id)))throw appError('error.artworkId','Invalid artwork ID');
-          const proxy=new URL('https://wsrv.nl/');
-          proxy.searchParams.set('url',`https://images.ygoprodeck.com/images/cards_cropped/${image.id}.jpg`);
-          // PNG preserves decoded pixels without resizing or JPEG recompression.
-          proxy.searchParams.set('output','png');
-          source=proxy.href;
-        }
-        response=await fetch(source,{signal:AbortSignal.timeout(15000)});
+      const loopback=['localhost','127.0.0.1','[::1]'].includes(window.location.hostname);
+      let source=appUrl(`api/artwork/${image.id}.jpg`);
+      if(!loopback){
+        if(!/^\d{1,12}$/.test(String(image.id)))throw appError('error.artworkId','Invalid artwork ID');
+        const proxy=new URL('https://wsrv.nl/');
+        proxy.searchParams.set('url',`https://images.ygoprodeck.com/images/cards_cropped/${image.id}.jpg`);
+        // PNG preserves decoded pixels without resizing or JPEG recompression.
+        proxy.searchParams.set('output','png');
+        source=proxy.href;
       }
+      response=await fetch(source,{signal:AbortSignal.timeout(15000)});
     }catch{throw appError('error.artworkDownload',`Impossibile scaricare l’illustrazione ${image.id}. Controlla la connessione e riprova.`,{id:image.id});}
     if(!response.ok){
       const detail=await response.json().catch(()=>null);

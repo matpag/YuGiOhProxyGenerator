@@ -1,10 +1,11 @@
+const {launchTestBrowser}=require('./helpers/test-data.cjs');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const fs=require('node:fs/promises'),assert=require('node:assert/strict');
 const example='1 Dark Magician\n\n1 74677422\n\n1 Blue-Eyes White Dragon';
 const directory='docs/validation/decklist-reset';
 const ready=page=>page.waitForFunction(()=>!document.querySelector('#generate').disabled);
 (async()=>{
- const browser=await chromium.launch({headless:true,channel:'msedge'}),errors=[];
+ const browser=await launchTestBrowser(chromium,{headless:true,channel:'msedge'}),errors=[];
  const messages=JSON.parse(await fs.readFile('app/dictionaries/ui.json','utf8')).messages;
  const url=process.env.APP_URL||'http://127.0.0.1:8765/',origin=new URL(url).origin;
  try{
@@ -31,9 +32,9 @@ const ready=page=>page.waitForFunction(()=>!document.querySelector('#generate').
    await page.locator('[data-ui-language=fr]').click();
    // Freeze artwork loading to inspect the busy controls deterministically.
    let release,seen;const reached=new Promise(resolve=>seen=resolve);
-   await page.route('**/assets/artwork/74677422.jpg',async route=>{
+   await page.route('**/api/artwork/74677422.jpg',async route=>{
     seen();await new Promise(resolve=>release=resolve);
-    await route.fulfill({contentType:'image/jpeg',body:await fs.readFile('app/assets/artwork/74677422.jpg')});
+    await route.fulfill({contentType:'image/jpeg',body:await fs.readFile('tests/fixtures/artwork/74677422.jpg')});
    });
    await page.locator('#generate').click();await reached;
    assert.equal(await clear.isDisabled(),true);assert.equal(await page.locator('#decklist_input').getAttribute('readonly'),'');
@@ -65,7 +66,7 @@ const ready=page=>page.waitForFunction(()=>!document.querySelector('#generate').
    await page.locator('#file').setInputFiles({name:'slow.txt',mimeType:'text/plain',buffer:Buffer.from('1 Dark Magician')});
    await page.waitForFunction(()=>document.querySelector('#decklist_input').value==='1 Dark Magician');
    await clear.click();assert.equal(await page.locator('#decklist_input').inputValue(),'');
-   // Every offered print language can generate the full example offline.
+   // Every offered print language can generate the full example using recorded API responses.
    await page.locator('#decklist_input').fill(example);
    for(const language of width===1440?['en','it','de','fr']:['en']){
     await page.locator('#language').selectOption(language);await page.locator('#generate').click();await ready(page);
@@ -78,7 +79,7 @@ const ready=page=>page.waitForFunction(()=>!document.querySelector('#generate').
    await ready(page);const printLanguage=await page.locator('#language').inputValue();
    await clear.click();assert.equal(await page.locator('#language').inputValue(),printLanguage);
    assert.equal(await page.locator('#paper_size').inputValue(),'LETTER');
-   await page.close();console.log(`${width}px: example, offline previews, localized reset, busy lock, file-import cancellation and PDF passed`);
+   await page.close();console.log(`${width}px: example, mocked API previews, localized reset, busy lock, file-import cancellation and PDF passed`);
   }
   assert.deepEqual(errors,[]);
  }finally{await browser.close();}

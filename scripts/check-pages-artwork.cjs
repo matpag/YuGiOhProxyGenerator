@@ -8,6 +8,7 @@ const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json
  try{
   const page=await browser.newPage({locale:'it-IT'}),errors=[],direct=[],relays=[],proxyCalls=[];
   const fixture=JSON.parse(await fs.readFile('tests/fixtures/remote-cards.json','utf8'));
+  for(const language of ['en','it'])fixture[language]=[...JSON.parse(await fs.readFile('tests/fixtures/cards-'+language+'.json','utf8')),...fixture[language]];
   // A tiny substitute image keeps the replay deterministic; real pixels are checked separately.
   const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aX1sAAAAASUVORK5CYII=','base64');
   let offline=false,proxyUnavailable=false;
@@ -44,7 +45,7 @@ const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json
   assert.deepEqual(proxyCalls.map(url=>{
    const u=new URL(url);assert.equal(u.searchParams.get('output'),'png');assert.equal([...u.searchParams].length,2);
    return u.searchParams.get('url');
-  }).sort(),['https://images.ygoprodeck.com/images/cards_cropped/31924889.jpg','https://images.ygoprodeck.com/images/cards_cropped/53129443.jpg']);
+  }).sort(),['https://images.ygoprodeck.com/images/cards_cropped/31924889.jpg','https://images.ygoprodeck.com/images/cards_cropped/44095762.jpg','https://images.ygoprodeck.com/images/cards_cropped/46986414.jpg','https://images.ygoprodeck.com/images/cards_cropped/53129443.jpg']);
   const download=page.waitForEvent('download');await page.locator('#download').click();
   assert.equal((await fs.readFile(await(await download).path())).subarray(0,5).toString(),'%PDF-');
   offline=true;const calls=proxyCalls.length;await page.reload();await ready();await page.locator('#language').selectOption('it');

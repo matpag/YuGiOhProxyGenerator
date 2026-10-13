@@ -1,7 +1,8 @@
+const {launchTestBrowser}=require('./helpers/test-data.cjs');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const fs=require('node:fs/promises'),assert=require('node:assert/strict');
 (async()=>{
- const browser=await chromium.launch({headless:true,channel:'msedge'});
+ const browser=await launchTestBrowser(chromium,{headless:true,channel:'msedge'});
  try{
   const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.route('https://**/*',route=>route.abort());
@@ -9,7 +10,7 @@ const fs=require('node:fs/promises'),assert=require('node:assert/strict');
   const profile=JSON.parse(await fs.readFile('docs/research/evidence/frame-color-profile.json','utf8'));
   const result=await page.evaluate(async({profile})=>{
    const {normalizeCard}=await import('/js/model/card.js'),{localizeCard}=await import('/js/localization/resolve.js'),{renderCard}=await import('/js/rendering/cardmaker.js');
-   const [en,it,dictionary,overrides]=await Promise.all(['/fixtures/cards-en.json','/fixtures/cards-it.json','/dictionaries/tcg.json','/text-overrides/cards.json'].map(async u=>(await fetch(u)).json()));
+   const [en,it,dictionary,overrides]=await Promise.all(['/__test__/fixtures/cards-en.json','/__test__/fixtures/cards-it.json','/dictionaries/tcg.json','/__test__/fixtures/text-overrides.json'].map(async u=>(await fetch(u)).json()));
    window.require.config({baseUrl:'/vendor/cardmaker/src'});
    const frameColor=await new Promise((resolve,reject)=>window.require(['tcg/ygo/FrameColor'],resolve,reject));
    const calibratedFilter=frameColor.filter;
@@ -35,7 +36,7 @@ const fs=require('node:fs/promises'),assert=require('node:assert/strict');
    }finally{CanvasRenderingContext2D.prototype.drawImage=drawImage;CanvasRenderingContext2D.prototype.fillText=fillText;}
    return {samples:output,leaked};
   },{profile});
-  assert.deepEqual(errors,[]);assert.deepEqual(result.leaked,[]);assert.equal(result.samples.length,JSON.parse(await fs.readFile('app/fixtures/cards-en.json','utf8')).length*2);
+  assert.deepEqual(errors,[]);assert.deepEqual(result.leaked,[]);assert.equal(result.samples.length,JSON.parse(await fs.readFile('tests/fixtures/cards-en.json','utf8')).length*2);
   await fs.mkdir('docs/validation/frame-colors/after',{recursive:true});
   await fs.mkdir('docs/validation/frame-colors/before',{recursive:true});
   for(const s of result.samples){

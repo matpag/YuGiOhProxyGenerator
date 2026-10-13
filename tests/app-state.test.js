@@ -8,8 +8,8 @@ import {formatError} from '../app/js/ui/i18n.js';
 import {exportProject} from '../app/js/model/project.js';
 const read=path=>JSON.parse(fs.readFileSync(path,'utf8'));
 const dictionary=read('app/dictionaries/tcg.json'),messages=read('app/dictionaries/ui.json').messages;
-const canonical=read('app/fixtures/cards-en.json').find(card=>card.id===46986414);
-const translated=read('app/fixtures/cards-it.json').find(card=>card.id===46986414);
+const canonical=read('tests/fixtures/cards-en.json').find(card=>card.id===46986414);
+const translated=read('tests/fixtures/cards-it.json').find(card=>card.id===46986414);
 const deferred=()=>{let resolve,reject;const promise=new Promise((yes,no)=>{resolve=yes;reject=no;});return {promise,resolve,reject};};
 const renderResult=id=>({url:'blob:test-'+id,pngBytes:new Uint8Array([1,2,3]),diagnostics:[],artworkId:id});
 function fixture(options={}){

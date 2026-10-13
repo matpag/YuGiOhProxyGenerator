@@ -7,7 +7,8 @@ const deck='3 Dark Magician\n1 Arcanite Magician\n1 Dark Hole\n1 Mirror Force';
   const page=await browser.newPage({locale:'it-IT'});const errors=[],directImages=[],relays=[];
   page.on('pageerror',e=>errors.push(e.message));
   const fixture=JSON.parse(await fs.readFile('tests/fixtures/remote-cards.json','utf8'));
-  const jpeg=await fs.readFile('app/assets/artwork/46986414.jpg');
+  for(const language of ['en','it'])fixture[language]=[...JSON.parse(await fs.readFile('tests/fixtures/cards-'+language+'.json','utf8')),...fixture[language]];
+  const jpeg=await fs.readFile('tests/fixtures/artwork/46986414.jpg');
   // Real saved API responses; a CDN without CORS is represented by blocked browser requests.
   await page.route('https://db.ygoprodeck.com/**',route=>{
    const u=new URL(route.request().url()),language=u.searchParams.get('language')||'en';
@@ -20,7 +21,7 @@ const deck='3 Dark Magician\n1 Arcanite Magician\n1 Dark Hole\n1 Mirror Force';
   await page.locator('#decklist_input').fill(deck);await page.locator('#generate').click();await page.waitForFunction(()=>!document.querySelector('#generate').disabled);
   assert.match(await page.locator('#status').innerText(),/6 carte pronte in IT/,`Exact reported deck failed: ${await page.locator('#status').innerText()}`);
   assert.equal(await page.locator('#preview figure').count(),4);assert.deepEqual(directImages,[]);
-  assert.deepEqual(relays.map(u=>new URL(u).pathname).sort(),['/api/artwork/31924889.jpg','/api/artwork/53129443.jpg']);
+  assert.deepEqual(relays.map(u=>new URL(u).pathname).sort(),['/api/artwork/31924889.jpg','/api/artwork/44095762.jpg','/api/artwork/46986414.jpg','/api/artwork/53129443.jpg']);
   const download=page.waitForEvent('download');await page.locator('#download').click();
   await fs.mkdir('_upstream/research/remote-artwork',{recursive:true});await (await download).saveAs('_upstream/research/remote-artwork/replayed-deck-it.pdf');
   // A reload drops memory caches; persistent metadata and artwork must still work without network.

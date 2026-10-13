@@ -1,5 +1,4 @@
 import {appError} from '../errors.js';
-import {appUrl} from '../paths.js';
 import {CARD_LANGUAGES} from '../localization/languages.js';
 const endpoint='https://db.ygoprodeck.com/api/v7/cardinfo.php';
 const networkMessage='Servizio dati non disponibile. Controlla la connessione e riprova.';
@@ -17,21 +16,13 @@ async function readJson(url,{signal,allowNotFound=false}={}){
   }
 }
 export class CardRepository {
-  constructor(){this.memory=new Map();this.fixtures=null;}
-  async init(){
-    const values=await Promise.all(['en','it','de','fr'].map(async lang=>{
-      const {data}=await readJson(appUrl(`fixtures/cards-${lang}.json`));
-      if(!Array.isArray(data))throw appError('error.network',networkMessage);
-      return [lang,data];
-    }));this.fixtures=Object.fromEntries(values);
-  }
+  constructor(){this.memory=new Map();}
   readCache(key){try{return JSON.parse(localStorage.getItem(key));}catch{return null;}}
   async request(query,language,signal){
     if(!CARD_LANGUAGES.includes(language))throw appError('error.label','Lingua non supportata');
     const key=`ygoprodeck:v7:${language}:${query.kind}:${query.query}`;
     if(this.memory.has(key))return this.memory.get(key);
-    const match=(this.fixtures[language]||[]).find(c=>query.kind==='id'?String(c.id).padStart(8,'0')===query.query:c.name.toLowerCase()===query.query.toLowerCase());
-    let card=match||this.readCache(key);
+    let card=this.readCache(key);
     if(!card){
       const url=new URL(endpoint);url.searchParams.set(query.kind==='id'?'id':'name',query.query);
       if(language!=='en')url.searchParams.set('language',language);

@@ -1,3 +1,4 @@
+const {launchTestBrowser}=require('./helpers/test-data.cjs');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const fs=require('node:fs/promises');
 const assert=require('node:assert/strict');
@@ -5,7 +6,7 @@ const baseline=JSON.parse(require('node:fs').readFileSync('docs/research/evidenc
 const factor=Math.min(697/baseline.logical_canvas[0],1016/baseline.logical_canvas[1]);
 const offsetX=(697-baseline.logical_canvas[0]*factor)/2;
 (async()=>{
- const browser=await chromium.launch({headless:true,channel:'msedge'});
+ const browser=await launchTestBrowser(chromium,{headless:true,channel:'msedge'});
  try{
   const page=await browser.newPage();
   await page.route('https://**/*',route=>route.abort());
@@ -13,7 +14,7 @@ const offsetX=(697-baseline.logical_canvas[0]*factor)/2;
   await page.waitForFunction(()=>!document.getElementById('generate').disabled);
   const results=await page.evaluate(async()=>{
    const {normalizeCard}=await import('/js/model/card.js'),{localizeCard}=await import('/js/localization/resolve.js'),{renderCard}=await import('/js/rendering/cardmaker.js');
-   const [en,it,dictionary,overrides]=await Promise.all(['/fixtures/cards-en.json','/fixtures/cards-it.json','/dictionaries/tcg.json','/text-overrides/cards.json'].map(async u=>(await fetch(u)).json()));
+   const [en,it,dictionary,overrides]=await Promise.all(['/__test__/fixtures/cards-en.json','/__test__/fixtures/cards-it.json','/dictionaries/tcg.json','/__test__/fixtures/text-overrides.json'].map(async u=>(await fetch(u)).json()));
    const original=CanvasRenderingContext2D.prototype.fillText;
    let draws=[];
    CanvasRenderingContext2D.prototype.fillText=function(text,x,y){

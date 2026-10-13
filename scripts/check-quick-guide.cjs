@@ -1,3 +1,4 @@
+const {launchTestBrowser}=require('./helpers/test-data.cjs');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const fs=require('node:fs/promises'),path=require('node:path'),assert=require('node:assert/strict');
 const {createServer}=require('node:http');
@@ -16,7 +17,7 @@ const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  let browser;
  try{
-  browser=await chromium.launch({headless:true,channel:'msedge'});
+  browser=await launchTestBrowser(chromium,{headless:true,channel:'msedge'});
   const errors=[],measurements=[],messages=JSON.parse(await fs.readFile('app/dictionaries/ui.json','utf8')).messages;
   const widths=phase==='before'?[1440,390,320]:[1440,1024,768,760,390,320,740];
   for(const width of widths){

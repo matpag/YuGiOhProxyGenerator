@@ -1,3 +1,4 @@
+const {launchTestBrowser}=require('./helpers/test-data.cjs');
 const {chromium}=require('playwright');
 const {createServer}=require('node:http');
 const {readFile}=require('node:fs/promises');
@@ -18,7 +19,7 @@ const assert=require('node:assert/strict');
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  let browser;
  try{
-  browser=await chromium.launch({headless:true,channel:'msedge'});
+  browser=await launchTestBrowser(chromium,{headless:true,channel:'msedge'});
   const page=await browser.newPage({locale:'it-IT'});const errors=[],failed=[];
   page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400)failed.push(r.url());});
   await page.route('https://**/*',route=>route.abort());

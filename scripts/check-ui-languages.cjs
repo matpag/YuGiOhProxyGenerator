@@ -1,7 +1,8 @@
+const {launchTestBrowser}=require('./helpers/test-data.cjs');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const fs=require('node:fs/promises'),assert=require('node:assert/strict');
 (async()=>{
- const browser=await chromium.launch({headless:true,channel:'msedge'});
+ const browser=await launchTestBrowser(chromium,{headless:true,channel:'msedge'});
  const messages=JSON.parse(await fs.readFile('app/dictionaries/ui.json','utf8')).messages;
  const dict=JSON.parse(await fs.readFile('app/dictionaries/tcg.json','utf8'));
  const names={en:'Dark Magician',it:'Mago Nero',de:'Dunkler Magier',fr:'Magicien Sombre'};
@@ -81,7 +82,7 @@ const fs=require('node:fs/promises'),assert=require('node:assert/strict');
    const card=lang==='en'?remote.en.find(c=>c.id===31924889):translations[lang];
    return route.fulfill({headers:{'Access-Control-Allow-Origin':'*'},status:card?200:400,json:card?{data:[card]}:{error:'Not found'}});
   });
-  await page.route('**/api/artwork/*.jpg',async route=>route.fulfill({body:await fs.readFile('app/assets/artwork/46986414.jpg'),contentType:'image/jpeg'}));
+  await page.route('**/api/artwork/*.jpg',async route=>route.fulfill({body:await fs.readFile('tests/fixtures/artwork/46986414.jpg'),contentType:'image/jpeg'}));
   await page.goto('http://127.0.0.1:8765/');await ready(page);
   for(const lang of ['de','fr']){
    await page.locator('#language').selectOption(lang);await page.locator('#decklist_input').fill('1 Arcanite Magician');await page.locator('#generate').click();await ready(page);

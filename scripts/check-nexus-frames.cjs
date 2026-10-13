@@ -1,16 +1,17 @@
+const {launchTestBrowser}=require('./helpers/test-data.cjs');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const fs=require('node:fs/promises'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 (async()=>{
  const manifest=JSON.parse(await fs.readFile('app/assets/templates/nexus/manifest.json','utf8'));
  for(const asset of manifest.assets)assert.equal(crypto.createHash('sha256').update(await fs.readFile(asset.file)).digest('hex'),asset.sha256);
- const browser=await chromium.launch({headless:true,channel:'msedge'});
+ const browser=await launchTestBrowser(chromium,{headless:true,channel:'msedge'});
  try{
   const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.route('https://**/*',route=>route.abort());
   await page.goto('http://127.0.0.1:8765/html/index.html');await page.waitForFunction(()=>!document.querySelector('#generate').disabled);
   const results=await page.evaluate(async()=>{
    const {normalizeCard}=await import('/js/model/card.js'),{localizeCard}=await import('/js/localization/resolve.js'),{editCard}=await import('/js/model/project.js'),{renderCard}=await import('/js/rendering/cardmaker.js');
-   const [en,it,dictionary,overrides,manifest]=await Promise.all(['/fixtures/cards-en.json','/fixtures/cards-it.json','/dictionaries/tcg.json','/text-overrides/cards.json','/assets/templates/nexus/manifest.json'].map(async u=>(await fetch(u)).json()));
+   const [en,it,dictionary,overrides,manifest]=await Promise.all(['/__test__/fixtures/cards-en.json','/__test__/fixtures/cards-it.json','/dictionaries/tcg.json','/__test__/fixtures/text-overrides.json','/assets/templates/nexus/manifest.json'].map(async u=>(await fetch(u)).json()));
    const original=localizeCard(normalizeCard(en.find(c=>c.id===46986414),it.find(c=>c.id===46986414)),'en',dictionary,overrides);
    const image=document.createElement('canvas');image.width=4;image.height=4;image.getContext('2d').fillStyle='#fff';image.getContext('2d').fillRect(0,0,4,4);const artwork=image.toDataURL();
    const drawImage=CanvasRenderingContext2D.prototype.drawImage;let draws=[];

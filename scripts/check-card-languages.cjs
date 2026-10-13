@@ -1,14 +1,15 @@
+const {launchTestBrowser}=require('./helpers/test-data.cjs');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const fs=require('node:fs/promises'),assert=require('node:assert/strict');
 (async()=>{
- const browser=await chromium.launch({headless:true,channel:'msedge'});
+ const browser=await launchTestBrowser(chromium,{headless:true,channel:'msedge'});
  try{
   const page=await browser.newPage({locale:'it-IT'}),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto('http://127.0.0.1:8765/');await page.waitForFunction(()=>!document.querySelector('#generate').disabled);
   await page.route('https://**/*',route=>route.abort());
   const result=await page.evaluate(async()=>{
    const {normalizeCard}=await import('/js/model/card.js'),{localizeCard}=await import('/js/localization/resolve.js'),{renderCard}=await import('/js/rendering/cardmaker.js');
-   const [en,de,fr,dictionary]=await Promise.all(['/fixtures/cards-en.json','/fixtures/cards-de.json','/fixtures/cards-fr.json','/dictionaries/tcg.json'].map(async url=>(await fetch(url)).json()));
+   const [en,de,fr,dictionary]=await Promise.all(['/__test__/fixtures/cards-en.json','/__test__/fixtures/cards-de.json','/__test__/fixtures/cards-fr.json','/dictionaries/tcg.json'].map(async url=>(await fetch(url)).json()));
    const output=[];
    for(const [language,translations] of [['de',de],['fr',fr]])for(const raw of en){
     try{
@@ -25,7 +26,7 @@ const fs=require('node:fs/promises'),assert=require('node:assert/strict');
    if(r.id===16178681)assert.match(r.error,/pendulumEffect non tradotta/);
    else{assert.equal(r.error,undefined,JSON.stringify(r));assert.equal(r.width,697);assert.equal(r.height,1016);await fs.writeFile(`${dir}/${r.id}-${r.language}.png`,Buffer.from(r.png,'base64'));delete r.png;}
   }
-  assert.equal(result.filter(r=>!r.error).length,(JSON.parse(await fs.readFile('app/fixtures/cards-en.json','utf8')).length-1)*2);assert.deepEqual(errors,[]);
+  assert.equal(result.filter(r=>!r.error).length,(JSON.parse(await fs.readFile('tests/fixtures/cards-en.json','utf8')).length-1)*2);assert.deepEqual(errors,[]);
   await fs.writeFile(dir+'/results.json',JSON.stringify(result,null,2)+'\n');
   console.log(`${result.filter(r=>!r.error).length} DE/FR sample PNGs passed offline across supported layouts; untranslated API Pendulum sections correctly rejected.`);
  }finally{await browser.close();}

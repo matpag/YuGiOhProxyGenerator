@@ -1,7 +1,8 @@
+const {launchTestBrowser}=require('./helpers/test-data.cjs');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const fs=require('node:fs/promises');const assert=require('node:assert/strict');
 (async()=>{
- const browser=await chromium.launch({headless:true,channel:'msedge'}),page=await browser.newPage({locale:'it-IT',viewport:{width:1280,height:900}});
+ const browser=await launchTestBrowser(chromium,{headless:true,channel:'msedge'}),page=await browser.newPage({locale:'it-IT',viewport:{width:1280,height:900}});
  await fs.mkdir('docs/validation/phase-6',{recursive:true});
  await page.goto('http://127.0.0.1:8765/html/index.html');await page.waitForFunction(()=>!document.getElementById('generate').disabled);
  await page.locator('#decklist_input').fill('3 Dark Magician');

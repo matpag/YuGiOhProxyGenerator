@@ -1,3 +1,4 @@
+const {launchTestBrowser}=require('./helpers/test-data.cjs');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs/promises');
 const ready=page=>page.waitForFunction(()=>!document.querySelector('#generate').disabled);
@@ -11,7 +12,7 @@ async function initialMobileFlow(page){
 }
 const fits=async(page,selector)=>{const b=await page.locator(selector).boundingBox();const v=page.viewportSize();assert.ok(b&&b.x>=-1&&b.x+b.width<=v.width+1&&b.y>=-1&&b.y+b.height<=v.height+1,`${selector} is unreachable in ${v.width}x${v.height}`);};
 (async()=>{
- const browser=await chromium.launch({headless:true,channel:'msedge'}),errors=[];
+ const browser=await launchTestBrowser(chromium,{headless:true,channel:'msedge'}),errors=[];
  try{
   const page=await browser.newPage({locale:'it-IT',viewport:{width:390,height:844}});page.on('pageerror',e=>errors.push(e.message));
   await page.addInitScript(()=>{window.releasedPreviewUrls=[];const revoke=URL.revokeObjectURL;URL.revokeObjectURL=url=>{window.releasedPreviewUrls.push(url);revoke.call(URL,url);};});

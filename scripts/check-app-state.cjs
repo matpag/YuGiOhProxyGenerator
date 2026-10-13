@@ -1,3 +1,4 @@
+const {launchTestBrowser}=require('./helpers/test-data.cjs');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs/promises');
 const ready=page=>page.waitForFunction(()=>!document.querySelector('#generate').disabled);
@@ -5,7 +6,7 @@ const appOrigin=new URL(process.env.APP_URL||'http://127.0.0.1:8765/').origin;
 const isolateRemote=route=>new URL(route.request().url()).origin===appOrigin?route.continue():route.abort();
 const deferred=()=>{let resolve;const promise=new Promise(done=>resolve=done);return {promise,resolve};};
 (async()=>{
- const browser=await chromium.launch({headless:true,channel:'msedge'}),errors=[];
+ const browser=await launchTestBrowser(chromium,{headless:true,channel:'msedge'}),errors=[];
  const messages=JSON.parse(await fs.readFile('app/dictionaries/ui.json','utf8')).messages;
  try{
   const page=await browser.newPage({locale:'it-IT',viewport:{width:390,height:844}});
@@ -16,6 +17,7 @@ const deferred=()=>{let resolve;const promise=new Promise(done=>resolve=done);re
   const seen=deferred(),release=deferred(),settled=deferred();
   const remote=JSON.parse(await fs.readFile('tests/fixtures/remote-cards.json','utf8')).en.find(card=>card.id===31924889);
   await page.route('https://db.ygoprodeck.com/**',async route=>{
+   if(new URL(route.request().url()).searchParams.get('name')!=='Arcanite Magician')return route.fallback();
    seen.resolve();await release.promise;
    await route.fulfill({json:{data:[remote]}}).catch(()=>{});settled.resolve();
   });
@@ -52,7 +54,7 @@ const deferred=()=>{let resolve;const promise=new Promise(done=>resolve=done);re
    }};
    window.holdNextArtwork=true;
   });
-  await page.locator('#edit-artwork').setInputFiles('app/assets/artwork/70095154.jpg');
+  await page.locator('#edit-artwork').setInputFiles('tests/fixtures/artwork/70095154.jpg');
   assert.equal(await page.locator('#apply-edit').isDisabled(),true);await page.locator('#edit-name').fill('Artwork and text');
   await page.evaluate(()=>window.releaseArtwork());await page.waitForFunction(()=>!document.querySelector('#apply-edit').disabled);
   await page.locator('#apply-edit').click();await page.locator('#editor').waitFor({state:'hidden'});
@@ -64,7 +66,7 @@ const deferred=()=>{let resolve;const promise=new Promise(done=>resolve=done);re
   assert.equal(project.items[0].artworkId,0);assert.ok(project.items[0].card.artworks[0].image_url_cropped.startsWith('data:image/jpeg;base64,'));
   // Closing an upload session must not affect a subsequently opened editor.
   await page.locator('#preview button').click();await page.evaluate(()=>window.holdNextArtwork=true);
-  await page.locator('#edit-artwork').setInputFiles('app/assets/artwork/46986414.jpg');await page.locator('#close-editor').click();
+  await page.locator('#edit-artwork').setInputFiles('tests/fixtures/artwork/46986414.jpg');await page.locator('#close-editor').click();
   await page.locator('#preview button').click();await page.locator('#edit-name').fill('New session');await page.evaluate(()=>window.releaseArtwork());
   await page.waitForFunction(()=>!document.querySelector('#apply-edit').disabled);assert.equal(await page.locator('#edit-name').inputValue(),'New session');
   await page.locator('#close-editor').click();await page.evaluate(()=>document.querySelector('#project-controls').hidden=true);
@@ -84,12 +86,12 @@ const deferred=()=>{let resolve;const promise=new Promise(done=>resolve=done);re
    const text=await page.locator('#status').innerText();assert.equal(text,[1,2].map(line=>messages[language]['error.row'].replace('{line}',line).replace('{message}',messages[language]['error.invalidQuantity'])).join('; '));
   }
   await page.reload();await ready(page);assert.equal(await page.locator('#language').inputValue(),'en');assert.equal(await page.locator('html').getAttribute('lang'),'fr');
-  // Input/file/language changes made while repository initialization is pending survive readiness.
+  // Input/file/language changes made while dictionary initialization is pending survive readiness.
   const boot=await browser.newPage({locale:'it-IT'});boot.on('pageerror',error=>errors.push(error.message));
   const bootSeen=deferred(),bootRelease=deferred();
   await boot.route('https://**/*',isolateRemote);
-  await boot.route('**/fixtures/cards-en.json',async route=>{
-   bootSeen.resolve();await bootRelease.promise;await route.fulfill({contentType:'application/json',body:await fs.readFile('app/fixtures/cards-en.json')});
+  await boot.route('**/dictionaries/tcg.json',async route=>{
+   bootSeen.resolve();await bootRelease.promise;await route.fulfill({contentType:'application/json',body:await fs.readFile('app/dictionaries/tcg.json')});
   });
   await boot.goto(process.env.APP_URL||'http://127.0.0.1:8765/');await bootSeen.promise;
   await boot.locator('#decklist_input').fill('1 Dark Hole');await boot.locator('#language').selectOption('it');
@@ -99,7 +101,7 @@ const deferred=()=>{let resolve;const promise=new Promise(done=>resolve=done);re
   assert.equal(await boot.locator('#decklist_input').inputValue(),'2 Dark Magician');assert.equal(await boot.locator('#language').inputValue(),'it');
   await boot.locator('#generate').click();await ready(boot);assert.equal(await boot.locator('#preview img').getAttribute('alt'),'Mago Nero');await boot.close();
   // Startup failures remain visible and never enable incomplete generation.
-  for(const [routePattern,expected] of [['**/dictionaries/ui.json','Interface translations unavailable'],['**/fixtures/cards-en.json',messages.it['error.network']]]){
+  for(const [routePattern,expected] of [['**/dictionaries/ui.json','Interface translations unavailable'],['**/dictionaries/tcg.json',messages.it['error.network']]]){
    const broken=await browser.newPage({locale:'it-IT'});broken.on('pageerror',error=>errors.push(error.message));
    await broken.route('https://**/*',isolateRemote);await broken.route(routePattern,route=>route.fulfill({status:503,json:{}}));
    await broken.goto(process.env.APP_URL||'http://127.0.0.1:8765/');await broken.locator('#status.error').waitFor();

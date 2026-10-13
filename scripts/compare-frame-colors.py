@@ -43,11 +43,11 @@ def font(size):
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--fetch-extra',action='store_true');args=parser.parse_args()
     OUT.mkdir(parents=True,exist_ok=True)
-    fixture = json.loads((ROOT/'app/fixtures/cards-en.json').read_text(encoding='utf-8'))
+    fixture = json.loads((ROOT/'tests/fixtures/cards-en.json').read_text(encoding='utf-8'))
     records=[]
     for raw in fixture:
         cid=str(raw['id']).zfill(8);frame=raw['frameType'].replace('_pendulum','.pendulum').capitalize()
-        paths={'reference':ROOT/f"app/assets/reference/{raw['id']}.jpg",'before':OUT/f'before/{cid}-en.png',
+        paths={'reference':ROOT/f"tests/fixtures/reference/{raw['id']}.jpg",'before':OUT/f'before/{cid}-en.png',
                'after':OUT/f'after/{cid}-en.png','legacy':ROOT/f'app/vendor/cardmaker/res/tcg/ygo/border/{frame}.png'}
         data={k:measure(normalized(p)) for k,p in paths.items()}
         records.append({'id':cid,'name':raw['name'],'frame':frame,'source':raw['card_images'][0]['image_url'],
