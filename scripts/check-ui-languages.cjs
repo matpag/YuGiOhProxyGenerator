@@ -27,6 +27,7 @@ const fs=require('node:fs/promises'),assert=require('node:assert/strict');
    await page.waitForFunction(()=>[...document.querySelectorAll('.ui-languages img')].every(img=>img.complete&&img.naturalWidth>0));
    assert.equal(await page.locator('.ui-languages img').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0)),true);
    if(locale==='ja-JP'){await page.close();continue;}
+   await page.locator('#decklist_input').fill('3 Dark Magician');
    for(const printLanguage of Object.keys(names)){
     await page.locator('#language').selectOption(printLanguage);await page.locator('#generate').click();await ready(page);
     assert.equal(await page.locator('#preview img').getAttribute('alt'),names[printLanguage]);

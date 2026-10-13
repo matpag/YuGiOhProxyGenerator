@@ -35,7 +35,7 @@ const fs=require('node:fs/promises'),assert=require('node:assert/strict');
    }finally{CanvasRenderingContext2D.prototype.drawImage=drawImage;CanvasRenderingContext2D.prototype.fillText=fillText;}
    return {samples:output,leaked};
   },{profile});
-  assert.deepEqual(errors,[]);assert.deepEqual(result.leaked,[]);assert.equal(result.samples.length,22);
+  assert.deepEqual(errors,[]);assert.deepEqual(result.leaked,[]);assert.equal(result.samples.length,JSON.parse(await fs.readFile('app/fixtures/cards-en.json','utf8')).length*2);
   await fs.mkdir('docs/validation/frame-colors/after',{recursive:true});
   await fs.mkdir('docs/validation/frame-colors/before',{recursive:true});
   for(const s of result.samples){
@@ -46,6 +46,6 @@ const fs=require('node:fs/promises'),assert=require('node:assert/strict');
    if(s.beforePng)await fs.writeFile(`docs/validation/frame-colors/before/${s.id}-en.png`,Buffer.from(s.beforePng,'base64'));delete s.beforePng;
   }
   await fs.writeFile('docs/validation/frame-colors/pixel-checks.json',JSON.stringify(result,null,2)+'\n');
-  console.log('22 EN/IT cards: correction stays inside the colored frame; artwork, text panels and other frames are pixel-identical. Filters never leak to text or icons.');
+  console.log(`${result.samples.length} EN/IT cards: correction stays inside the colored frame; artwork, text panels and other frames are pixel-identical. Filters never leak to text or icons.`);
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

@@ -25,8 +25,8 @@ const fs=require('node:fs/promises'),assert=require('node:assert/strict');
    if(r.id===16178681)assert.match(r.error,/pendulumEffect non tradotta/);
    else{assert.equal(r.error,undefined,JSON.stringify(r));assert.equal(r.width,697);assert.equal(r.height,1016);await fs.writeFile(`${dir}/${r.id}-${r.language}.png`,Buffer.from(r.png,'base64'));delete r.png;}
   }
-  assert.equal(result.filter(r=>!r.error).length,20);assert.deepEqual(errors,[]);
+  assert.equal(result.filter(r=>!r.error).length,(JSON.parse(await fs.readFile('app/fixtures/cards-en.json','utf8')).length-1)*2);assert.deepEqual(errors,[]);
   await fs.writeFile(dir+'/results.json',JSON.stringify(result,null,2)+'\n');
-  console.log('20 DE/FR sample PNGs passed offline across supported layouts; untranslated API Pendulum sections correctly rejected.');
+  console.log(`${result.filter(r=>!r.error).length} DE/FR sample PNGs passed offline across supported layouts; untranslated API Pendulum sections correctly rejected.`);
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

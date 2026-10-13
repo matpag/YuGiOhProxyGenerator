@@ -1,5 +1,5 @@
 {
-  "version": 5,
+  "version": 6,
   "languages": [
     "en",
     "it",
@@ -10,6 +10,7 @@
   "messages": {
     "it": {
       "decklist": "La tua decklist",
+      "clearDecklist": "Svuota la decklist",
       "lookupHint": "Nomi inglesi o ID, una carta per riga",
       "lookupHelp": "Inserisci i nomi esatti in inglese oppure gli ID, anche quando stampi in un’altra lingua.",
       "fileImport": "Importa un file .ydk o .txt",
@@ -140,6 +141,7 @@
     },
     "en": {
       "decklist": "Your decklist",
+      "clearDecklist": "Clear decklist",
       "lookupHint": "English names or IDs, one card per line",
       "lookupHelp": "Enter exact English names or IDs, even when printing in another language.",
       "fileImport": "Import a .ydk or .txt file",
@@ -270,6 +272,7 @@
     },
     "de": {
       "decklist": "Deine Deckliste",
+      "clearDecklist": "Deckliste leeren",
       "lookupHint": "Englische Namen oder IDs, eine Karte pro Zeile",
       "lookupHelp": "Gib die genauen englischen Namen oder IDs ein, auch beim Drucken in einer anderen Sprache.",
       "fileImport": "Eine .ydk- oder .txt-Datei importieren",
@@ -400,6 +403,7 @@
     },
     "es": {
       "decklist": "Tu lista de cartas",
+      "clearDecklist": "Vaciar la lista de cartas",
       "lookupHint": "Nombres en inglés o IDs, una carta por línea",
       "lookupHelp": "Introduce los nombres exactos en inglés o los IDs, aunque imprimas en otro idioma.",
       "fileImport": "Importar un archivo .ydk o .txt",
@@ -530,6 +534,7 @@
     },
     "fr": {
       "decklist": "Votre liste de cartes",
+      "clearDecklist": "Vider la liste de cartes",
       "lookupHint": "Noms anglais ou identifiants, une carte par ligne",
       "lookupHelp": "Saisissez les noms anglais exacts ou les identifiants, même pour imprimer dans une autre langue.",
       "fileImport": "Importer un fichier .ydk ou .txt",

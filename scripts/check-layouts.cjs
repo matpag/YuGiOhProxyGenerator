@@ -28,11 +28,11 @@ const validationDirectory=process.env.PROXY_VALIDATION_DIR||'docs/validation/pha
    if(r.png){await fs.writeFile(`${validationDirectory}/${r.id}-${r.language}.png`,Buffer.from(r.png,'base64'));delete r.png;}
  }
  await fs.writeFile(`${validationDirectory}/results.json`,JSON.stringify(result,null,2));
- assert.equal(result.length,22);assert.ok(result.every(r=>!r.error&&r.coverage>(r.layout==='Synchro'?.6:.7)));assert.deepEqual(errors,[]);
+ assert.equal(result.length,JSON.parse(await fs.readFile('app/fixtures/cards-en.json','utf8')).length*2);assert.ok(result.every(r=>!r.error&&r.coverage>(r.layout==='Synchro'?.6:.7)));assert.deepEqual(errors,[]);
  await page.locator('#decklist_input').fill('3 Cyber Dragon\n2 Pot of Greed\n2 Mirror Force\n1 Number 39: Utopia\n1 Decode Talker\n1 Odd-Eyes Pendulum Dragon\n1 Stardust Dragon');
  await page.locator('#generate').click();await page.waitForFunction(()=>!document.getElementById('generate').disabled);
  assert.match(await page.locator('#status').innerText(),/11 carte pronte/);
  await page.screenshot({path:`${validationDirectory}/mixed-deck.png`,fullPage:true});
  const pending=page.waitForEvent('download');await page.locator('#download').click();await (await pending).saveAs(`${validationDirectory}/mixed-deck-it.pdf`);
- await browser.close();console.log('All 22 sample renders and mixed-layout PDF passed offline.');
+ await browser.close();console.log(`All ${result.length} sample renders and mixed-layout PDF passed offline.`);
 })().catch(e=>{console.error(e);process.exit(1)})

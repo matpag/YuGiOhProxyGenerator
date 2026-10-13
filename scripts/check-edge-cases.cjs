@@ -2,6 +2,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');const asse
 (async()=>{
  const b=await chromium.launch({headless:true,channel:'msedge'}),p=await b.newPage({locale:'it-IT'});
  await p.goto('http://127.0.0.1:8765/html/index.html');await p.waitForFunction(()=>!document.getElementById('generate').disabled);
+ await p.locator('#decklist_input').fill('3 Dark Magician');
  await p.locator('#generate').click();await p.waitForFunction(()=>!document.getElementById('generate').disabled);
  await p.getByRole('button',{name:'Modifica carta',exact:true}).click();
  await p.locator('#edit-artwork').setInputFiles('app/assets/artwork/70095154.jpg');await p.waitForFunction(()=>!document.getElementById('apply-edit').disabled);
