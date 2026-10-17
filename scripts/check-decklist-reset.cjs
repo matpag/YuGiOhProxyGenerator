@@ -1,7 +1,7 @@
 const {launchTestBrowser}=require('./helpers/test-data.cjs');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const fs=require('node:fs/promises'),assert=require('node:assert/strict');
-const example='1 Dark Magician\n\n1 74677422\n\n1 Blue-Eyes White Dragon';
+const example='1 Dark Magician\n1 74677422\n1 Blue-Eyes White Dragon';
 const directory='docs/validation/decklist-reset';
 const ready=page=>page.waitForFunction(()=>!document.querySelector('#generate').disabled);
 (async()=>{
