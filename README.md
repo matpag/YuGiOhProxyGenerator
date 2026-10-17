@@ -73,6 +73,12 @@ The full local rendering/research suite is available through node scripts/run-br
 
 The interface uses the shared Retroformats foundation in `app/assets/retroformats/`, copied byte-for-byte from the portal's canonical `design-system/`. App-specific styling stays in `app/html/maker.css`; card fonts, templates, rendering and PDF geometry are independent. During an intentional interface redesign, `VISUAL_ALLOW_UI_CHANGES=1` lets `check-ui-visuals.cjs` compare controls, messages, UI/print languages and exact card PNG hashes against the earlier baseline while recording new geometry for visual review. The default comparison remains strict. Screenshot pixel comparison and baseline replacement require reviewing the intended UI changes; never accept changed card output as a styling change.
 
+### Retroformats handoff (2026-10-17)
+
+Continue work in this repository on `main`. The visual alignment is committed here and published on GitHub Pages; the portal's `.local/worktrees/` directories were temporary implementation copies. The canonical kit and cross-app verification report live in the sibling `YuGiOh Retroformatsdotcom/design-system/` and `YuGiOh Retroformatsdotcom/docs/visual-alignment-verification.md`.
+
+Probability Calculator is the interface style reference. This app stays dark-only; adding a light theme was deferred. Preserve the five UI languages, four print languages and independent English print default. Completed verification included 43 Node tests, 6 Python tests, the suite's 13 browser tests / 101 consistency checks and a before/after PDF comparison with identical content, page geometry and embedded image pixels. Keep renderer and print changes separate from interface styling.
+
 The Egyptian God frames have native SVG sources and baked PNG assets under app/assets/templates/frames/. egyptian-gods-palette.json records photo URLs, hashes, sampled card corners, measured colors, masks and saturation adjustments. With Playwright available, node scripts/build-egyptian-frames.cjs rebuilds the assets from the unchanged Nexus Normal texture. The inherited gold outer hairline is replaced with adjacent body texture so each palette meets the dark border directly. Run node scripts/check-egyptian-frames.cjs for exact alpha/neutral-pixel checks, outer-edge continuity, measured color checks, deterministic repaint, EN/IT rendering, mobile editing in five UI languages and PDF export.
 
 Recorded card responses, artwork and rendering references for automated checks live under tests/fixtures/ and are not included in the published app.
