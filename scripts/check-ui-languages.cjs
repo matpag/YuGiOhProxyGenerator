@@ -16,7 +16,12 @@ const fs=require('node:fs/promises'),assert=require('node:assert/strict');
    await page.goto('http://127.0.0.1:8765/');await ready(page);
    assert.equal(await page.locator('html').getAttribute('lang'),expected);
    assert.equal(await page.locator(`[data-ui-language=${expected}]`).getAttribute('aria-pressed'),'true');
-   assert.match(await page.locator('.title').innerText(),/\[MULTI5\]/);
+   assert.match(await page.locator('.rf-brand').innerText(),/retroformats\./);
+   assert.equal(await page.locator('.rf-brand__product').innerText(),'Proxy Generator');
+   assert.equal(await page.locator('.rf-suite-nav a').count(),5);
+   assert.equal(await page.locator('.rf-suite-nav [aria-current=page]').getAttribute('href'),'https://retroformats.com/proxy/');
+   for(const key of ['heroTitle','heroDescription','suiteTools','skipToWorkspace'])
+    assert.equal(await page.locator('[data-i18n='+key+']').innerText(),messages[expected][key]);
    assert.equal(await page.locator('#language').inputValue(),'en','Print must default to English regardless of browser UI language');
    assert.deepEqual(await page.locator('#language option').evaluateAll(options=>options.map(o=>o.value)),['en','it','de','fr']);
    assert.equal(await page.locator('#project-controls').isVisible(),false);

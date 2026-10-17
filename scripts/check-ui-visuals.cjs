@@ -77,8 +77,12 @@ async function capture(page,name){
   await fs.writeFile(path.join(directory,'snapshots.json'),JSON.stringify(samples,null,2)+'\n');
   if(phase==='after'||phase==='after-software'){
    const baseline=JSON.parse(await fs.readFile(path.resolve('docs/validation/state-refactor',phase==='after-software'?'before-software':'before','snapshots.json'),'utf8'));
-   assert.deepEqual(samples,baseline,'UI geometry, controls, messages and rendered card pixels must match the baseline');
+   if(process.env.VISUAL_ALLOW_UI_CHANGES==='1'){
+    // Intentional redesigns still preserve every behavior field and rendered PNG hash.
+    const behavior=values=>values.map(({geometry,...snapshot})=>snapshot);
+    assert.deepEqual(behavior(samples),behavior(baseline),'Controls, messages, languages and rendered card pixels must match the baseline');
+   }else assert.deepEqual(samples,baseline,'UI geometry, controls, messages and rendered card pixels must match the baseline');
   }
-  console.log(samples.length+' visual scenarios captured in '+directory+'; UI, controls and card pixels '+(phase.startsWith('after')?'match the baseline':'recorded before refactoring')+'.');
+  console.log(samples.length+' visual scenarios captured in '+directory+'; '+(process.env.VISUAL_ALLOW_UI_CHANGES==='1'?'controls, messages, languages and card pixels (UI geometry requires visual review)':'UI, controls and card pixels')+' '+(phase.startsWith('after')?'match the baseline':'recorded before refactoring')+'.');
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

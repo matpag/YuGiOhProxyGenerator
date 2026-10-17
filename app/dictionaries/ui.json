@@ -9,6 +9,11 @@
   ],
   "messages": {
     "it": {
+      "heroTitle": "Il tuo mazzo, pronto da stampare.",
+      "heroDescription": "Genera l’anteprima, personalizza le carte e scarica un PDF pronto per la stampa.",
+      "suiteTools": "Strumenti",
+      "suiteNavigation": "Strumenti Retroformats",
+      "skipToWorkspace": "Vai alla decklist",
       "decklist": "La tua decklist",
       "clearDecklist": "Svuota la decklist",
       "lookupHint": "Nomi inglesi o ID, una carta per riga",
@@ -140,6 +145,11 @@
       "error.uiTranslations": "Traduzioni dell’interfaccia non disponibili"
     },
     "en": {
+      "heroTitle": "Your deck, ready to print.",
+      "heroDescription": "Build a preview, customize your cards and download a print-ready PDF.",
+      "suiteTools": "Tools",
+      "suiteNavigation": "Retroformats tools",
+      "skipToWorkspace": "Skip to decklist",
       "decklist": "Your decklist",
       "clearDecklist": "Clear decklist",
       "lookupHint": "English names or IDs, one card per line",
@@ -271,6 +281,11 @@
       "error.uiTranslations": "Interface translations are unavailable"
     },
     "de": {
+      "heroTitle": "Dein Deck, bereit zum Drucken.",
+      "heroDescription": "Erstelle eine Vorschau, passe deine Karten an und lade eine druckfertige PDF herunter.",
+      "suiteTools": "Werkzeuge",
+      "suiteNavigation": "Retroformats-Werkzeuge",
+      "skipToWorkspace": "Zur Deckliste springen",
       "decklist": "Deine Deckliste",
       "clearDecklist": "Deckliste leeren",
       "lookupHint": "Englische Namen oder IDs, eine Karte pro Zeile",
@@ -402,6 +417,11 @@
       "error.uiTranslations": "Übersetzungen der Oberfläche sind nicht verfügbar"
     },
     "es": {
+      "heroTitle": "Tu mazo, listo para imprimir.",
+      "heroDescription": "Genera una vista previa, personaliza las cartas y descarga un PDF listo para imprimir.",
+      "suiteTools": "Herramientas",
+      "suiteNavigation": "Herramientas de Retroformats",
+      "skipToWorkspace": "Ir a la lista de cartas",
       "decklist": "Tu lista de cartas",
       "clearDecklist": "Vaciar la lista de cartas",
       "lookupHint": "Nombres en inglés o IDs, una carta por línea",
@@ -533,6 +553,11 @@
       "error.uiTranslations": "Las traducciones de la interfaz no están disponibles"
     },
     "fr": {
+      "heroTitle": "Votre deck, prêt à imprimer.",
+      "heroDescription": "Générez un aperçu, personnalisez vos cartes et téléchargez un PDF prêt à imprimer.",
+      "suiteTools": "Outils",
+      "suiteNavigation": "Outils Retroformats",
+      "skipToWorkspace": "Aller à la liste de cartes",
       "decklist": "Votre liste de cartes",
       "clearDecklist": "Vider la liste de cartes",
       "lookupHint": "Noms anglais ou identifiants, une carte par ligne",
