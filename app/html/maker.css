@@ -115,13 +115,7 @@ summary { font-weight: 600; min-height: 44px; line-height: 1.5; padding: 10px 0;
 .render-host img { display: none; }
 
 footer { text-align: center; font-size: 11px; color: var(--rf-muted); padding: 26px 20px 76px; border-top: 1px solid var(--rf-line); }
-.footer-branding { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 16px; }
-.footer-credit { font-size: 12px; margin: 0; }
-.footer-social { display: flex; align-items: center; gap: 12px; max-width: 100%; color: var(--rf-text); text-decoration: none; padding: 4px 12px; border-radius: var(--rf-radius-control); }
-.footer-social img { display: block; width: 64px; max-width: 100%; height: auto; }
-.footer-social > span { font-size: 12px; min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: underline; text-underline-offset: 4px; }
-.footer-social:hover { color: var(--rf-accent-text); background: var(--rf-hover); }
-.footer-data { margin: 16px 0 0; line-height: 1.8; }
+.footer-data { margin: 0; line-height: 1.8; }
 .footer-data > span { display: inline-block; }
 .footer-data a { color: var(--rf-text); text-underline-offset: 3px; }
 .footer-data a:hover { color: var(--rf-accent-text); }
@@ -204,7 +198,6 @@ dialog[open] { display: flex; flex-direction: column; }
   .intro h1 { font-size: 31px; letter-spacing: -1.2px; }
   .eyebrow { font-size: 9px; letter-spacing: 1.1px; }
   .panel, .quick-guide.panel { padding: 18px; }
-  .footer-branding { gap: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }

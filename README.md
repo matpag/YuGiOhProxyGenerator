@@ -73,6 +73,8 @@ The full local rendering/research suite is available through node scripts/run-br
 
 The interface uses the shared Retroformats foundation in `app/assets/retroformats/`, copied byte-for-byte from the portal's canonical `design-system/`. App-specific styling stays in `app/html/maker.css`; card fonts, templates, rendering and PDF geometry are independent. During an intentional interface redesign, `VISUAL_ALLOW_UI_CHANGES=1` lets `check-ui-visuals.cjs` compare controls, messages, UI/print languages and exact card PNG hashes against the earlier baseline while recording new geometry for visual review. The default comparison remains strict. Screenshot pixel comparison and baseline replacement require reviewing the intended UI changes; never accept changed card output as a styling change.
 
+The tab icon uses the shared Retroformats mark. The Duel Hunters development credit, logo and Instagram link are maintained in the footer of retroformats.com.
+
 ### Retroformats handoff (2026-10-17)
 
 Continue work in this repository on `main`. The visual alignment is committed here and published on GitHub Pages; the portal's `.local/worktrees/` directories were temporary implementation copies. The canonical kit and cross-app verification report live in the sibling `YuGiOh Retroformatsdotcom/design-system/` and `YuGiOh Retroformatsdotcom/docs/visual-alignment-verification.md`.
